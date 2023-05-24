@@ -35,35 +35,36 @@ class PorposalApi{
   fetchAdvanceSearchData({
     required String majorClearanceType,
     required String state,
-    required String sector,
-    required String proposalStatus,
-    required String proposalType,
-    required String issuingAuthority,
-    required String activityId,
-    required String category,
-    required String startDate,
-    required String endDate,
-    required String area,
-    required String text,
+    // required String sector,
+    // required String proposalStatus,
+    // required String proposalType,
+    // required String issuingAuthority,
+    // required String activityId,
+    // required String category,
+    // required String startDate,
+    // required String endDate,
+    // required String area,
+    // required String text,
 
   }) async {
     final Uri uri = Uri.parse(AppUrls.advanceSearchDetails); // Replace with your API endpoint
     final Map<String, String> queryParams = {
       'majorClearanceType': majorClearanceType,
       'state': state,
-      'sector': sector,
-      'proposalStatus': proposalStatus,
-      'proposalType': proposalType,
-      'issuingAuthority': issuingAuthority,
-      'activityId': activityId,
-      'category': category,
-      'startDate': startDate,
-      'endDate': endDate,
-      'area': area,
-      'text': text,
+      // 'sector': sector,
+      // 'proposalStatus': proposalStatus,
+      // 'proposalType': proposalType,
+      // 'issuingAuthority': issuingAuthority,
+      // 'activityId': activityId,
+      // 'category': category,
+      // 'startDate': startDate,
+      // 'endDate': endDate,
+      // 'area': area,
+      // 'text': text,
     };
     final Uri finalUri = uri.replace(queryParameters: queryParams);
     final response = await http.get(finalUri);
+    print("myurl${finalUri}");
 
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);

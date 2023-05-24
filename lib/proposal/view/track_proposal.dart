@@ -29,6 +29,21 @@ class _TrackPorposalState extends State<TrackPorposal> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Text('') ,
+          centerTitle: true,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/logo.png'),
+                    fit: BoxFit.fitWidth
+                )
+            ),
+          ),
+
+        ),
+
         body: Container(
           color: Colors.white,
           child: Padding(
@@ -39,12 +54,6 @@ class _TrackPorposalState extends State<TrackPorposal> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Container(
-                      width: MediaQuery.of(context).size.width / 1.1,
-                      child: Image.asset(
-                        'assets/images/logo.png',
-                        fit: BoxFit.cover,
-                      )),
 
                   Container(
                     height: MediaQuery.of(context).size.height/4,),
@@ -94,7 +103,7 @@ class _TrackPorposalState extends State<TrackPorposal> {
 
 
                           Container(
-                            height: MediaQuery.of(context).size.height/7,),
+                            height: MediaQuery.of(context).size.height/10,),
                           GestureDetector(
                             onTap: () {
                               if (porposalController.text.isNotEmpty) {
@@ -108,7 +117,7 @@ class _TrackPorposalState extends State<TrackPorposal> {
                               }
                             },
                             child: Container(
-                              padding: EdgeInsets.all(10),
+                              padding: EdgeInsets.all(15),
                               decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.green),
                               width: double.infinity,
                               child: Center(
@@ -126,7 +135,7 @@ class _TrackPorposalState extends State<TrackPorposal> {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => const AdvanceSearchPorposal()));
                             },
                             child: Container(
-                              padding: EdgeInsets.all(10),
+                              padding: EdgeInsets.all(15),
                               decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.orange),
                               width: double.infinity,
                               child: Center(

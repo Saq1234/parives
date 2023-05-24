@@ -14,12 +14,13 @@ class TrackPorposalDash extends StatefulWidget {
 }
 
 class _TrackPorposalDashState extends State<TrackPorposalDash> {
-  ProposalViewModel? porposalViewModel;
+  ProposalViewModel? proposalViewModel;
   TrackPorposalModel? trackPorposalModel;
 
   @override
   void initState() {
-    porposalViewModel = Provider.of<ProposalViewModel>(context, listen: false);
+    proposalViewModel = Provider.of<ProposalViewModel>(context, listen: false);
+   // proposalViewModel?.getPorposalDetails(porposalNo: porposalNo)
 
     // TODO: implement initState
     super.initState();
@@ -27,12 +28,27 @@ class _TrackPorposalDashState extends State<TrackPorposalDash> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          Expanded(child: CardData()),
-        ],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Text('') ,
+          centerTitle: true,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/logo.png'),
+                    fit: BoxFit.fitWidth
+                )
+            ),
+          ),
+
+        ),
+        body: Column(
+          children: [
+            Expanded(child: CardData()),
+          ],
+        ),
       ),
     );
   }
@@ -42,7 +58,7 @@ Widget CardData() {
   return
     Consumer<ProposalViewModel>(builder: (context, model, child) {
     return
-      model.trackPorposalModel?.data != null && model.trackPorposalModel!.data!.isNotEmpty?
+      model.trackPorposalModel!=null?
       ListView.builder(
         itemCount: model.trackPorposalModel?.data?.length,
         itemBuilder: (BuildContext context, int index) {
@@ -50,7 +66,7 @@ Widget CardData() {
           return
               mylist?.proposalNo !=null?
             Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(10),
             child: Card(
               elevation: 10,
               shape: RoundedRectangleBorder(
@@ -78,7 +94,7 @@ Widget CardData() {
                       ),
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 10,
                     ),
                     RichText(
                       text: TextSpan(
@@ -94,7 +110,7 @@ Widget CardData() {
                       ),
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 10,
                     ),
                     RichText(
                       text: TextSpan(
@@ -110,7 +126,7 @@ Widget CardData() {
                       ),
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 10,
                     ),
                     RichText(
                       text: TextSpan(
@@ -125,7 +141,7 @@ Widget CardData() {
                       ),
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 10,
                     ),
                     RichText(
                       text: TextSpan(
@@ -141,7 +157,7 @@ Widget CardData() {
                       ),
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 10,
                     ),
                     RichText(
                       text: TextSpan(
@@ -160,7 +176,7 @@ Widget CardData() {
                       ),
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 10,
                     ),
                     RichText(
                       text: TextSpan(
@@ -175,13 +191,18 @@ Widget CardData() {
                         ],
                       ),
                     ),
-                    SizedBox(height: 8,)
+                    SizedBox(height: 15,)
                   ],
                 ),
               ),
             ),
           ):Center(child: CircularProgressIndicator(color: Colors.green,),);
-        }):Center(child: Text("No Data"),);
+        }):
+      Center(
+        child: model.trackPorposalModel!=null && model.trackPorposalModel!.data!.isEmpty?
+        Text("No Data Available",style: TextStyle(color: Colors.black),)
+            :CircularProgressIndicator(color: Colors.green,),
+      );
   });
 }
 

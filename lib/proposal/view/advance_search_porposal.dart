@@ -3,10 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:parivesh/common/custom_widget.dart';
+import 'package:parivesh/proposal/model/advance_search_arguments.dart';
+import 'package:parivesh/proposal/view/advance_search_dashboard.dart';
+import 'package:parivesh/proposal/view/track_proposal.dart';
 import 'package:parivesh/proposal/view/track_proposal_dashboard.dart';
 import 'package:provider/provider.dart';
 
 import '../../common/appColors.dart';
+import '../../common/app_routes.dart';
 import '../model/clearanceType_model.dart';
 import '../viewmodel/trackporposal_viewmodel.dart';
 
@@ -28,6 +32,8 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
   late TextEditingController _endAreaController = TextEditingController();
   late ProposalViewModel proposalViewModel;
   ClearanceTypeModel? clearanceTypeModel;
+  bool clearancevisible=false;
+  bool statevisible=false;
 
 
 
@@ -82,13 +88,30 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
   }
   var clearencevalue;
   var statevalue;
+  var clearanceId;
+  var stateCode;
 
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-         body: Container(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Text('') ,
+          centerTitle: true,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/logo.png'),
+                    fit: BoxFit.fitWidth
+                )
+            ),
+          ),
+
+        ),
+
+        body: Container(
           child: SingleChildScrollView(
             physics: AlwaysScrollableScrollPhysics(),
             child:
@@ -96,20 +119,12 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
 
               return Column(
                 children: [
-                  Card(
-                    elevation: 8,
-                    child: Container(
-                      child: Image.asset(
-                        'assets/images/logo.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
+
                   SizedBox(
                     height: 20,
                   ),
                   Text(
-                    "Track your Proposal",
+                    "Track Your Proposal",
                     style: TextStyle(fontSize: 32),
                   ),
                   Padding(
@@ -159,6 +174,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                   isDense: true,
                                   hint: Text("Select"),
                                   items: model.clearanceTypeModel?.data?.map((item) {
+                                     clearanceId=item.id;
                                     return DropdownMenuItem(
                                       value: item.name,
                                       child: Text(item.name.toString()),
@@ -167,6 +183,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                   onChanged: (newVal) {
                                     setState(() {
                                       clearencevalue = newVal;
+                                      clearancevisible=true;
                                     });
                                   },
                                   value: clearencevalue,
@@ -220,6 +237,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                   isDense: true,
                                   hint: Text("Select"),
                                   items: model.stateTypeModel?.data?.map((item) {
+                                    stateCode=item.code;
                                     return DropdownMenuItem(
                                       value: item.name,
                                       child: Text(item.name.toString()),
@@ -228,6 +246,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                   onChanged: (newVal) {
                                     setState(() {
                                       statevalue = newVal;
+                                      statevisible=true;
                                     });
                                   },
                                   value: statevalue,
@@ -432,7 +451,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                 child: Align(
                                     alignment: Alignment.center,
                                     child: Padding(
-                                      padding: const EdgeInsets.only(right: 80, top: 10),
+                                      padding: const EdgeInsets.only(right: 85, top: 5),
                                       child: Icon(
                                         Icons.calendar_month,
                                         size: 20,
@@ -443,7 +462,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                 child: Align(
                                     alignment: Alignment.centerRight,
                                     child: Padding(
-                                      padding: const EdgeInsets.only(right: 20, top: 10),
+                                      padding: const EdgeInsets.only(right: 20, top: 5),
                                       child: Icon(
                                         Icons.calendar_month,
                                         size: 20,
@@ -769,12 +788,45 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                           height: 30,
                         ),
                         GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
+                          onTap: () async{
+                            print(("cler${clearanceId}"));
+                            print(("stat${stateCode}"));
+                            if(clearancevisible==true ){
+                              if(statevisible==true){
+                                await proposalViewModel.getAdvanceSearchDetails(
+                                  majorClearanceType: clearanceId.toString(),
+                                  state: stateCode.toString(),
+                                  // sector: "",
+                                  // proposalStatus: "",
+                                  // proposalType: "",
+                                  // issuingAuthority: "",
+                                  // activityId: "",
+                                  // category: "category",
+                                  // startDate: "startDate",
+                                  // endDate: "",
+                                  // area: "",
+                                  // text: ""
+                                );
+                                Navigator.pushNamed(context, AppRoutes.advancesearchdashboard,arguments: AdvanceSearchArguments(
+                                    clearanceId:clearanceId,stateCode: stateCode ));
+                              }
+                              else{
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  content: Text("Please Select State"),
+                                ));
+                              }
+
+                            }
+                            else{
+                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                content: Text("Please Select Clearance Type"),
+                              ));
+                            }
+
                           },
                           child: Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.green),
+                            padding: EdgeInsets.all(15),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(25), color: Colors.green),
                             width: double.infinity,
                             child: Center(
                                 child: Text(
@@ -788,15 +840,15 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const AdvanceSearchPorposal()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const TrackPorposal()));
                           },
                           child: Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.orange),
+                            padding: EdgeInsets.all(15),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(25), color: Colors.orange),
                             width: double.infinity,
                             child: Center(
                                 child: Text(
-                                  "Show Advance Search",
+                                  "Hide Advance Search",
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 )),
                           ),

@@ -23,19 +23,26 @@ class ProposalViewModel extends ChangeNotifier{
   Future getAdvanceSearchDetails({
     required String majorClearanceType,
     required String state,
-    required String sector,
-    required String proposalStatus,
-    required String proposalType,
-    required String issuingAuthority,
-    required String activityId,
-    required String category,
-    required String startDate,
-    required String endDate,
-    required String area,
-    required String text,
+    // required String sector,
+    // required String proposalStatus,
+    // required String proposalType,
+    // required String issuingAuthority,
+    // required String activityId,
+    // required String category,
+    // required String startDate,
+    // required String endDate,
+    // required String area,
+    // required String text,
   }
       )async{
-    final data=await _porposalApi.fetchAdvanceSearchData(majorClearanceType: majorClearanceType, state: state, sector: sector, proposalStatus: proposalStatus, proposalType: proposalType, issuingAuthority: issuingAuthority, activityId: activityId, category: category, startDate: startDate, endDate: endDate, area: area, text: text);
+    final data=await _porposalApi.fetchAdvanceSearchData(
+        majorClearanceType: majorClearanceType, state: state,
+        // sector: sector, proposalStatus: proposalStatus,
+        // proposalType: proposalType, issuingAuthority: issuingAuthority,
+        // activityId: activityId, category: category,
+        // startDate: startDate, endDate: endDate, area: area,
+        // text: text
+    );
     advanceSearchDetailModel=data;
     notifyListeners();
     return advanceSearchDetailModel;
