@@ -32,10 +32,8 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
   late TextEditingController _endAreaController = TextEditingController();
   late ProposalViewModel proposalViewModel;
   ClearanceTypeModel? clearanceTypeModel;
-  bool clearancevisible=false;
-  bool statevisible=false;
-
-
+  bool clearancevisible = false;
+  bool statevisible = false;
 
   Future<Null> selectStartDateForAndroid(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -83,13 +81,14 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
     proposalViewModel.getDataClearanceType();
     proposalViewModel.getDataStateType();
 
-
     super.initState();
   }
+
   var clearencevalue;
   var statevalue;
   var clearanceId;
   var stateCode;
+  List<String> check=[];
 
 
   @override
@@ -98,767 +97,753 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: Text('') ,
+          title: Text(''),
           centerTitle: true,
           flexibleSpace: Container(
             decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/images/logo.png'),
-                    fit: BoxFit.fitWidth
-                )
-            ),
+                image: DecorationImage(image: AssetImage('assets/images/logo.png'), fit: BoxFit.fitWidth)),
           ),
-
         ),
-
         body: Container(
           child: SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
-            child:
-            Consumer<ProposalViewModel>(builder: (context, model, child) {
-
-              return Column(
-                children: [
-
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "Track Your Proposal",
-                    style: TextStyle(fontSize: 32),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 10, right: 10, top: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        RichText(
-                          text: TextSpan(
-                              text: 'Clearances Type',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                              children: [
-                                TextSpan(
-                                    text: ' *',
-                                    style: TextStyle(
-                                      color: Colors.red,
-                                    ))
-                              ]),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: AppColor.black),
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          padding: const EdgeInsets.all(8),
-                          margin: const EdgeInsets.only(top: 10),
-                          width: MediaQuery.of(context).size.width * 0.94,
-                          child: Column(
-                            children: [
-                              DropdownButtonHideUnderline(
-                                child: DropdownButton2(
-                                  isExpanded: true,
-                                  icon: Icon(
-                                    Icons.keyboard_arrow_down_outlined,
-                                    color: AppColor.black,
-                                  ),
-                                  dropdownDecoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  scrollbarAlwaysShow: true,
-                                  scrollbarThickness: 8.0,
-                                  dropdownMaxHeight: 200,
-                                  selectedItemHighlightColor: AppColor.blue,
-                                  itemPadding: EdgeInsets.only(left: 10),
-                                  isDense: true,
-                                  hint: Text("Select"),
-                                  items: model.clearanceTypeModel?.data?.map((item) {
-                                     clearanceId=item.id;
-                                    return DropdownMenuItem(
-                                      value: item.name,
-                                      child: Text(item.name.toString()),
-                                    );
-                                  }).toList(),
-                                  onChanged: (newVal) {
-                                    setState(() {
-                                      clearencevalue = newVal;
-                                      clearancevisible=true;
-                                    });
-                                  },
-                                  value: clearencevalue,
+              physics: AlwaysScrollableScrollPhysics(),
+              child: Consumer<ProposalViewModel>(builder: (context, model, child) {
+                return Column(
+                  children: [
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Track Your Proposal",
+                      style: TextStyle(fontSize: 32),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 10, right: 10, top: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          RichText(
+                            text: TextSpan(
+                                text: 'Clearances Type',
+                                style: TextStyle(
+                                  color: Colors.black,
                                 ),
-                              ),
-                            ],
+                                children: [
+                                  TextSpan(
+                                      text: ' *',
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                      ))
+                                ]),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        RichText(
-                          text: TextSpan(
-                              text: 'State',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: AppColor.black),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            padding: const EdgeInsets.all(8),
+                            margin: const EdgeInsets.only(top: 10),
+                            width: MediaQuery.of(context).size.width * 0.94,
+                            child: Column(
                               children: [
-                                TextSpan(
-                                    text: ' *',
-                                    style: TextStyle(
-                                      color: Colors.red,
-                                    ))
-                              ]),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: AppColor.black),
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          padding: const EdgeInsets.all(8),
-                          margin: const EdgeInsets.only(top: 10),
-                          width: MediaQuery.of(context).size.width * 0.94,
-                          child: Column(
-                            children: [
-                              DropdownButtonHideUnderline(
-                                child: DropdownButton2(
-                                  isExpanded: true,
-                                  icon: Icon(
-                                    Icons.keyboard_arrow_down_outlined,
-                                    color: AppColor.black,
-                                  ),
-                                  dropdownDecoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  scrollbarAlwaysShow: true,
-                                  scrollbarThickness: 8.0,
-                                  dropdownMaxHeight: 200,
-                                  selectedItemHighlightColor: AppColor.blue,
-                                  itemPadding: EdgeInsets.only(left: 10),
-                                  isDense: true,
-                                  hint: Text("Select"),
-                                  items: model.stateTypeModel?.data?.map((item) {
-                                    stateCode=item.code;
-                                    return DropdownMenuItem(
-                                      value: item.name,
-                                      child: Text(item.name.toString()),
-                                    );
-                                  }).toList(),
-                                  onChanged: (newVal) {
-                                    setState(() {
-                                      statevalue = newVal;
-                                      statevisible=true;
-                                    });
-                                  },
-                                  value: statevalue,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        //
-                        // Column(
-                        //   children: [
-                        //
-                        //     RichText(
-                        //       text: TextSpan(
-                        //           text: 'Issuing Authority:',
-                        //           style: TextStyle(
-                        //             color: Colors.black,
-                        //           ),
-                        //           children: [
-                        //             TextSpan(
-                        //                 text: ' *',
-                        //                 style: TextStyle(
-                        //                   color: Colors.red,
-                        //                 ))
-                        //           ]),
-                        //     ),
-                        //     Container(
-                        //       decoration: BoxDecoration(
-                        //         border: Border.all(color: AppColor.black),
-                        //         borderRadius: BorderRadius.circular(25),
-                        //       ),
-                        //       padding: const EdgeInsets.all(8),
-                        //       margin: const EdgeInsets.only(top: 10),
-                        //       width: MediaQuery.of(context).size.width * 0.94,
-                        //       child: Column(
-                        //         children: [
-                        //           DropdownButtonHideUnderline(
-                        //             child: DropdownButton2(
-                        //               isExpanded: true,
-                        //               icon: Icon(
-                        //                 Icons.keyboard_arrow_down_outlined,
-                        //                 color: AppColor.black,
-                        //               ),
-                        //               dropdownDecoration: BoxDecoration(
-                        //                 borderRadius: BorderRadius.circular(10),
-                        //               ),
-                        //               scrollbarAlwaysShow: true,
-                        //               scrollbarThickness: 8.0,
-                        //               dropdownMaxHeight: 200,
-                        //               selectedItemHighlightColor: AppColor.blue,
-                        //               itemPadding: EdgeInsets.only(left: 10),
-                        //               isDense: true,
-                        //               hint: Text("Select"),
-                        //               // value: status_value,
-                        //               items: [],
-                        //               // status_array.map((item) {
-                        //               //   return DropdownMenuItem(
-                        //               //     value: int.parse(item['tts_task_status_id'].toString()),
-                        //               //     child: Text(item['tts_task_status_title'].toString()),
-                        //               //   );
-                        //               // }).toList(),
-                        //               onChanged: (newVal) {
-                        //                 setState(() {
-                        //                   //  status_value = newVal;
-                        //                   //  _getStageList(project_item_value.toString());
-                        //                 });
-                        //               },
-                        //             ),
-                        //           ),
-                        //         ],
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
-                        // Column(
-                        //   children: [
-                        //
-                        //     RichText(
-                        //       text: TextSpan(
-                        //           text: 'Schedule No:',
-                        //           style: TextStyle(
-                        //             color: Colors.black,
-                        //           ),
-                        //           children: [
-                        //             TextSpan(
-                        //                 text: ' *',
-                        //                 style: TextStyle(
-                        //                   color: Colors.red,
-                        //                 ))
-                        //           ]),
-                        //     ),
-                        //     Container(
-                        //       decoration: BoxDecoration(
-                        //         border: Border.all(color: AppColor.black),
-                        //         borderRadius: BorderRadius.circular(25),
-                        //       ),
-                        //       padding: const EdgeInsets.all(8),
-                        //       margin: const EdgeInsets.only(top: 10),
-                        //       width: MediaQuery.of(context).size.width * 0.94,
-                        //       child: Column(
-                        //         children: [
-                        //           DropdownButtonHideUnderline(
-                        //             child: DropdownButton2(
-                        //               isExpanded: true,
-                        //               icon: Icon(
-                        //                 Icons.keyboard_arrow_down_outlined,
-                        //                 color: AppColor.black,
-                        //               ),
-                        //               dropdownDecoration: BoxDecoration(
-                        //                 borderRadius: BorderRadius.circular(10),
-                        //               ),
-                        //               scrollbarAlwaysShow: true,
-                        //               scrollbarThickness: 8.0,
-                        //               dropdownMaxHeight: 200,
-                        //               selectedItemHighlightColor: AppColor.blue,
-                        //               itemPadding: EdgeInsets.only(left: 10),
-                        //               isDense: true,
-                        //               hint: Text("Select"),
-                        //               // value: status_value,
-                        //               items: [],
-                        //               // status_array.map((item) {
-                        //               //   return DropdownMenuItem(
-                        //               //     value: int.parse(item['tts_task_status_id'].toString()),
-                        //               //     child: Text(item['tts_task_status_title'].toString()),
-                        //               //   );
-                        //               // }).toList(),
-                        //               onChanged: (newVal) {
-                        //                 setState(() {
-                        //                   //  status_value = newVal;
-                        //                   //  _getStageList(project_item_value.toString());
-                        //                 });
-                        //               },
-                        //             ),
-                        //           ),
-                        //         ],
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
-
-
-
-
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text("Proposal Date"),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Stack(
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    // decoration: BoxDecoration(
-                                    //   border: Border.all(color: AppColor.black)
-                                    // ),
-                                    child: TextField(
-                                      readOnly: true,
-                                      onTap: () {
-                                        selectStartDateForAndroid(context);
-                                      },
-                                      controller: _startDateController,
-                                      decoration: InputDecoration(
-                                        isDense: true,
-                                        contentPadding: const EdgeInsets.all(8),
-                                        border: OutlineInputBorder(borderSide: BorderSide(color: AppColor.black)),
-                                        hintText: "mm/dd/yyyy",
-                                      ),
+                                DropdownButtonHideUnderline(
+                                  child: DropdownButton2(
+                                    isExpanded: true,
+                                    icon: Icon(
+                                      Icons.keyboard_arrow_down_outlined,
+                                      color: AppColor.black,
                                     ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text("To"),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    child: TextField(
-                                      readOnly: true,
-                                      onTap: () {
-                                        selectEndDateForAndroid(context);
-                                      },
-                                      controller: _endDateController,
-                                      decoration: const InputDecoration(
-                                        isDense: true,
-                                        contentPadding: const EdgeInsets.all(8),
-                                        border: OutlineInputBorder(),
-                                        hintText: "mm/dd/yyyy",
-                                      ),
+                                    dropdownDecoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
                                     ),
+                                    scrollbarAlwaysShow: true,
+                                    scrollbarThickness: 8.0,
+                                    dropdownMaxHeight: 200,
+                                    selectedItemHighlightColor: AppColor.blue,
+                                    itemPadding: EdgeInsets.only(left: 10),
+                                    isDense: true,
+                                    hint: Text("Select"),
+                                    items: model.clearanceTypeModel?.data?.map((item) {
+                                      return DropdownMenuItem(
+                                        value: item.id,
+                                        child: Text(item.name.toString()),
+                                      );
+                                    }).toList(),
+                                    onChanged: (newVal) {
+                                      setState(() {
+                                        clearencevalue = newVal;
+                                        print("check${clearencevalue}");
+                                        clearancevisible = true;
+
+                                      });
+                                    },
+                                    value: clearencevalue,
                                   ),
                                 ),
                               ],
                             ),
-                            Positioned(
-                                child: Align(
-                                    alignment: Alignment.center,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(right: 85, top: 5),
-                                      child: Icon(
-                                        Icons.calendar_month,
-                                        size: 20,
-                                        color: AppColor.black,
-                                      ),
-                                    ))),
-                            Positioned(
-                                child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(right: 20, top: 5),
-                                      child: Icon(
-                                        Icons.calendar_month,
-                                        size: 20,
-                                        color: AppColor.black,
-                                      ),
-                                    ))),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        // RichText(
-                        //   text: TextSpan(
-                        //       text: 'Area (ha):',
-                        //       style: TextStyle(
-                        //         color: Colors.black,
-                        //       ),
-                        //       children: []),
-                        // ),
-                        // SizedBox(
-                        //   height: 10,
-                        // ),
-                        // Row(
-                        //   children: [
-                        //     Expanded(
-                        //       child: Container(
-                        //         height: 50,
-                        //         child: TextField(
-                        //           controller: areaController,
-                        //           decoration: const InputDecoration(
-                        //             border: OutlineInputBorder(),
-                        //             hintText: 'Enter Area (ha)',
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     SizedBox(
-                        //       width: 10,
-                        //     ),
-                        //     Text("To"),
-                        //     SizedBox(
-                        //       width: 10,
-                        //     ),
-                        //     Expanded(
-                        //       child: Container(
-                        //         height: 50,
-                        //         child: TextField(
-                        //           controller: _endAreaController,
-                        //           decoration: const InputDecoration(
-                        //             border: OutlineInputBorder(),
-                        //             hintText: 'Enter Area (ha)',
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        RichText(
-                          text: TextSpan(
-                              text: 'Proposal Type',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                              children: []),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: AppColor.black),
-                            borderRadius: BorderRadius.circular(25),
                           ),
-                          padding: const EdgeInsets.all(8),
-                          margin: const EdgeInsets.only(top: 10),
-                          width: MediaQuery.of(context).size.width * 0.94,
-                          child: Column(
-                            children: [
-                              DropdownButtonHideUnderline(
-                                child: DropdownButton2(
-                                  isExpanded: true,
-                                  icon: Icon(
-                                    Icons.keyboard_arrow_down_outlined,
-                                    color: AppColor.black,
-                                  ),
-                                  dropdownDecoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  scrollbarAlwaysShow: true,
-                                  scrollbarThickness: 8.0,
-                                  dropdownMaxHeight: 200,
-                                  selectedItemHighlightColor: AppColor.blue,
-                                  itemPadding: EdgeInsets.only(left: 10),
-                                  isDense: true,
-                                  hint: Text("Select"),
-                                  // value: status_value,
-                                  items: [],
-                                  // status_array.map((item) {
-                                  //   return DropdownMenuItem(
-                                  //     value: int.parse(item['tts_task_status_id'].toString()),
-                                  //     child: Text(item['tts_task_status_title'].toString()),
-                                  //   );
-                                  // }).toList(),
-                                  onChanged: (newVal) {
-                                    setState(() {
-                                      //  status_value = newVal;
-                                      //  _getStageList(project_item_value.toString());
-                                    });
-                                  },
+                          SizedBox(
+                            height: 10,
+                          ),
+                          RichText(
+                            text: TextSpan(
+                                text: 'State',
+                                style: TextStyle(
+                                  color: Colors.black,
                                 ),
-                              ),
-                            ],
+                                children: [
+                                  TextSpan(
+                                      text: ' *',
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                      ))
+                                ]),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        RichText(
-                          text: TextSpan(
-                              text: 'Proposal Status',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                              children: []),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: AppColor.black),
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          padding: const EdgeInsets.all(8),
-                          margin: const EdgeInsets.only(top: 10),
-                          width: MediaQuery.of(context).size.width * 0.94,
-                          child: Column(
-                            children: [
-                              DropdownButtonHideUnderline(
-                                child: DropdownButton2(
-                                  isExpanded: true,
-                                  icon: Icon(
-                                    Icons.keyboard_arrow_down_outlined,
-                                    color: AppColor.black,
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: AppColor.black),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            padding: const EdgeInsets.all(8),
+                            margin: const EdgeInsets.only(top: 10),
+                            width: MediaQuery.of(context).size.width * 0.94,
+                            child: Column(
+                              children: [
+                                DropdownButtonHideUnderline(
+                                  child: DropdownButton2(
+                                    isExpanded: true,
+                                    icon: Icon(
+                                      Icons.keyboard_arrow_down_outlined,
+                                      color: AppColor.black,
+                                    ),
+                                    dropdownDecoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    scrollbarAlwaysShow: true,
+                                    scrollbarThickness: 8.0,
+                                    dropdownMaxHeight: 200,
+                                    selectedItemHighlightColor: AppColor.blue,
+                                    itemPadding: EdgeInsets.only(left: 10),
+                                    isDense: true,
+                                    hint: Text("Select"),
+                                    items: model.stateTypeModel?.data?.map((item) {
+                                      return DropdownMenuItem(
+                                        value: item.code,
+                                        child: Text(item.name.toString()),
+                                      );
+                                    }).toList(),
+                                    onChanged: (newVal) {
+                                      setState(() {
+                                        statevalue = newVal;
+                                        print("stt${statevalue}");
+                                        statevisible = true;
+                                      });
+                                    },
+                                    value: statevalue,
                                   ),
-                                  dropdownDecoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  scrollbarAlwaysShow: true,
-                                  scrollbarThickness: 8.0,
-                                  dropdownMaxHeight: 200,
-                                  selectedItemHighlightColor: AppColor.blue,
-                                  itemPadding: EdgeInsets.only(left: 10),
-                                  isDense: true,
-                                  hint: Text("Select status..."),
-                                  // value: status_value,
-                                  items: [],
-                                  // status_array.map((item) {
-                                  //   return DropdownMenuItem(
-                                  //     value: int.parse(item['tts_task_status_id'].toString()),
-                                  //     child: Text(item['tts_task_status_title'].toString()),
-                                  //   );
-                                  // }).toList(),
-                                  onChanged: (newVal) {
-                                    setState(() {
-                                      //  status_value = newVal;
-                                      //  _getStageList(project_item_value.toString());
-                                    });
-                                  },
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        RichText(
-                          text: TextSpan(
-                              text: 'Enter Text',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                              children: []),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          height: 50,
-                          child: TextField(
-                            controller: _endAreaController,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: 'Enter Text to Search',
+                              ],
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
+                          //
+                          // Column(
+                          //   children: [
+                          //
+                          //     RichText(
+                          //       text: TextSpan(
+                          //           text: 'Issuing Authority:',
+                          //           style: TextStyle(
+                          //             color: Colors.black,
+                          //           ),
+                          //           children: [
+                          //             TextSpan(
+                          //                 text: ' *',
+                          //                 style: TextStyle(
+                          //                   color: Colors.red,
+                          //                 ))
+                          //           ]),
+                          //     ),
+                          //     Container(
+                          //       decoration: BoxDecoration(
+                          //         border: Border.all(color: AppColor.black),
+                          //         borderRadius: BorderRadius.circular(25),
+                          //       ),
+                          //       padding: const EdgeInsets.all(8),
+                          //       margin: const EdgeInsets.only(top: 10),
+                          //       width: MediaQuery.of(context).size.width * 0.94,
+                          //       child: Column(
+                          //         children: [
+                          //           DropdownButtonHideUnderline(
+                          //             child: DropdownButton2(
+                          //               isExpanded: true,
+                          //               icon: Icon(
+                          //                 Icons.keyboard_arrow_down_outlined,
+                          //                 color: AppColor.black,
+                          //               ),
+                          //               dropdownDecoration: BoxDecoration(
+                          //                 borderRadius: BorderRadius.circular(10),
+                          //               ),
+                          //               scrollbarAlwaysShow: true,
+                          //               scrollbarThickness: 8.0,
+                          //               dropdownMaxHeight: 200,
+                          //               selectedItemHighlightColor: AppColor.blue,
+                          //               itemPadding: EdgeInsets.only(left: 10),
+                          //               isDense: true,
+                          //               hint: Text("Select"),
+                          //               // value: status_value,
+                          //               items: [],
+                          //               // status_array.map((item) {
+                          //               //   return DropdownMenuItem(
+                          //               //     value: int.parse(item['tts_task_status_id'].toString()),
+                          //               //     child: Text(item['tts_task_status_title'].toString()),
+                          //               //   );
+                          //               // }).toList(),
+                          //               onChanged: (newVal) {
+                          //                 setState(() {
+                          //                   //  status_value = newVal;
+                          //                   //  _getStageList(project_item_value.toString());
+                          //                 });
+                          //               },
+                          //             ),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
+                          // Column(
+                          //   children: [
+                          //
+                          //     RichText(
+                          //       text: TextSpan(
+                          //           text: 'Schedule No:',
+                          //           style: TextStyle(
+                          //             color: Colors.black,
+                          //           ),
+                          //           children: [
+                          //             TextSpan(
+                          //                 text: ' *',
+                          //                 style: TextStyle(
+                          //                   color: Colors.red,
+                          //                 ))
+                          //           ]),
+                          //     ),
+                          //     Container(
+                          //       decoration: BoxDecoration(
+                          //         border: Border.all(color: AppColor.black),
+                          //         borderRadius: BorderRadius.circular(25),
+                          //       ),
+                          //       padding: const EdgeInsets.all(8),
+                          //       margin: const EdgeInsets.only(top: 10),
+                          //       width: MediaQuery.of(context).size.width * 0.94,
+                          //       child: Column(
+                          //         children: [
+                          //           DropdownButtonHideUnderline(
+                          //             child: DropdownButton2(
+                          //               isExpanded: true,
+                          //               icon: Icon(
+                          //                 Icons.keyboard_arrow_down_outlined,
+                          //                 color: AppColor.black,
+                          //               ),
+                          //               dropdownDecoration: BoxDecoration(
+                          //                 borderRadius: BorderRadius.circular(10),
+                          //               ),
+                          //               scrollbarAlwaysShow: true,
+                          //               scrollbarThickness: 8.0,
+                          //               dropdownMaxHeight: 200,
+                          //               selectedItemHighlightColor: AppColor.blue,
+                          //               itemPadding: EdgeInsets.only(left: 10),
+                          //               isDense: true,
+                          //               hint: Text("Select"),
+                          //               // value: status_value,
+                          //               items: [],
+                          //               // status_array.map((item) {
+                          //               //   return DropdownMenuItem(
+                          //               //     value: int.parse(item['tts_task_status_id'].toString()),
+                          //               //     child: Text(item['tts_task_status_title'].toString()),
+                          //               //   );
+                          //               // }).toList(),
+                          //               onChanged: (newVal) {
+                          //                 setState(() {
+                          //                   //  status_value = newVal;
+                          //                   //  _getStageList(project_item_value.toString());
+                          //                 });
+                          //               },
+                          //             ),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
 
-                        //category
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text("Proposal Date"),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Stack(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      // decoration: BoxDecoration(
+                                      //   border: Border.all(color: AppColor.black)
+                                      // ),
+                                      child: TextField(
+                                        readOnly: true,
+                                        onTap: () {
+                                          selectStartDateForAndroid(context);
+                                        },
+                                        controller: _startDateController,
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          contentPadding: const EdgeInsets.all(8),
+                                          border: OutlineInputBorder(borderSide: BorderSide(color: AppColor.black)),
+                                          hintText: "mm/dd/yyyy",
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text("To"),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      child: TextField(
+                                        readOnly: true,
+                                        onTap: () {
+                                          selectEndDateForAndroid(context);
+                                        },
+                                        controller: _endDateController,
+                                        decoration: const InputDecoration(
+                                          isDense: true,
+                                          contentPadding: const EdgeInsets.all(8),
+                                          border: OutlineInputBorder(),
+                                          hintText: "mm/dd/yyyy",
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Positioned(
+                                  child: Align(
+                                      alignment: Alignment.center,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(right: 85, top: 5),
+                                        child: Icon(
+                                          Icons.calendar_month,
+                                          size: 20,
+                                          color: AppColor.black,
+                                        ),
+                                      ))),
+                              Positioned(
+                                  child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(right: 20, top: 5),
+                                        child: Icon(
+                                          Icons.calendar_month,
+                                          size: 20,
+                                          color: AppColor.black,
+                                        ),
+                                      ))),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          // RichText(
+                          //   text: TextSpan(
+                          //       text: 'Area (ha):',
+                          //       style: TextStyle(
+                          //         color: Colors.black,
+                          //       ),
+                          //       children: []),
+                          // ),
+                          // SizedBox(
+                          //   height: 10,
+                          // ),
+                          // Row(
+                          //   children: [
+                          //     Expanded(
+                          //       child: Container(
+                          //         height: 50,
+                          //         child: TextField(
+                          //           controller: areaController,
+                          //           decoration: const InputDecoration(
+                          //             border: OutlineInputBorder(),
+                          //             hintText: 'Enter Area (ha)',
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     ),
+                          //     SizedBox(
+                          //       width: 10,
+                          //     ),
+                          //     Text("To"),
+                          //     SizedBox(
+                          //       width: 10,
+                          //     ),
+                          //     Expanded(
+                          //       child: Container(
+                          //         height: 50,
+                          //         child: TextField(
+                          //           controller: _endAreaController,
+                          //           decoration: const InputDecoration(
+                          //             border: OutlineInputBorder(),
+                          //             hintText: 'Enter Area (ha)',
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          RichText(
+                            text: TextSpan(
+                                text: 'Proposal Type',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                                children: []),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: AppColor.black),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            padding: const EdgeInsets.all(8),
+                            margin: const EdgeInsets.only(top: 10),
+                            width: MediaQuery.of(context).size.width * 0.94,
+                            child: Column(
+                              children: [
+                                DropdownButtonHideUnderline(
+                                  child: DropdownButton2(
+                                    isExpanded: true,
+                                    icon: Icon(
+                                      Icons.keyboard_arrow_down_outlined,
+                                      color: AppColor.black,
+                                    ),
+                                    dropdownDecoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    scrollbarAlwaysShow: true,
+                                    scrollbarThickness: 8.0,
+                                    dropdownMaxHeight: 200,
+                                    selectedItemHighlightColor: AppColor.blue,
+                                    itemPadding: EdgeInsets.only(left: 10),
+                                    isDense: true,
+                                    hint: Text("Select"),
+                                    // value: status_value,
+                                    items: [],
+                                    // status_array.map((item) {
+                                    //   return DropdownMenuItem(
+                                    //     value: int.parse(item['tts_task_status_id'].toString()),
+                                    //     child: Text(item['tts_task_status_title'].toString()),
+                                    //   );
+                                    // }).toList(),
+                                    onChanged: (newVal) {
+                                      setState(() {
+                                        //  status_value = newVal;
+                                        //  _getStageList(project_item_value.toString());
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          RichText(
+                            text: TextSpan(
+                                text: 'Proposal Status',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                                children: []),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: AppColor.black),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            padding: const EdgeInsets.all(8),
+                            margin: const EdgeInsets.only(top: 10),
+                            width: MediaQuery.of(context).size.width * 0.94,
+                            child: Column(
+                              children: [
+                                DropdownButtonHideUnderline(
+                                  child: DropdownButton2(
+                                    isExpanded: true,
+                                    icon: Icon(
+                                      Icons.keyboard_arrow_down_outlined,
+                                      color: AppColor.black,
+                                    ),
+                                    dropdownDecoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    scrollbarAlwaysShow: true,
+                                    scrollbarThickness: 8.0,
+                                    dropdownMaxHeight: 200,
+                                    selectedItemHighlightColor: AppColor.blue,
+                                    itemPadding: EdgeInsets.only(left: 10),
+                                    isDense: true,
+                                    hint: Text("Select status..."),
+                                    // value: status_value,
+                                    items: [],
+                                    // status_array.map((item) {
+                                    //   return DropdownMenuItem(
+                                    //     value: int.parse(item['tts_task_status_id'].toString()),
+                                    //     child: Text(item['tts_task_status_title'].toString()),
+                                    //   );
+                                    // }).toList(),
+                                    onChanged: (newVal) {
+                                      setState(() {
+                                        //  status_value = newVal;
+                                        //  _getStageList(project_item_value.toString());
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          RichText(
+                            text: TextSpan(
+                                text: 'Enter Text',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                                children: []),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            height: 50,
+                            child: TextField(
+                              controller: _endAreaController,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: 'Enter Text to Search',
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
 
-                        // RichText(
-                        //   text: TextSpan(
-                        //       text: 'Category:',
-                        //       style: TextStyle(
-                        //         color: Colors.black,
-                        //       ),
-                        //       children: []),
-                        // ),
-                        // Container(
-                        //   decoration: BoxDecoration(
-                        //     border: Border.all(color: AppColor.black),
-                        //     borderRadius: BorderRadius.circular(25),
-                        //   ),
-                        //   padding: const EdgeInsets.all(8),
-                        //   margin: const EdgeInsets.only(top: 10),
-                        //   width: MediaQuery.of(context).size.width * 0.94,
-                        //   child: Column(
-                        //     children: [
-                        //       DropdownButtonHideUnderline(
-                        //         child: DropdownButton2(
-                        //           isExpanded: true,
-                        //           icon: Icon(
-                        //             Icons.keyboard_arrow_down_outlined,
-                        //             color: AppColor.black,
-                        //           ),
-                        //           dropdownDecoration: BoxDecoration(
-                        //             borderRadius: BorderRadius.circular(10),
-                        //           ),
-                        //           scrollbarAlwaysShow: true,
-                        //           scrollbarThickness: 8.0,
-                        //           dropdownMaxHeight: 200,
-                        //           selectedItemHighlightColor: AppColor.blue,
-                        //           itemPadding: EdgeInsets.only(left: 10),
-                        //           isDense: true,
-                        //           hint: Text("Select"),
-                        //           // value: status_value,
-                        //           items: [],
-                        //           // status_array.map((item) {
-                        //           //   return DropdownMenuItem(
-                        //           //     value: int.parse(item['tts_task_status_id'].toString()),
-                        //           //     child: Text(item['tts_task_status_title'].toString()),
-                        //           //   );
-                        //           // }).toList(),
-                        //           onChanged: (newVal) {
-                        //             setState(() {
-                        //               //  status_value = newVal;
-                        //               //  _getStageList(project_item_value.toString());
-                        //             });
-                        //           },
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
+                          //category
 
-                        // Column(
-                        //   children: [
-                        //     RichText(
-                        //       text: TextSpan(
-                        //           text: 'Sector:',
-                        //           style: TextStyle(
-                        //             color: Colors.black,
-                        //           ),
-                        //           children: [
-                        //             TextSpan(
-                        //                 text: ' *',
-                        //                 style: TextStyle(
-                        //                   color: Colors.red,
-                        //                 ))
-                        //           ]),
-                        //     ),
-                        //     Container(
-                        //       decoration: BoxDecoration(
-                        //         border: Border.all(color: AppColor.black),
-                        //         borderRadius: BorderRadius.circular(25),
-                        //       ),
-                        //       padding: const EdgeInsets.all(8),
-                        //       margin: const EdgeInsets.only(top: 10),
-                        //       width: MediaQuery.of(context).size.width * 0.94,
-                        //       child: Column(
-                        //         children: [
-                        //           DropdownButtonHideUnderline(
-                        //             child: DropdownButton2(
-                        //               isExpanded: true,
-                        //               icon: Icon(
-                        //                 Icons.keyboard_arrow_down_outlined,
-                        //                 color: AppColor.black,
-                        //               ),
-                        //               dropdownDecoration: BoxDecoration(
-                        //                 borderRadius: BorderRadius.circular(10),
-                        //               ),
-                        //               scrollbarAlwaysShow: true,
-                        //               scrollbarThickness: 8.0,
-                        //               dropdownMaxHeight: 200,
-                        //               selectedItemHighlightColor: AppColor.blue,
-                        //               itemPadding: EdgeInsets.only(left: 10),
-                        //               isDense: true,
-                        //               hint: Text("Select"),
-                        //               // value: status_value,
-                        //               items: [],
-                        //               // status_array.map((item) {
-                        //               //   return DropdownMenuItem(
-                        //               //     value: int.parse(item['tts_task_status_id'].toString()),
-                        //               //     child: Text(item['tts_task_status_title'].toString()),
-                        //               //   );
-                        //               // }).toList(),
-                        //               onChanged: (newVal) {
-                        //                 setState(() {
-                        //                   //  status_value = newVal;
-                        //                   //  _getStageList(project_item_value.toString());
-                        //                 });
-                        //               },
-                        //             ),
-                        //           ),
-                        //         ],
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
+                          // RichText(
+                          //   text: TextSpan(
+                          //       text: 'Category:',
+                          //       style: TextStyle(
+                          //         color: Colors.black,
+                          //       ),
+                          //       children: []),
+                          // ),
+                          // Container(
+                          //   decoration: BoxDecoration(
+                          //     border: Border.all(color: AppColor.black),
+                          //     borderRadius: BorderRadius.circular(25),
+                          //   ),
+                          //   padding: const EdgeInsets.all(8),
+                          //   margin: const EdgeInsets.only(top: 10),
+                          //   width: MediaQuery.of(context).size.width * 0.94,
+                          //   child: Column(
+                          //     children: [
+                          //       DropdownButtonHideUnderline(
+                          //         child: DropdownButton2(
+                          //           isExpanded: true,
+                          //           icon: Icon(
+                          //             Icons.keyboard_arrow_down_outlined,
+                          //             color: AppColor.black,
+                          //           ),
+                          //           dropdownDecoration: BoxDecoration(
+                          //             borderRadius: BorderRadius.circular(10),
+                          //           ),
+                          //           scrollbarAlwaysShow: true,
+                          //           scrollbarThickness: 8.0,
+                          //           dropdownMaxHeight: 200,
+                          //           selectedItemHighlightColor: AppColor.blue,
+                          //           itemPadding: EdgeInsets.only(left: 10),
+                          //           isDense: true,
+                          //           hint: Text("Select"),
+                          //           // value: status_value,
+                          //           items: [],
+                          //           // status_array.map((item) {
+                          //           //   return DropdownMenuItem(
+                          //           //     value: int.parse(item['tts_task_status_id'].toString()),
+                          //           //     child: Text(item['tts_task_status_title'].toString()),
+                          //           //   );
+                          //           // }).toList(),
+                          //           onChanged: (newVal) {
+                          //             setState(() {
+                          //               //  status_value = newVal;
+                          //               //  _getStageList(project_item_value.toString());
+                          //             });
+                          //           },
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
 
-                        SizedBox(
-                          height: 30,
-                        ),
-                        GestureDetector(
-                          onTap: () async{
-                            print(("cler${clearanceId}"));
-                            print(("stat${stateCode}"));
-                            if(clearancevisible==true ){
-                              if(statevisible==true){
-                                await proposalViewModel.getAdvanceSearchDetails(
-                                  majorClearanceType: clearanceId.toString(),
-                                  state: stateCode.toString(),
-                                  // sector: "",
-                                  // proposalStatus: "",
-                                  // proposalType: "",
-                                  // issuingAuthority: "",
-                                  // activityId: "",
-                                  // category: "category",
-                                  // startDate: "startDate",
-                                  // endDate: "",
-                                  // area: "",
-                                  // text: ""
-                                );
-                                Navigator.pushNamed(context, AppRoutes.advancesearchdashboard,arguments: AdvanceSearchArguments(
-                                    clearanceId:clearanceId,stateCode: stateCode ));
-                              }
-                              else{
+                          // Column(
+                          //   children: [
+                          //     RichText(
+                          //       text: TextSpan(
+                          //           text: 'Sector:',
+                          //           style: TextStyle(
+                          //             color: Colors.black,
+                          //           ),
+                          //           children: [
+                          //             TextSpan(
+                          //                 text: ' *',
+                          //                 style: TextStyle(
+                          //                   color: Colors.red,
+                          //                 ))
+                          //           ]),
+                          //     ),
+                          //     Container(
+                          //       decoration: BoxDecoration(
+                          //         border: Border.all(color: AppColor.black),
+                          //         borderRadius: BorderRadius.circular(25),
+                          //       ),
+                          //       padding: const EdgeInsets.all(8),
+                          //       margin: const EdgeInsets.only(top: 10),
+                          //       width: MediaQuery.of(context).size.width * 0.94,
+                          //       child: Column(
+                          //         children: [
+                          //           DropdownButtonHideUnderline(
+                          //             child: DropdownButton2(
+                          //               isExpanded: true,
+                          //               icon: Icon(
+                          //                 Icons.keyboard_arrow_down_outlined,
+                          //                 color: AppColor.black,
+                          //               ),
+                          //               dropdownDecoration: BoxDecoration(
+                          //                 borderRadius: BorderRadius.circular(10),
+                          //               ),
+                          //               scrollbarAlwaysShow: true,
+                          //               scrollbarThickness: 8.0,
+                          //               dropdownMaxHeight: 200,
+                          //               selectedItemHighlightColor: AppColor.blue,
+                          //               itemPadding: EdgeInsets.only(left: 10),
+                          //               isDense: true,
+                          //               hint: Text("Select"),
+                          //               // value: status_value,
+                          //               items: [],
+                          //               // status_array.map((item) {
+                          //               //   return DropdownMenuItem(
+                          //               //     value: int.parse(item['tts_task_status_id'].toString()),
+                          //               //     child: Text(item['tts_task_status_title'].toString()),
+                          //               //   );
+                          //               // }).toList(),
+                          //               onChanged: (newVal) {
+                          //                 setState(() {
+                          //                   //  status_value = newVal;
+                          //                   //  _getStageList(project_item_value.toString());
+                          //                 });
+                          //               },
+                          //             ),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
+
+                          SizedBox(
+                            height: 30,
+                          ),
+                          GestureDetector(
+                            onTap: () async {
+                              print(("cler${clearanceId}"));
+                              print(("stat${stateCode}"));
+                              if (clearancevisible == true) {
+                                if (statevisible == true) {
+                                  await proposalViewModel.getAdvanceSearchDetails(
+                                    majorClearanceType: clearencevalue.toString(),
+                                    state: statevalue.toString(),
+                                    // sector: "",
+                                    // proposalStatus: "",
+                                    // proposalType: "",
+                                    // issuingAuthority: "",
+                                    // activityId: "",
+                                    // category: "category",
+                                    // startDate: "startDate",
+                                    // endDate: "",
+                                    // area: "",
+                                    // text: ""
+                                  );
+                                  Navigator.pushNamed(context, AppRoutes.advancesearchdashboard,
+                                      arguments:
+                                          AdvanceSearchArguments(clearanceId: clearencevalue, stateCode: statevalue));
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                    content: Text("Please Select State"),
+                                  ));
+                                }
+                              } else {
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                  content: Text("Please Select State"),
+                                  content: Text("Please Select Clearance Type"),
                                 ));
                               }
-
-                            }
-                            else{
-                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                content: Text("Please Select Clearance Type"),
-                              ));
-                            }
-
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(15),
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(25), color: Colors.green),
-                            width: double.infinity,
-                            child: Center(
-                                child: Text(
-                                  "Search",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                )),
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(15),
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(25), color: Colors.green),
+                              width: double.infinity,
+                              child: Center(
+                                  child: Text(
+                                "Search",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              )),
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const TrackPorposal()));
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(15),
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(25), color: Colors.orange),
-                            width: double.infinity,
-                            child: Center(
-                                child: Text(
-                                  "Hide Advance Search",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                )),
+                          SizedBox(
+                            height: 30,
                           ),
-                        ),
-                      ],
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const TrackPorposal()));
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(15),
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(25), color: Colors.orange),
+                              width: double.infinity,
+                              child: Center(
+                                  child: Text(
+                                "Hide Advance Search",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              )),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              );
-            })),
+                  ],
+                );
+              })),
         ),
       ),
     );

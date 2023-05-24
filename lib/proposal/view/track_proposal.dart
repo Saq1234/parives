@@ -105,11 +105,12 @@ class _TrackPorposalState extends State<TrackPorposal> {
                           Container(
                             height: MediaQuery.of(context).size.height/10,),
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async{
                               if (porposalController.text.isNotEmpty) {
-                                porposalViewModel.getPorposalDetails(porposalNo: porposalController.text);
+                              await  porposalViewModel.getPorposalDetails(porposalNo: porposalController.text);
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => const TrackPorposalDash()));
                                 FocusManager.instance.primaryFocus?.unfocus();
+                                porposalController.clear();
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                   content: Text("Please fill Porposal Number"),
@@ -133,6 +134,8 @@ class _TrackPorposalState extends State<TrackPorposal> {
                           GestureDetector(
                             onTap: () {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => const AdvanceSearchPorposal()));
+                              porposalController.clear();
+
                             },
                             child: Container(
                               padding: EdgeInsets.all(15),

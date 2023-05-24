@@ -31,7 +31,7 @@ class PorposalApi{
     log("msg$response");
 
   }
-  Future<AdvanceSearchDetailModel?>
+  Future <AdvanceSearchDetailModel?>
   fetchAdvanceSearchData({
     required String majorClearanceType,
     required String state,
@@ -85,7 +85,7 @@ class PorposalApi{
 
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
-      print("response--$responseData");
+      print("response--clearence$responseData");
       if(responseData !=null){
         return ClearanceTypeModel.fromJson(responseData);
       }
@@ -102,7 +102,7 @@ class PorposalApi{
 
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
-      print("response--$responseData");
+      print("response--state$responseData");
       if(responseData !=null){
         return StateTypeModel.fromJson(responseData);
       }

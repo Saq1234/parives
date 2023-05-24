@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class AdvanceSearchDetailModel {
   List<Data>? data;
   String? message;
@@ -103,7 +105,9 @@ class Data {
     certificateUrl = json['certificateUrl'];
     proposalType = json['proposalType'];
     formId = json['form_id'];
-    dateOfSubmission = json['dateOfSubmission'];
+    dateOfSubmission = json['dateOfSubmission'] != null
+        ? DateFormat('dd-MM-yyyy HH:mm:ss').format(DateTime.parse(json['dateOfSubmission'].toString()))
+    : null;
   }
 
   Map<String, dynamic> toJson() {

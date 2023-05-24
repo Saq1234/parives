@@ -171,7 +171,7 @@ Widget CardData() {
                           TextSpan(
                               text: "Category :${mylist?.category ?? ""},"
                                   " Sector :${mylist?.sector ?? ""},"
-                                  "dateOfSubmission :${mylist?.dateOfSubmission ?? ""}"),
+                                  "dateOfSubmission :${mylist?.dateOfSubmission?.substring(0,10) ?? ""}"),
                         ],
                       ),
                     ),

@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class TrackPorposalModel {
   List<Data>? data;
   String? message;
@@ -39,18 +41,18 @@ class Data {
   String? proposalId;
   String? proposalNo;
   int? applicationId;
-  Null? moefccFileNumber;
-  Null? otherProperty;
+  dynamic? moefccFileNumber;
+  dynamic? otherProperty;
   String? clearanceType;
-  Null? lastSubmissionDate;
+  dynamic? lastSubmissionDate;
   String? projectName;
-  Null? forestArea;
+  dynamic? forestArea;
   String? proposalStatus;
   String? singleWindowNumber;
   String? cafnumber;
   String? nameOfUserAgency;
   String? issuingAuthority;
-  Null? certificateUrl;
+  dynamic? certificateUrl;
   String? proposalType;
   int? formId;
   String? dateOfSubmission;
@@ -103,7 +105,9 @@ class Data {
     certificateUrl = json['certificateUrl'];
     proposalType = json['proposalType'];
     formId = json['form_id'];
-    dateOfSubmission = json['dateOfSubmission'];
+    dateOfSubmission = json['dateOfSubmission']!= null
+        ? DateFormat('dd-MM-yyyy HH:mm:ss').format(DateTime.parse(json['dateOfSubmission'].toString()))
+        : null;
   }
 
   Map<String, dynamic> toJson() {

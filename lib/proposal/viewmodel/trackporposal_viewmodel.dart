@@ -49,11 +49,11 @@ class ProposalViewModel extends ChangeNotifier{
   }
 
 //ClearanceTypeViewModel
-  Future getDataClearanceType()async{
+  Future <void> getDataClearanceType()async{
     final data=await _porposalApi.fetchDataClearanceType();
     clearanceTypeModel=data;
     notifyListeners();
-    return clearanceTypeModel;
+    //return clearanceTypeModel;
   }
 
 // StateTypeViewModel

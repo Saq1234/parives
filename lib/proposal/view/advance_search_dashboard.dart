@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:parivesh/common/date_time_convert.dart';
 import 'package:provider/provider.dart';
 
 import '../model/advance_search_detail_model.dart';
@@ -19,8 +20,6 @@ class _AdvanceSearchDashboardState extends State<AdvanceSearchDashboard> {
 
   @override
   void initState() {
-    print("myyy${widget.clearanceId}");
-    print("myyy${widget.stateCode}");
     proposalViewModel = Provider.of<ProposalViewModel>(context, listen: false);
     proposalViewModel?.getAdvanceSearchDetails(
         majorClearanceType: widget.clearanceId.toString(),
@@ -77,6 +76,7 @@ Widget CardData() {
             itemCount: model.advanceSearchDetailModel?.data?.length,
             itemBuilder: (BuildContext context, int index) {
               final mylist = model.advanceSearchDetailModel?.data?[index];
+
               return
                 Padding(
                   padding: const EdgeInsets.all(10),
@@ -184,7 +184,8 @@ Widget CardData() {
                                 TextSpan(
                                     text: "Category :${mylist?.category ?? ""},"
                                         " Sector :${mylist?.sector ?? ""},"
-                                        "dateOfSubmission :${mylist?.dateOfSubmission ?? ""}"),
+                                        "dateOfSubmission :${
+                                        mylist?.dateOfSubmission?.substring(0,10) ?? ""}"),
                               ],
                             ),
                           ),
@@ -213,7 +214,7 @@ Widget CardData() {
             }):
       Center(
         child: model.advanceSearchDetailModel!=null && model.advanceSearchDetailModel!.data!.isEmpty?
-        Text("No Data Available"):CircularProgressIndicator(color: Colors.green,),
+        Text("No Data Available",style: TextStyle(color: Colors.black),):CircularProgressIndicator(color: Colors.green,),
       );
     });
 }
