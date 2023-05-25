@@ -30,6 +30,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
   late TextEditingController _endDateController = TextEditingController();
   late TextEditingController areaController = TextEditingController();
   late TextEditingController _endAreaController = TextEditingController();
+  late TextEditingController _enterTextController = TextEditingController();
   late ProposalViewModel proposalViewModel;
   ClearanceTypeModel? clearanceTypeModel;
   bool clearancevisible = false;
@@ -85,18 +86,20 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
     proposalViewModel.getPorposalStatus(workgroupId: 0);
     proposalViewModel.getDataAuthority();
     proposalViewModel.getDataSheduleNo();
+    proposalViewModel.getDataSectorType();
 
   }
 
   var clearencevalue;
   var authorityvalue;
   var shedulenovalue;
+  var categoryvalue;
   var proposolStatusValue;
   var proposolTypeevalue;
+  var sectorTypeevalue;
   var statevalue;
   var clearanceId;
   var stateCode;
-  List<String> check = [];
 
   @override
   Widget build(BuildContext context) {
@@ -176,14 +179,15 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                         child: Text(item.name.toString()),
                                       );
                                     }).toList(),
-                                    onChanged: (newVal)async {
+                                    onChanged: (newVal) {
                                       setState(() {
                                         clearencevalue = newVal;
                                         print("check${clearencevalue}");
                                         clearancevisible = true;
-                                        //proposolTypeevalue="";
+                                        proposalViewModel.proposolTypeModel?.data?.clear();
+                                        proposolTypeevalue;
                                       });
-                                      await proposalViewModel.getPorposalType(id: clearencevalue);
+                                       proposalViewModel.getPorposalType(id: clearencevalue);
 
                                     },
                                     value: clearencevalue,
@@ -258,142 +262,146 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                           SizedBox(
                             height: 10,
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+                          Visibility(
+                            visible: clearencevalue==1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
 
-                              RichText(
-                                text: TextSpan(
-                                    text: 'Issuing Authority:',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                    ),
-                                    children: [
-                                      // TextSpan(
-                                      //     text: ' *',
-                                      //     style: TextStyle(
-                                      //       color: Colors.red,
-                                      //     ))
-                                    ]),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: AppColor.black),
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-                                padding: const EdgeInsets.all(8),
-                                margin: const EdgeInsets.only(top: 10),
-                                width: MediaQuery.of(context).size.width * 0.94,
-                                child: Column(
-                                  children: [
-                                    DropdownButtonHideUnderline(
-                                      child: DropdownButton2(
-                                        isExpanded: true,
-                                        icon: Icon(
-                                          Icons.keyboard_arrow_down_outlined,
-                                          color: AppColor.black,
-                                        ),
-                                        dropdownDecoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        scrollbarAlwaysShow: true,
-                                        scrollbarThickness: 8.0,
-                                        dropdownMaxHeight: 200,
-                                        selectedItemHighlightColor: AppColor.blue,
-                                        itemPadding: EdgeInsets.only(left: 10),
-                                        isDense: true,
-                                        hint: Text("Select"),
-                                        items: model.authorityModel?.data?.map((item) {
-                                          return DropdownMenuItem(
-                                            value: item.name,
-                                            child: Text(item.name.toString()),
-                                          );
-                                        }).toList(),
-                                        onChanged: (newVal)async {
-                                          setState(() {
-                                            authorityvalue = newVal;
-                                            print("check${authorityvalue}");
-                                          });
-
-                                        },
-                                        value: authorityvalue,
+                                RichText(
+                                  text: TextSpan(
+                                      text: 'Issuing Authority',
+                                      style: TextStyle(
+                                        color: Colors.black,
                                       ),
-                                    ),
-                                  ],
+                                      children: [
+                                        // TextSpan(
+                                        //     text: ' *',
+                                        //     style: TextStyle(
+                                        //       color: Colors.red,
+                                        //     ))
+                                      ]),
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-
-                              RichText(
-                                text: TextSpan(
-                                    text: 'Schedule No:',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                    ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: AppColor.black),
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  padding: const EdgeInsets.all(8),
+                                  margin: const EdgeInsets.only(top: 10),
+                                  width: MediaQuery.of(context).size.width * 0.94,
+                                  child: Column(
                                     children: [
-                                      // TextSpan(
-                                      //     text: ' *',
-                                      //     style: TextStyle(
-                                      //       color: Colors.red,
-                                      //     ))
-                                    ]),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: AppColor.black),
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-                                padding: const EdgeInsets.all(8),
-                                margin: const EdgeInsets.only(top: 10),
-                                width: MediaQuery.of(context).size.width * 0.94,
-                                child: Column(
-                                  children: [
-                                    DropdownButtonHideUnderline(
-                                      child: DropdownButton2(
-                                        isExpanded: true,
-                                        icon: Icon(
-                                          Icons.keyboard_arrow_down_outlined,
-                                          color: AppColor.black,
-                                        ),
-                                        dropdownDecoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        scrollbarAlwaysShow: true,
-                                        scrollbarThickness: 8.0,
-                                        dropdownMaxHeight: 200,
-                                        selectedItemHighlightColor: AppColor.blue,
-                                        itemPadding: EdgeInsets.only(left: 10),
-                                        isDense: true,
-                                        hint: Text("Select"),
-                                        items: model.sheduleNoModel?.data?.map((item) {
-                                          return DropdownMenuItem(
-                                            value: item.id,
-                                            child: Text(item.name.toString()),
-                                          );
-                                        }).toList(),
-                                        onChanged: (newVal)async {
-                                          setState(() {
-                                            shedulenovalue = newVal;
-                                            print("check${shedulenovalue}");
+                                      DropdownButtonHideUnderline(
+                                        child: DropdownButton2(
+                                          isExpanded: true,
+                                          icon: Icon(
+                                            Icons.keyboard_arrow_down_outlined,
+                                            color: AppColor.black,
+                                          ),
+                                          dropdownDecoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          scrollbarAlwaysShow: true,
+                                          scrollbarThickness: 8.0,
+                                          dropdownMaxHeight: 200,
+                                          selectedItemHighlightColor: AppColor.blue,
+                                          itemPadding: EdgeInsets.only(left: 10),
+                                          isDense: true,
+                                          hint: Text("Select"),
+                                          items: model.authorityModel?.data?.map((item) {
+                                            return DropdownMenuItem(
+                                              value: item.name,
+                                              child: Text(item.name.toString()),
+                                            );
+                                          }).toList(),
+                                          onChanged: (newVal)async {
+                                            setState(() {
+                                              authorityvalue = newVal;
+                                              print("check${authorityvalue}");
+                                            });
 
-                                          });
-
-                                        },
-                                        value: shedulenovalue,
+                                          },
+                                          value: authorityvalue,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
+
+                          // Visibility(
+                          //   visible: clearencevalue==1,
+                          //   child: Column(
+                          //     crossAxisAlignment: CrossAxisAlignment.start,
+                          //     children: [
+                          //
+                          //       RichText(
+                          //         text: TextSpan(
+                          //             text: 'Schedule No',
+                          //             style: TextStyle(
+                          //               color: Colors.black,
+                          //             ),
+                          //             children: [
+                          //               // TextSpan(
+                          //               //     text: ' *',
+                          //               //     style: TextStyle(
+                          //               //       color: Colors.red,
+                          //               //     ))
+                          //             ]),
+                          //       ),
+                          //       Container(
+                          //         decoration: BoxDecoration(
+                          //           border: Border.all(color: AppColor.black),
+                          //           borderRadius: BorderRadius.circular(25),
+                          //         ),
+                          //         padding: const EdgeInsets.all(8),
+                          //         margin: const EdgeInsets.only(top: 10),
+                          //         width: MediaQuery.of(context).size.width * 0.94,
+                          //         child: Column(
+                          //           children: [
+                          //             DropdownButtonHideUnderline(
+                          //               child: DropdownButton2(
+                          //                 isExpanded: true,
+                          //                 icon: Icon(
+                          //                   Icons.keyboard_arrow_down_outlined,
+                          //                   color: AppColor.black,
+                          //                 ),
+                          //                 dropdownDecoration: BoxDecoration(
+                          //                   borderRadius: BorderRadius.circular(10),
+                          //                 ),
+                          //                 scrollbarAlwaysShow: true,
+                          //                 scrollbarThickness: 8.0,
+                          //                 dropdownMaxHeight: 200,
+                          //                 selectedItemHighlightColor: AppColor.blue,
+                          //                 itemPadding: EdgeInsets.only(left: 10),
+                          //                 isDense: true,
+                          //                 hint: Text("Select"),
+                          //                 items: model.categoryModel?.data?.map((item) {
+                          //                   return DropdownMenuItem(
+                          //                     value: item.id,
+                          //                     child: Text(item.name.toString()),
+                          //                   );
+                          //                 }).toList(),
+                          //                 onChanged: (newVal)async {
+                          //                   setState(() {
+                          //                     shedulenovalue = newVal;
+                          //                     print("check${shedulenovalue}");
+                          //
+                          //                   });
+                          //
+                          //                 },
+                          //                 value: shedulenovalue,
+                          //               ),
+                          //             ),
+                          //           ],
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
 
                           SizedBox(
                             height: 10,
@@ -479,52 +487,61 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                           SizedBox(
                             height: 10,
                           ),
-                          // RichText(
-                          //   text: TextSpan(
-                          //       text: 'Area (ha):',
-                          //       style: TextStyle(
-                          //         color: Colors.black,
-                          //       ),
-                          //       children: []),
-                          // ),
-                          // SizedBox(
-                          //   height: 10,
-                          // ),
-                          // Row(
-                          //   children: [
-                          //     Expanded(
-                          //       child: Container(
-                          //         height: 50,
-                          //         child: TextField(
-                          //           controller: areaController,
-                          //           decoration: const InputDecoration(
-                          //             border: OutlineInputBorder(),
-                          //             hintText: 'Enter Area (ha)',
-                          //           ),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //     SizedBox(
-                          //       width: 10,
-                          //     ),
-                          //     Text("To"),
-                          //     SizedBox(
-                          //       width: 10,
-                          //     ),
-                          //     Expanded(
-                          //       child: Container(
-                          //         height: 50,
-                          //         child: TextField(
-                          //           controller: _endAreaController,
-                          //           decoration: const InputDecoration(
-                          //             border: OutlineInputBorder(),
-                          //             hintText: 'Enter Area (ha)',
-                          //           ),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
+                          Visibility(
+                            visible: clearencevalue==2,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                      text: 'Area (ha):',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                      children: []),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        height: 50,
+                                        child: TextField(
+                                          controller: areaController,
+                                          decoration: const InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            hintText: 'Enter Area (ha)',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text("To"),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        height: 50,
+                                        child: TextField(
+                                          controller: _endAreaController,
+                                          decoration: const InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            hintText: 'Enter Area (ha)',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+
                           SizedBox(
                             height: 10,
                           ),
@@ -574,11 +591,11 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                       items: model.proposolTypeModel?.data?.map((item) {
                                         return
                                           DropdownMenuItem(
-                                          value: item.name,
+                                          value: item.id,
                                           child: Text(item.name.toString()),
                                         );
                                       }).toList(),
-                                      onChanged: (newVal)async {
+                                      onChanged: (newVal) {
                                         setState(() {
                                           proposolTypeevalue = newVal;
                                           print("check${proposolTypeevalue}");
@@ -666,7 +683,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                           Container(
                             height: 50,
                             child: TextField(
-                              controller: _endAreaController,
+                              controller: _enterTextController,
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
                                 hintText: 'Enter Text to Search',
@@ -679,125 +696,137 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
 
                           //category
 
-                          // RichText(
-                          //   text: TextSpan(
-                          //       text: 'Category:',
-                          //       style: TextStyle(
-                          //         color: Colors.black,
-                          //       ),
-                          //       children: []),
-                          // ),
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //     border: Border.all(color: AppColor.black),
-                          //     borderRadius: BorderRadius.circular(25),
-                          //   ),
-                          //   padding: const EdgeInsets.all(8),
-                          //   margin: const EdgeInsets.only(top: 10),
-                          //   width: MediaQuery.of(context).size.width * 0.94,
-                          //   child: Column(
-                          //     children: [
-                          //       DropdownButtonHideUnderline(
-                          //         child: DropdownButton2(
-                          //           isExpanded: true,
-                          //           icon: Icon(
-                          //             Icons.keyboard_arrow_down_outlined,
-                          //             color: AppColor.black,
-                          //           ),
-                          //           dropdownDecoration: BoxDecoration(
-                          //             borderRadius: BorderRadius.circular(10),
-                          //           ),
-                          //           scrollbarAlwaysShow: true,
-                          //           scrollbarThickness: 8.0,
-                          //           dropdownMaxHeight: 200,
-                          //           selectedItemHighlightColor: AppColor.blue,
-                          //           itemPadding: EdgeInsets.only(left: 10),
-                          //           isDense: true,
-                          //           hint: Text("Select"),
-                          //           // value: status_value,
-                          //           items: [],
-                          //           // status_array.map((item) {
-                          //           //   return DropdownMenuItem(
-                          //           //     value: int.parse(item['tts_task_status_id'].toString()),
-                          //           //     child: Text(item['tts_task_status_title'].toString()),
-                          //           //   );
-                          //           // }).toList(),
-                          //           onChanged: (newVal) {
-                          //             setState(() {
-                          //               //  status_value = newVal;
-                          //               //  _getStageList(project_item_value.toString());
-                          //             });
-                          //           },
-                          //         ),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
+                          Visibility(
+                            visible: clearencevalue==2,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                      text: 'Category',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                      children: []),
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: AppColor.black),
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  padding: const EdgeInsets.all(8),
+                                  margin: const EdgeInsets.only(top: 10),
+                                  width: MediaQuery.of(context).size.width * 0.94,
+                                  child: Column(
+                                    children: [
+                                      DropdownButtonHideUnderline(
+                                        child: DropdownButton2(
+                                          isExpanded: true,
+                                          icon: Icon(
+                                            Icons.keyboard_arrow_down_outlined,
+                                            color: AppColor.black,
+                                          ),
+                                          dropdownDecoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          scrollbarAlwaysShow: true,
+                                          scrollbarThickness: 8.0,
+                                          dropdownMaxHeight: 200,
+                                          selectedItemHighlightColor: AppColor.blue,
+                                          itemPadding: EdgeInsets.only(left: 10),
+                                          isDense: true,
+                                          hint: Text("Select"),
+                                          items: model.categoryModel?.data?.map((item) {
+                                            return DropdownMenuItem(
+                                              value: item.id,
+                                              child: Text(item.name.toString()),
+                                            );
+                                          }).toList(),
+                                          onChanged: (newVal)async {
+                                            setState(() {
+                                              categoryvalue = newVal;
+                                              print("check${categoryvalue}");
 
-                          // Column(
-                          //   children: [
-                          //     RichText(
-                          //       text: TextSpan(
-                          //           text: 'Sector:',
-                          //           style: TextStyle(
-                          //             color: Colors.black,
-                          //           ),
-                          //           children: [
-                          //             TextSpan(
-                          //                 text: ' *',
-                          //                 style: TextStyle(
-                          //                   color: Colors.red,
-                          //                 ))
-                          //           ]),
-                          //     ),
-                          //     Container(
-                          //       decoration: BoxDecoration(
-                          //         border: Border.all(color: AppColor.black),
-                          //         borderRadius: BorderRadius.circular(25),
-                          //       ),
-                          //       padding: const EdgeInsets.all(8),
-                          //       margin: const EdgeInsets.only(top: 10),
-                          //       width: MediaQuery.of(context).size.width * 0.94,
-                          //       child: Column(
-                          //         children: [
-                          //           DropdownButtonHideUnderline(
-                          //             child: DropdownButton2(
-                          //               isExpanded: true,
-                          //               icon: Icon(
-                          //                 Icons.keyboard_arrow_down_outlined,
-                          //                 color: AppColor.black,
-                          //               ),
-                          //               dropdownDecoration: BoxDecoration(
-                          //                 borderRadius: BorderRadius.circular(10),
-                          //               ),
-                          //               scrollbarAlwaysShow: true,
-                          //               scrollbarThickness: 8.0,
-                          //               dropdownMaxHeight: 200,
-                          //               selectedItemHighlightColor: AppColor.blue,
-                          //               itemPadding: EdgeInsets.only(left: 10),
-                          //               isDense: true,
-                          //               hint: Text("Select"),
-                          //               // value: status_value,
-                          //               items: [],
-                          //               // status_array.map((item) {
-                          //               //   return DropdownMenuItem(
-                          //               //     value: int.parse(item['tts_task_status_id'].toString()),
-                          //               //     child: Text(item['tts_task_status_title'].toString()),
-                          //               //   );
-                          //               // }).toList(),
-                          //               onChanged: (newVal) {
-                          //                 setState(() {
-                          //                   //  status_value = newVal;
-                          //                   //  _getStageList(project_item_value.toString());
-                          //                 });
-                          //               },
-                          //             ),
-                          //           ),
-                          //         ],
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
+                                            });
+
+                                          },
+                                          value: categoryvalue,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                              ],
+                            ),
+                          ),
+                        //  SizedBox(height: 10,),
+
+                          Visibility(
+                            visible: clearencevalue==1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                      text: 'Sector ',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                      children: [
+
+                                      ]),
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: AppColor.black),
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  padding: const EdgeInsets.all(8),
+                                  margin: const EdgeInsets.only(top: 10),
+                                  width: MediaQuery.of(context).size.width * 0.94,
+                                  child: Column(
+                                    children: [
+                                      DropdownButtonHideUnderline(
+                                        child: DropdownButton2(
+                                          isExpanded: true,
+                                          icon: Icon(
+                                            Icons.keyboard_arrow_down_outlined,
+                                            color: AppColor.black,
+                                          ),
+                                          dropdownDecoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          scrollbarAlwaysShow: true,
+                                          scrollbarThickness: 8.0,
+                                          dropdownMaxHeight: 200,
+                                          selectedItemHighlightColor: AppColor.blue,
+                                          itemPadding: EdgeInsets.only(left: 10),
+                                          isDense: true,
+                                          hint: Text("Select"),
+                                          items: model.sectorTypeModel?.data?.map((item) {
+                                            return
+                                              DropdownMenuItem(
+                                                value: item.id,
+                                                child: Text(item.name.toString()),
+                                              );
+                                          }).toList(),
+                                          onChanged: (newVal) {
+                                            setState(() {
+                                              sectorTypeevalue = newVal;
+                                              print("check${sectorTypeevalue}");
+                                            });
+
+                                          },
+                                          value: sectorTypeevalue,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
 
                           SizedBox(
                             height: 30,

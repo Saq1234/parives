@@ -22,7 +22,6 @@ class _TrackPorposalDashState extends State<TrackPorposalDash> {
   @override
   void initState() {
     super.initState();
-
     proposalViewModel = Provider.of<ProposalViewModel>(context, listen: false);
 
     // TODO: implement initState
@@ -59,6 +58,7 @@ Widget CardData() {
             itemCount: model.trackPorposalModel?.data?.length,
             itemBuilder: (BuildContext context, int index) {
               final mylist = model.trackPorposalModel?.data?[index];
+              print("nooo${mylist?.proposalNo?[index]}");
               return mylist?.proposalNo != null
                   ? Padding(
                       padding: const EdgeInsets.all(10),
@@ -66,7 +66,9 @@ Widget CardData() {
                         onTap: (){
                           Navigator.pushNamed(context, AppRoutes.trackproposoldetails,
                               arguments:
-                              TrackProposolDetailsArguments(proposolNo: mylist?.proposalNo?[index]));
+                              TrackProposolDetailsArguments(proposolNo: mylist?.proposalNo,ApplicationFor: mylist?.clearanceType,
+                              Date: mylist?.dateOfSubmission,ProjectName: mylist?.projectName,SingleWindowNo: mylist?.singleWindowNumber,
+                              state: mylist?.state,ProjectCategory: mylist?.category,Area: mylist?.forestArea,id: mylist?.id));
                         },
                         child: Card(
                           elevation: 10,

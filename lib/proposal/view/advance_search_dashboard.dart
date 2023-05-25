@@ -86,7 +86,8 @@ Widget CardData() {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10, left: 10),
-                    child: Column(
+                    child:
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         RichText(

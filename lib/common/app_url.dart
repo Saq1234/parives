@@ -8,6 +8,7 @@ class AppUrls{
   static const getListOProposolType ="https://parivesh.nic.in/parivesh_api/trackYourProposal/getProposalTypeOnBasesOfClearanceType?id=";
   static const getListOProposolStatus ="https://parivesh.nic.in/parivesh_api/trackYourProposal/getListOfStatus?workgroupId=";
   static const getListOProposolAuthority ="https://parivesh.nic.in/parivesh_api/trackYourProposal/getListOfIssuingAuthority";
-  static const getListOProposolSheduleNo ="https://parivesh.nic.in/parivesh_api/trackYourProposal/getListOfCategoryForFC";
+  static const getListOProposolCategory ="https://parivesh.nic.in/parivesh_api/trackYourProposal/getListOfCategoryForFC";
   static const advanceSearchDetails="https://parivesh.nic.in/parivesh_api/trackYourProposal/advanceSearchData?majorClearanceType=&state=";
+  static const ProposolHistory="https://parivesh.nic.in/workgroupmaster/generic/getProcessHis?application_id=";
 }

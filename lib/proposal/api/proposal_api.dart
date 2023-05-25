@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:parivesh/common/app_url.dart';
 import 'package:http/http.dart' as http;
 import 'package:parivesh/proposal/model/authority_model.dart';
+import 'package:parivesh/proposal/model/proposol_history_model.dart';
 import 'package:parivesh/proposal/model/proposol_status_model.dart';
 import 'package:parivesh/proposal/model/proposol_type_model.dart';
 import 'package:parivesh/proposal/model/sector_type_model.dart';
@@ -196,8 +197,8 @@ class PorposalApi{
 
 // SheduleNo Api
 
-  Future<SheduleNoModel?> fetchDataSheduleNo() async {
-    final Uri uri = Uri.parse(AppUrls.getListOProposolSheduleNo); // Replace with your API endpoint
+  Future<CategoryModel?> fetchDataSheduleNo() async {
+    final Uri uri = Uri.parse(AppUrls.getListOProposolCategory); // Replace with your API endpoint
 
     final response = await http.get(uri);
 
@@ -205,7 +206,7 @@ class PorposalApi{
       final responseData = json.decode(response.body);
       print("response--state$responseData");
       if(responseData !=null){
-        return SheduleNoModel.fromJson(responseData);
+        return CategoryModel.fromJson(responseData);
       }
     }
     log("msg$response");
@@ -232,6 +233,30 @@ class PorposalApi{
     log("msg$response");
 
   }
+
+// ProposolHistory Api
+
+  Future<ProposolHistoryModel?>fetchDataProposolHistory({required int application_id}) async {
+    final Uri uri = Uri.parse(AppUrls.trackPorpsalDetails); // Replace with your API endpoint
+    final Map<String, String> queryParams = {
+      'application_id': application_id.toString(),
+    };
+    final Uri finalUri = uri.replace(queryParameters: queryParams);
+    final response = await http.post(finalUri);
+
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print("response--$responseData");
+      if(responseData !=null){
+        return ProposolHistoryModel.fromJson(responseData);
+      }
+    }
+    log("msg$response");
+
+  }
+
+
+
 
 
 

@@ -5,5 +5,14 @@ class AdvanceSearchArguments{
 }
 class TrackProposolDetailsArguments{
     String? proposolNo;
-    TrackProposolDetailsArguments({this.proposolNo});
+    String? SingleWindowNo;
+    String? ProjectName;
+    String? state;
+    String? ProjectCategory;
+    String? Area;
+    String? ApplicationFor;
+    String? Date;
+    int?id;
+
+    TrackProposolDetailsArguments({this.proposolNo,this.ApplicationFor,this.Area,this.Date,this.ProjectCategory,this.ProjectName,this.SingleWindowNo,this.state,this.id});
 }

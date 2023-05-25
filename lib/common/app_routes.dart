@@ -44,7 +44,9 @@ data(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
               create: (_) => ProposalViewModel(),
-              child: TrackProposolDetails(proposolNo: args.proposolNo,)));
+              child: TrackProposolDetails(proposolNo: args.proposolNo,ApplicationFor: args.ApplicationFor,
+              ProjectCategory: args.ProjectCategory,Area: args.Area,Date: args.Date,ProjectName: args.ProjectName,SingleWindowNo: args.SingleWindowNo,
+              state: args.state,id: args.id,)));
 
   }
 }

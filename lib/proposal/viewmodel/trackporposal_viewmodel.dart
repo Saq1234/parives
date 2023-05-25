@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:parivesh/proposal/api/proposal_api.dart';
 import 'package:parivesh/proposal/model/authority_model.dart';
+import 'package:parivesh/proposal/model/proposol_history_model.dart';
 import 'package:parivesh/proposal/model/proposol_status_model.dart';
 import 'package:parivesh/proposal/model/sector_type_model.dart';
 import 'package:parivesh/proposal/model/shedule_no_model.dart';
@@ -22,8 +23,9 @@ class ProposalViewModel extends ChangeNotifier {
   ProposolTypeModel? proposolTypeModel;
   ProposolStatusModel? proposolStatusModel;
   AuthorityModel? authorityModel;
-  SheduleNoModel? sheduleNoModel;
+  CategoryModel? categoryModel;
   TrackProposolDetailsModel? trackProposolDetailsModel;
+  ProposolHistoryModel? proposolHistoryModel;
 
   Future getPorposalDetails({required String porposalNo}) async {
     final data = await _porposalApi.fetchData(porposalNo: porposalNo);
@@ -115,9 +117,9 @@ class ProposalViewModel extends ChangeNotifier {
 
   Future getDataSheduleNo() async {
     final data = await _porposalApi.fetchDataSheduleNo();
-    sheduleNoModel = data;
+    categoryModel = data;
     notifyListeners();
-    return sheduleNoModel;
+    return categoryModel;
   }
 
 
@@ -129,6 +131,16 @@ class ProposalViewModel extends ChangeNotifier {
     notifyListeners();
     return trackProposolDetailsModel;
   }
+
+// ProposolHistory
+
+  Future getProposolHistory({required int application_id}) async {
+    final data = await _porposalApi.fetchDataProposolHistory(application_id: application_id);
+    proposolHistoryModel = data;
+    notifyListeners();
+   // return proposolHistoryModel;
+  }
+
 
 
 

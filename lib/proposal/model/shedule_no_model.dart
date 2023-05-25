@@ -1,12 +1,12 @@
-class SheduleNoModel {
+class CategoryModel {
   List<Data>? data;
   String? message;
   String? error;
   int? status;
 
-  SheduleNoModel({this.data, this.message, this.error, this.status});
+  CategoryModel({this.data, this.message, this.error, this.status});
 
-  SheduleNoModel.fromJson(Map<String, dynamic> json) {
+  CategoryModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
