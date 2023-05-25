@@ -3,6 +3,12 @@ import 'dart:developer';
 
 import 'package:parivesh/common/app_url.dart';
 import 'package:http/http.dart' as http;
+import 'package:parivesh/proposal/model/authority_model.dart';
+import 'package:parivesh/proposal/model/proposol_status_model.dart';
+import 'package:parivesh/proposal/model/proposol_type_model.dart';
+import 'package:parivesh/proposal/model/sector_type_model.dart';
+import 'package:parivesh/proposal/model/shedule_no_model.dart';
+import 'package:parivesh/proposal/model/track_proposol_details_model.dart';
 import 'package:parivesh/proposal/view/advance_search_porposal.dart';
 
 import '../model/advance_search_detail_model.dart';
@@ -110,5 +116,127 @@ class PorposalApi{
     log("msg$response");
 
   }
+
+// SectorType Api
+  Future<SectorTypeModel?> fetchDataSectorType() async {
+    final Uri uri = Uri.parse(AppUrls.getListOfSector); // Replace with your API endpoint
+
+    final response = await http.get(uri);
+
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print("response--state$responseData");
+      if(responseData !=null){
+        return SectorTypeModel.fromJson(responseData);
+      }
+    }
+    log("msg$response");
+
+  }
+
+// ProposolType Api
+
+  Future<ProposolTypeModel?> fetchDataProposolType({required int id}) async {
+    final Uri uri = Uri.parse(AppUrls.getListOProposolType); // Replace with your API endpoint
+    final Map<String, String> queryParams = {
+      'id': id.toString(),
+    };
+    final Uri finalUri = uri.replace(queryParameters: queryParams);
+    final response = await http.get(finalUri);
+
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print("response--$responseData");
+      if(responseData !=null){
+        return ProposolTypeModel.fromJson(responseData);
+      }
+    }
+    log("msg$response");
+
+  }
+
+// ProposolStatus Api
+
+  Future<ProposolStatusModel?> fetchDataProposolStatus({required int workgroupId}) async {
+    final Uri uri = Uri.parse(AppUrls.getListOProposolStatus); // Replace with your API endpoint
+    final Map<String, String> queryParams = {
+      'workgroupId': workgroupId.toString(),
+    };
+    final Uri finalUri = uri.replace(queryParameters: queryParams);
+    final response = await http.get(finalUri);
+
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print("response--$responseData");
+      if(responseData !=null){
+        return ProposolStatusModel.fromJson(responseData);
+      }
+    }
+    log("msg$response");
+
+  }
+
+// Authority Api
+
+  Future<AuthorityModel?> fetchDataAuthority() async {
+    final Uri uri = Uri.parse(AppUrls.getListOProposolAuthority); // Replace with your API endpoint
+
+    final response = await http.get(uri);
+
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print("response--state$responseData");
+      if(responseData !=null){
+        return AuthorityModel.fromJson(responseData);
+      }
+    }
+    log("msg$response");
+
+  }
+
+// SheduleNo Api
+
+  Future<SheduleNoModel?> fetchDataSheduleNo() async {
+    final Uri uri = Uri.parse(AppUrls.getListOProposolSheduleNo); // Replace with your API endpoint
+
+    final response = await http.get(uri);
+
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print("response--state$responseData");
+      if(responseData !=null){
+        return SheduleNoModel.fromJson(responseData);
+      }
+    }
+    log("msg$response");
+
+  }
+
+// TrackProposolDetail Api
+
+  Future<TrackProposolDetailsModel?> fetchDataProposolDetail({required String proposalNo}) async {
+    final Uri uri = Uri.parse(AppUrls.trackPorpsalDetails); // Replace with your API endpoint
+    final Map<String, String> queryParams = {
+      'proposalNo': proposalNo.toString(),
+    };
+    final Uri finalUri = uri.replace(queryParameters: queryParams);
+    final response = await http.get(finalUri);
+
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print("response--$responseData");
+      if(responseData !=null){
+        return TrackProposolDetailsModel.fromJson(responseData);
+      }
+    }
+    log("msg$response");
+
+  }
+
+
+
+
+
+
 
 }

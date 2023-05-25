@@ -77,19 +77,26 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
 
   @override
   void initState() {
+    super.initState();
+
     proposalViewModel = Provider.of<ProposalViewModel>(context, listen: false);
     proposalViewModel.getDataClearanceType();
     proposalViewModel.getDataStateType();
+    proposalViewModel.getPorposalStatus(workgroupId: 0);
+    proposalViewModel.getDataAuthority();
+    proposalViewModel.getDataSheduleNo();
 
-    super.initState();
   }
 
   var clearencevalue;
+  var authorityvalue;
+  var shedulenovalue;
+  var proposolStatusValue;
+  var proposolTypeevalue;
   var statevalue;
   var clearanceId;
   var stateCode;
-  List<String> check=[];
-
+  List<String> check = [];
 
   @override
   Widget build(BuildContext context) {
@@ -169,13 +176,15 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                         child: Text(item.name.toString()),
                                       );
                                     }).toList(),
-                                    onChanged: (newVal) {
+                                    onChanged: (newVal)async {
                                       setState(() {
                                         clearencevalue = newVal;
                                         print("check${clearencevalue}");
                                         clearancevisible = true;
-
+                                        //proposolTypeevalue="";
                                       });
+                                      await proposalViewModel.getPorposalType(id: clearencevalue);
+
                                     },
                                     value: clearencevalue,
                                   ),
@@ -246,137 +255,145 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                               ],
                             ),
                           ),
-                          //
-                          // Column(
-                          //   children: [
-                          //
-                          //     RichText(
-                          //       text: TextSpan(
-                          //           text: 'Issuing Authority:',
-                          //           style: TextStyle(
-                          //             color: Colors.black,
-                          //           ),
-                          //           children: [
-                          //             TextSpan(
-                          //                 text: ' *',
-                          //                 style: TextStyle(
-                          //                   color: Colors.red,
-                          //                 ))
-                          //           ]),
-                          //     ),
-                          //     Container(
-                          //       decoration: BoxDecoration(
-                          //         border: Border.all(color: AppColor.black),
-                          //         borderRadius: BorderRadius.circular(25),
-                          //       ),
-                          //       padding: const EdgeInsets.all(8),
-                          //       margin: const EdgeInsets.only(top: 10),
-                          //       width: MediaQuery.of(context).size.width * 0.94,
-                          //       child: Column(
-                          //         children: [
-                          //           DropdownButtonHideUnderline(
-                          //             child: DropdownButton2(
-                          //               isExpanded: true,
-                          //               icon: Icon(
-                          //                 Icons.keyboard_arrow_down_outlined,
-                          //                 color: AppColor.black,
-                          //               ),
-                          //               dropdownDecoration: BoxDecoration(
-                          //                 borderRadius: BorderRadius.circular(10),
-                          //               ),
-                          //               scrollbarAlwaysShow: true,
-                          //               scrollbarThickness: 8.0,
-                          //               dropdownMaxHeight: 200,
-                          //               selectedItemHighlightColor: AppColor.blue,
-                          //               itemPadding: EdgeInsets.only(left: 10),
-                          //               isDense: true,
-                          //               hint: Text("Select"),
-                          //               // value: status_value,
-                          //               items: [],
-                          //               // status_array.map((item) {
-                          //               //   return DropdownMenuItem(
-                          //               //     value: int.parse(item['tts_task_status_id'].toString()),
-                          //               //     child: Text(item['tts_task_status_title'].toString()),
-                          //               //   );
-                          //               // }).toList(),
-                          //               onChanged: (newVal) {
-                          //                 setState(() {
-                          //                   //  status_value = newVal;
-                          //                   //  _getStageList(project_item_value.toString());
-                          //                 });
-                          //               },
-                          //             ),
-                          //           ),
-                          //         ],
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
-                          // Column(
-                          //   children: [
-                          //
-                          //     RichText(
-                          //       text: TextSpan(
-                          //           text: 'Schedule No:',
-                          //           style: TextStyle(
-                          //             color: Colors.black,
-                          //           ),
-                          //           children: [
-                          //             TextSpan(
-                          //                 text: ' *',
-                          //                 style: TextStyle(
-                          //                   color: Colors.red,
-                          //                 ))
-                          //           ]),
-                          //     ),
-                          //     Container(
-                          //       decoration: BoxDecoration(
-                          //         border: Border.all(color: AppColor.black),
-                          //         borderRadius: BorderRadius.circular(25),
-                          //       ),
-                          //       padding: const EdgeInsets.all(8),
-                          //       margin: const EdgeInsets.only(top: 10),
-                          //       width: MediaQuery.of(context).size.width * 0.94,
-                          //       child: Column(
-                          //         children: [
-                          //           DropdownButtonHideUnderline(
-                          //             child: DropdownButton2(
-                          //               isExpanded: true,
-                          //               icon: Icon(
-                          //                 Icons.keyboard_arrow_down_outlined,
-                          //                 color: AppColor.black,
-                          //               ),
-                          //               dropdownDecoration: BoxDecoration(
-                          //                 borderRadius: BorderRadius.circular(10),
-                          //               ),
-                          //               scrollbarAlwaysShow: true,
-                          //               scrollbarThickness: 8.0,
-                          //               dropdownMaxHeight: 200,
-                          //               selectedItemHighlightColor: AppColor.blue,
-                          //               itemPadding: EdgeInsets.only(left: 10),
-                          //               isDense: true,
-                          //               hint: Text("Select"),
-                          //               // value: status_value,
-                          //               items: [],
-                          //               // status_array.map((item) {
-                          //               //   return DropdownMenuItem(
-                          //               //     value: int.parse(item['tts_task_status_id'].toString()),
-                          //               //     child: Text(item['tts_task_status_title'].toString()),
-                          //               //   );
-                          //               // }).toList(),
-                          //               onChanged: (newVal) {
-                          //                 setState(() {
-                          //                   //  status_value = newVal;
-                          //                   //  _getStageList(project_item_value.toString());
-                          //                 });
-                          //               },
-                          //             ),
-                          //           ),
-                          //         ],
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+
+                              RichText(
+                                text: TextSpan(
+                                    text: 'Issuing Authority:',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                    children: [
+                                      // TextSpan(
+                                      //     text: ' *',
+                                      //     style: TextStyle(
+                                      //       color: Colors.red,
+                                      //     ))
+                                    ]),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: AppColor.black),
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                padding: const EdgeInsets.all(8),
+                                margin: const EdgeInsets.only(top: 10),
+                                width: MediaQuery.of(context).size.width * 0.94,
+                                child: Column(
+                                  children: [
+                                    DropdownButtonHideUnderline(
+                                      child: DropdownButton2(
+                                        isExpanded: true,
+                                        icon: Icon(
+                                          Icons.keyboard_arrow_down_outlined,
+                                          color: AppColor.black,
+                                        ),
+                                        dropdownDecoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        scrollbarAlwaysShow: true,
+                                        scrollbarThickness: 8.0,
+                                        dropdownMaxHeight: 200,
+                                        selectedItemHighlightColor: AppColor.blue,
+                                        itemPadding: EdgeInsets.only(left: 10),
+                                        isDense: true,
+                                        hint: Text("Select"),
+                                        items: model.authorityModel?.data?.map((item) {
+                                          return DropdownMenuItem(
+                                            value: item.name,
+                                            child: Text(item.name.toString()),
+                                          );
+                                        }).toList(),
+                                        onChanged: (newVal)async {
+                                          setState(() {
+                                            authorityvalue = newVal;
+                                            print("check${authorityvalue}");
+                                          });
+
+                                        },
+                                        value: authorityvalue,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+
+                              RichText(
+                                text: TextSpan(
+                                    text: 'Schedule No:',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                    children: [
+                                      // TextSpan(
+                                      //     text: ' *',
+                                      //     style: TextStyle(
+                                      //       color: Colors.red,
+                                      //     ))
+                                    ]),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: AppColor.black),
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                padding: const EdgeInsets.all(8),
+                                margin: const EdgeInsets.only(top: 10),
+                                width: MediaQuery.of(context).size.width * 0.94,
+                                child: Column(
+                                  children: [
+                                    DropdownButtonHideUnderline(
+                                      child: DropdownButton2(
+                                        isExpanded: true,
+                                        icon: Icon(
+                                          Icons.keyboard_arrow_down_outlined,
+                                          color: AppColor.black,
+                                        ),
+                                        dropdownDecoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        scrollbarAlwaysShow: true,
+                                        scrollbarThickness: 8.0,
+                                        dropdownMaxHeight: 200,
+                                        selectedItemHighlightColor: AppColor.blue,
+                                        itemPadding: EdgeInsets.only(left: 10),
+                                        isDense: true,
+                                        hint: Text("Select"),
+                                        items: model.sheduleNoModel?.data?.map((item) {
+                                          return DropdownMenuItem(
+                                            value: item.id,
+                                            child: Text(item.name.toString()),
+                                          );
+                                        }).toList(),
+                                        onChanged: (newVal)async {
+                                          setState(() {
+                                            shedulenovalue = newVal;
+                                            print("check${shedulenovalue}");
+
+                                          });
+
+                                        },
+                                        value: shedulenovalue,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
 
                           SizedBox(
                             height: 10,
@@ -529,37 +546,47 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                             width: MediaQuery.of(context).size.width * 0.94,
                             child: Column(
                               children: [
-                                DropdownButtonHideUnderline(
-                                  child: DropdownButton2(
-                                    isExpanded: true,
-                                    icon: Icon(
-                                      Icons.keyboard_arrow_down_outlined,
-                                      color: AppColor.black,
-                                    ),
-                                    dropdownDecoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    scrollbarAlwaysShow: true,
-                                    scrollbarThickness: 8.0,
-                                    dropdownMaxHeight: 200,
-                                    selectedItemHighlightColor: AppColor.blue,
-                                    itemPadding: EdgeInsets.only(left: 10),
-                                    isDense: true,
-                                    hint: Text("Select"),
-                                    // value: status_value,
-                                    items: [],
-                                    // status_array.map((item) {
-                                    //   return DropdownMenuItem(
-                                    //     value: int.parse(item['tts_task_status_id'].toString()),
-                                    //     child: Text(item['tts_task_status_title'].toString()),
-                                    //   );
-                                    // }).toList(),
-                                    onChanged: (newVal) {
-                                      setState(() {
-                                        //  status_value = newVal;
-                                        //  _getStageList(project_item_value.toString());
-                                      });
+                                GestureDetector(
+                                  onTap: (){
+                                    if(clearancevisible==false){
+                                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                        content: Text("Please Select Clearances Type"),
+                                      ));
+                                    }
                                     },
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton2(
+                                      isExpanded: true,
+                                      icon: Icon(
+                                        Icons.keyboard_arrow_down_outlined,
+                                        color: AppColor.black,
+                                      ),
+                                      dropdownDecoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      scrollbarAlwaysShow: true,
+                                      scrollbarThickness: 8.0,
+                                      dropdownMaxHeight: 200,
+                                      selectedItemHighlightColor: AppColor.blue,
+                                      itemPadding: EdgeInsets.only(left: 10),
+                                      isDense: true,
+                                      hint: Text("Select"),
+                                      items: model.proposolTypeModel?.data?.map((item) {
+                                        return
+                                          DropdownMenuItem(
+                                          value: item.name,
+                                          child: Text(item.name.toString()),
+                                        );
+                                      }).toList(),
+                                      onChanged: (newVal)async {
+                                        setState(() {
+                                          proposolTypeevalue = newVal;
+                                          print("check${proposolTypeevalue}");
+                                        });
+
+                                      },
+                                      value: proposolTypeevalue,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -603,20 +630,20 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                     itemPadding: EdgeInsets.only(left: 10),
                                     isDense: true,
                                     hint: Text("Select status..."),
-                                    // value: status_value,
-                                    items: [],
-                                    // status_array.map((item) {
-                                    //   return DropdownMenuItem(
-                                    //     value: int.parse(item['tts_task_status_id'].toString()),
-                                    //     child: Text(item['tts_task_status_title'].toString()),
-                                    //   );
-                                    // }).toList(),
-                                    onChanged: (newVal) {
+                                    items: model.proposolStatusModel?.data?.map((item) {
+                                      return DropdownMenuItem(
+                                        value: item.name,
+                                        child: Text(item.name.toString()),
+                                      );
+                                    }).toList(),
+                                    onChanged: (newVal)async {
                                       setState(() {
-                                        //  status_value = newVal;
-                                        //  _getStageList(project_item_value.toString());
+                                        proposolStatusValue = newVal;
+                                        print("check${proposolStatusValue}");
                                       });
+
                                     },
+                                    value: proposolStatusValue,
                                   ),
                                 ),
                               ],

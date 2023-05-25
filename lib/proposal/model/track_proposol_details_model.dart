@@ -1,14 +1,12 @@
-import 'package:intl/intl.dart';
-
-class TrackPorposalModel {
+class TrackProposolDetailsModel {
   List<Data>? data;
   String? message;
   String? error;
   int? status;
 
-  TrackPorposalModel({this.data, this.message, this.error, this.status});
+  TrackProposolDetailsModel({this.data, this.message, this.error, this.status});
 
-  TrackPorposalModel.fromJson(Map<String, dynamic> json) {
+  TrackProposolDetailsModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
@@ -35,58 +33,53 @@ class TrackPorposalModel {
 class Data {
   int? id;
   String? state;
-  String? projectId;
-  String? sector;
-  String? category;
-  String? proposalId;
+  int? projectId;
+  dynamic? category;
+  int? proposalId;
   String? proposalNo;
   int? applicationId;
   dynamic? moefccFileNumber;
-  dynamic? otherProperty;
+  String? otherProperty;
   String? clearanceType;
-  dynamic? lastSubmissionDate;
   String? projectName;
-  dynamic? forestArea;
   String? proposalStatus;
   String? singleWindowNumber;
   String? cafnumber;
   String? nameOfUserAgency;
-  String? issuingAuthority;
+  dynamic? issuingAuthority;
   dynamic? certificateUrl;
   String? proposalType;
-  int? formId;
+  dynamic? formId;
   String? dateOfSubmission;
+  dynamic? certificateUrl1;
 
   Data(
       {this.id,
-      this.state,
-      this.projectId,
-      this.sector,
-      this.category,
-      this.proposalId,
-      this.proposalNo,
-      this.applicationId,
-      this.moefccFileNumber,
-      this.otherProperty,
-      this.clearanceType,
-      this.lastSubmissionDate,
-      this.projectName,
-      this.forestArea,
-      this.proposalStatus,
-      this.singleWindowNumber,
-      this.cafnumber,
-      this.nameOfUserAgency,
-      this.issuingAuthority,
-      this.certificateUrl,
-      this.proposalType,
-      this.formId,
-      this.dateOfSubmission});
+        this.state,
+        this.projectId,
+        this.category,
+        this.proposalId,
+        this.proposalNo,
+        this.applicationId,
+        this.moefccFileNumber,
+        this.otherProperty,
+        this.clearanceType,
+        this.projectName,
+        this.proposalStatus,
+        this.singleWindowNumber,
+        this.cafnumber,
+        this.nameOfUserAgency,
+        this.issuingAuthority,
+        this.certificateUrl,
+        this.proposalType,
+        this.formId,
+        this.dateOfSubmission,
+        this.certificateUrl1});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     state = json['state'];
     projectId = json['project_id'];
-    sector = json['sector'];
     category = json['category'];
     proposalId = json['proposal_id'];
     proposalNo = json['proposalNo'];
@@ -94,9 +87,7 @@ class Data {
     moefccFileNumber = json['moefccFileNumber'];
     otherProperty = json['other_property'];
     clearanceType = json['clearanceType'];
-    lastSubmissionDate = json['last_submission_date'];
     projectName = json['projectName'];
-    forestArea = json['forest_area'];
     proposalStatus = json['proposalStatus'];
     singleWindowNumber = json['singleWindowNumber'];
     cafnumber = json['cafnumber'];
@@ -105,9 +96,8 @@ class Data {
     certificateUrl = json['certificateUrl'];
     proposalType = json['proposalType'];
     formId = json['form_id'];
-    dateOfSubmission = json['dateOfSubmission'] != null
-        ? DateFormat('dd-MM-yyyy HH:mm:ss').format(DateTime.parse(json['dateOfSubmission'].toString()))
-        : null;
+    dateOfSubmission = json['dateOfSubmission'];
+    certificateUrl1 = json['certificateUrl1'];
   }
 
   Map<String, dynamic> toJson() {
@@ -115,7 +105,6 @@ class Data {
     data['id'] = this.id;
     data['state'] = this.state;
     data['project_id'] = this.projectId;
-    data['sector'] = this.sector;
     data['category'] = this.category;
     data['proposal_id'] = this.proposalId;
     data['proposalNo'] = this.proposalNo;
@@ -123,9 +112,7 @@ class Data {
     data['moefccFileNumber'] = this.moefccFileNumber;
     data['other_property'] = this.otherProperty;
     data['clearanceType'] = this.clearanceType;
-    data['last_submission_date'] = this.lastSubmissionDate;
     data['projectName'] = this.projectName;
-    data['forest_area'] = this.forestArea;
     data['proposalStatus'] = this.proposalStatus;
     data['singleWindowNumber'] = this.singleWindowNumber;
     data['cafnumber'] = this.cafnumber;
@@ -135,6 +122,7 @@ class Data {
     data['proposalType'] = this.proposalType;
     data['form_id'] = this.formId;
     data['dateOfSubmission'] = this.dateOfSubmission;
+    data['certificateUrl1'] = this.certificateUrl1;
     return data;
   }
 }
