@@ -62,9 +62,10 @@ class _TrackProposolDetailsState extends State<TrackProposolDetails> {
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Card(
-              elevation: 10,
+              elevation: 2,
               shape: RoundedRectangleBorder(
                 side: BorderSide(
                   color: Colors.white,
@@ -231,7 +232,11 @@ class _TrackProposolDetailsState extends State<TrackProposolDetails> {
                 ),
               ),
             ),
-            Expanded(child: ProposlHistory()),
+            SizedBox(height: 20,),
+            Text("Proposal History/Timeline",style: TextStyle(fontWeight: FontWeight.bold),),
+            SizedBox(height: 10,),
+
+            Expanded(child: ProposlHistory(isExpanded)),
           ],
         ),
       ),
@@ -239,250 +244,118 @@ class _TrackProposolDetailsState extends State<TrackProposolDetails> {
   }
 }
 
-// Widget DetailsData(){
-//   return Consumer<ProposalViewModel>(builder: (context, model, child) {
-//     return model.trackPorposalModel != null
-//         ? ListView.builder(
-//         itemCount: model.trackPorposalModel?.data?.length,
-//         itemBuilder: (BuildContext context, int index) {
-//           final mylist = model.trackPorposalModel?.data?[index];
-//
-//           return Padding(
-//             padding: const EdgeInsets.all(10),
-//             child: Card(
-//               elevation: 10,
-//               shape: RoundedRectangleBorder(
-//                 side: BorderSide(
-//                   color: Colors.white,
-//                 ),
-//                 borderRadius: BorderRadius.circular(20.0),
-//               ),
-//               child: Padding(
-//                 padding: const EdgeInsets.only(top: 10, left: 10),
-//                 child:
-//                 Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     RichText(
-//                       text: TextSpan(
-//                         style: TextStyle(
-//                           color: Colors.black,
-//                         ),
-//                         children: <TextSpan>[
-//                           TextSpan(
-//                               text: 'Proposal No :   ',
-//                               style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-//                           TextSpan(text: mylist?.proposalNo),
-//                         ],
-//                       ),
-//                     ),
-//                     SizedBox(
-//                       height: 10,
-//                     ),
-//                     RichText(
-//                       text: TextSpan(
-//                         style: TextStyle(
-//                           color: Colors.black,
-//                         ),
-//                         children: <TextSpan>[
-//                           TextSpan(
-//                               text: 'Single Window No :  ',
-//                               style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-//                           TextSpan(text: mylist?.singleWindowNumber),
-//                         ],
-//                       ),
-//                     ),
-//                     SizedBox(
-//                       height: 10,
-//                     ),
-//                     RichText(
-//                       text: TextSpan(
-//                         style: TextStyle(
-//                           color: Colors.black,
-//                         ),
-//                         children: <TextSpan>[
-//                           TextSpan(
-//                               text: 'Project Name :   ',
-//                               style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-//                           TextSpan(text: mylist?.projectName),
-//                         ],
-//                       ),
-//                     ),
-//                     SizedBox(
-//                       height: 10,
-//                     ),
-//                     RichText(
-//                       text: TextSpan(
-//                         style: TextStyle(
-//                           color: Colors.black,
-//                         ),
-//                         children: <TextSpan>[
-//                           TextSpan(
-//                               text: 'State :  ',
-//                               style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-//                           TextSpan(text: mylist?.state),
-//                         ],
-//                       ),
-//                     ),
-//                     SizedBox(
-//                       height: 10,
-//                     ),
-//                     RichText(
-//                       text: TextSpan(
-//                         style: TextStyle(
-//                           color: Colors.black,
-//                         ),
-//                         children: <TextSpan>[
-//                           TextSpan(
-//                               text: 'Project Category :   ',
-//                               style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-//                           TextSpan(text: mylist?.category),
-//                         ],
-//                       ),
-//                     ),
-//                     SizedBox(
-//                       height: 10,
-//                     ),
-//                     RichText(
-//                       text: TextSpan(
-//                         style: TextStyle(
-//                           color: Colors.black,
-//                         ),
-//                         children: <TextSpan>[
-//                           TextSpan(
-//                               text: 'Area (ha) :  ',
-//                               style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-//                           TextSpan(
-//                               text: mylist?.forestArea),
-//                         ],
-//                       ),
-//                     ),
-//                     SizedBox(
-//                       height: 10,
-//                     ),
-//                     RichText(
-//                       text: TextSpan(
-//                         style: TextStyle(
-//                           color: Colors.black,
-//                         ),
-//                         children: <TextSpan>[
-//                           TextSpan(
-//                               text: 'Application For :   ',
-//                               style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-//                           TextSpan(text: mylist?.clearanceType),
-//                         ],
-//                       ),
-//                     ),
-//                     SizedBox(
-//                       height: 10,
-//                     ),
-//                     RichText(
-//                       text: TextSpan(
-//                         style: TextStyle(
-//                           color: Colors.black,
-//                         ),
-//                         children: <TextSpan>[
-//                           TextSpan(
-//                               text: 'Date of Submission :   ',
-//                               style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-//                           TextSpan(text: mylist?.dateOfSubmission?.substring(0,11)),
-//                         ],
-//                       ),
-//                     ),
-//                     SizedBox(
-//                       height: 10,
-//                     ),
-//                     Row(children: [
-//                       Text("In-Principle Approval : "),
-//                       Container(
-//                         padding: EdgeInsets.all(5),
-//                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.orange),
-//                           child: Text("In-Progress")),
-//                     ],),
-//                     SizedBox(
-//                       height: 10,
-//                     ),
-//                     Row(children: [
-//                       Text("Final Approva : "),
-//                       Container(
-//                           padding: EdgeInsets.all(5),
-//
-//                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.orange),
-//                           child: Text("In-Progress")),
-//                     ],),
-//
-//                     SizedBox(
-//                       height: 15,
-//                     )
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           );
-//         })
-//         : Center(
-//       child: model.advanceSearchDetailModel != null && model.advanceSearchDetailModel!.data!.isEmpty
-//           ? Text(
-//         "No Data Available",
-//         style: TextStyle(color: Colors.black),
-//       )
-//           : CircularProgressIndicator(
-//         color: Colors.green,
-//       ),
-//     );
-//   });
-//
-//
-// }
-Widget ProposlHistory() {
+
+Widget ProposlHistory( bool isExpanded) {
   return Consumer<ProposalViewModel>(builder: (context, model, child) {
-    return Card(
-      child: Column(
-        children: [
-          ExpansionTile(
-            title: Row(
+  // final name= model.proposolHistoryModel?.data?[0].historyWiseWithApplications?[0].userName;
+   return ListView.builder(
+        itemCount: model.proposolHistoryModel?.data?.length ,
+        itemBuilder: (BuildContext context, int index) {
+          final historylist=model.proposolHistoryModel?.data?[index];
+          print("count karo ${model.proposolHistoryModel?.data?.length}");
+          return
+
+            Card(
+            child: Column(
               children: [
-                Text("hhhjk jh"),
-                Spacer(),
-                Container(
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: AppColor.orange,
+                ExpansionTile(
+                 // textColor: AppColor.green,
+                  //collapsedTextColor: AppColor.green,
+                  backgroundColor: AppColor.whitecolor,
+                  collapsedBackgroundColor:isExpanded==true?AppColor.whitecolor :AppColor.greenshade,
+                  onExpansionChanged: (v){
+                    isExpanded=true;
+                  },
+                  title:
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(historylist?.status??"",style: TextStyle(fontWeight: FontWeight.bold),),
+                      SizedBox(height: 5,),
+
+                      Container(
+                        width: MediaQuery.of(context).size.width/2,
+                          padding: EdgeInsets.only(left: 5,top: 2,bottom: 2),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
+                              color: AppColor.darkgreen),
+                          child: Row(
+                            children: [
+                              Text(historylist?.startDate?.substring(0,10)??"",style: TextStyle(color: AppColor.whitecolor),),
+                              historylist?.endDate!=null?
+
+                              Text(" - ${historylist?.endDate?.substring(0,10)??""}",style: TextStyle(color: AppColor.whitecolor),):Text(" - N/A",style: TextStyle(color: AppColor.whitecolor),),
+                            ],
+                          )
+                      )
+
+                    ],
                   ),
-                  child: Text(
-                    "date",
-                  ),
-                ),
-              ],
-            ),
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(left: 15,right: 30,bottom: 30),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text("Start Date"),
-                        Spacer(),
-                        Text("End Date"),
-                      ],
-                    ),
-                    SizedBox(height: 30,),
-                    Row(
-                      children: [
-                        Text("Start Date"),
-                        Spacer(),
-                        Text("End Date"),
-                      ],
+
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15,right: 30,bottom: 30,top: 5),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text("Start Date"),
+                              Spacer(),
+                              Text(historylist?.startDate?.substring(0,10)??"",style: TextStyle(fontWeight: FontWeight.bold),),
+                            ],
+                          ),
+                          SizedBox(height: 20,),
+
+                          Padding(
+                            padding: const EdgeInsets.only(right: 0),
+                            child: Row(
+                              children: [
+                                Text("End Date"),
+                                Spacer(),
+                                historylist?.endDate!=null?Text(historylist?.endDate?.substring(0,10)??"",style: TextStyle(fontWeight: FontWeight.bold),):Text("N/A"),
+                              ],
+                            ),
+                          ),
+
+                          SizedBox(height: 8,),
+
+
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width/2,
+                                child: RichText(
+
+                                  text: TextSpan(
+                                    style: TextStyle(
+                                      color: AppColor.black,
+                                    ),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                          text: 'Raised EDS by  ',
+                                     ),
+                                      TextSpan(text:"User name  ",style: TextStyle(color: AppColor.black, fontWeight: FontWeight.bold)),
+                                      TextSpan(text:"Role name",style: TextStyle(color: AppColor.black, fontWeight: FontWeight.bold)),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Spacer(),
+                              Text("View",style: TextStyle(color: AppColor.darkgreen,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,decorationThickness: 2,) ,),
+                              Spacer(),
+                              Text("(${historylist?.endDate?.substring(0,10)??""})"),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
+              ],
+            ),
+          );
+
+
+        });
   });
 }

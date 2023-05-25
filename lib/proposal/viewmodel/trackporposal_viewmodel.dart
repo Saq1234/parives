@@ -134,11 +134,11 @@ class ProposalViewModel extends ChangeNotifier {
 
 // ProposolHistory
 
-  Future getProposolHistory({required int application_id}) async {
+  Future<ProposolHistoryModel?> getProposolHistory({required int application_id}) async {
     final data = await _porposalApi.fetchDataProposolHistory(application_id: application_id);
     proposolHistoryModel = data;
     notifyListeners();
-   // return proposolHistoryModel;
+    return proposolHistoryModel;
   }
 
 

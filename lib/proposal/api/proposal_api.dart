@@ -237,7 +237,7 @@ class PorposalApi{
 // ProposolHistory Api
 
   Future<ProposolHistoryModel?>fetchDataProposolHistory({required int application_id}) async {
-    final Uri uri = Uri.parse(AppUrls.trackPorpsalDetails); // Replace with your API endpoint
+    final Uri uri = Uri.parse(AppUrls.ProposolHistory); // Replace with your API endpoint
     final Map<String, String> queryParams = {
       'application_id': application_id.toString(),
     };

@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class ProposolHistoryModel {
   List<Data>? data;
   String? message;
@@ -77,8 +79,12 @@ class Data {
     processStepMappingId = json['process_step_mapping_id'];
     version = json['version'];
     currentStepId = json['current_step_id'];
-    startDate = json['start_date'];
-    endDate = json['end_date'];
+    startDate = json['start_date']!= null
+        ? DateFormat('dd-MM-yyyy HH:mm:ss').format(DateTime.parse(json['start_date'].toString()))
+        : null;
+    endDate = json['end_date']!= null
+        ? DateFormat('dd-MM-yyyy HH:mm:ss').format(DateTime.parse(json['end_date'].toString()))
+        : null;
     isCurrentStep = json['is_current_step'];
     status = json['status'];
     remarks = json['remarks'];
