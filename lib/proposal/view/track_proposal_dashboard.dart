@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:parivesh/common/appColors.dart';
@@ -18,11 +21,14 @@ class TrackPorposalDash extends StatefulWidget {
 class _TrackPorposalDashState extends State<TrackPorposalDash> {
   ProposalViewModel? proposalViewModel;
   TrackPorposalModel? trackPorposalModel;
+  bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
+
     proposalViewModel = Provider.of<ProposalViewModel>(context, listen: false);
+
 
     // TODO: implement initState
   }
@@ -40,7 +46,8 @@ class _TrackPorposalDashState extends State<TrackPorposalDash> {
                 image: DecorationImage(image: AssetImage('assets/images/logo.png'), fit: BoxFit.fitWidth)),
           ),
         ),
-        body: Column(
+        body:
+        Column(
           children: [
             Expanded(child: CardData()),
           ],
@@ -51,10 +58,10 @@ class _TrackPorposalDashState extends State<TrackPorposalDash> {
 }
 
 Widget CardData() {
-  return Consumer<ProposalViewModel>(builder: (context, model, child)
-  {
-    return model.trackPorposalModel != null
-        ? ListView.builder(
+  return Consumer<ProposalViewModel>(builder: (context, model, child) {
+     return model.trackPorposalModel != null
+        ?
+     ListView.builder(
             itemCount: model.trackPorposalModel?.data?.length,
             itemBuilder: (BuildContext context, int index) {
               final mylist = model.trackPorposalModel?.data?[index];
@@ -64,6 +71,7 @@ Widget CardData() {
                       padding: const EdgeInsets.all(10),
                       child: GestureDetector(
                         onTap: (){
+
                           Navigator.pushNamed(context, AppRoutes.trackproposoldetails,
                               arguments:
                               TrackProposolDetailsArguments(proposolNo: mylist?.proposalNo,ApplicationFor: mylist?.clearanceType,
@@ -71,7 +79,7 @@ Widget CardData() {
                               state: mylist?.state,ProjectCategory: mylist?.category,Area: mylist?.forestArea,id: mylist?.id));
                         },
                         child: Card(
-                          elevation: 10,
+                          elevation: 2,
                           shape: RoundedRectangleBorder(
                             side: BorderSide(
                               color: Colors.white,
@@ -79,7 +87,7 @@ Widget CardData() {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 10, left: 10),
+                            padding: const EdgeInsets.only(top: 20, left: 10,bottom: 20),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

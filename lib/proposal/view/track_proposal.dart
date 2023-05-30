@@ -1,6 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:parivesh/proposal/model/track_proposal_model.dart';
 import 'package:parivesh/proposal/view/advance_search_porposal.dart';
 import 'package:parivesh/proposal/view/track_proposal_dashboard.dart';
 import 'package:provider/provider.dart';
@@ -107,7 +108,9 @@ class _TrackPorposalState extends State<TrackPorposal> {
                           GestureDetector(
                             onTap: () async{
                               if (porposalController.text.isNotEmpty) {
-                              await  porposalViewModel.getPorposalDetails(porposalNo: porposalController.text);
+
+                                await  porposalViewModel.getPorposalDetails(porposalNo: porposalController.text);
+
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => const TrackPorposalDash()));
                                 FocusManager.instance.primaryFocus?.unfocus();
                                 porposalController.clear();

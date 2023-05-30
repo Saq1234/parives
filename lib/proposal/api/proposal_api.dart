@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:parivesh/common/app_url.dart';
 import 'package:http/http.dart' as http;
+import 'package:parivesh/proposal/model/advance_search_history_model.dart';
 import 'package:parivesh/proposal/model/authority_model.dart';
 import 'package:parivesh/proposal/model/proposol_history_model.dart';
 import 'package:parivesh/proposal/model/proposol_status_model.dart';
@@ -244,6 +245,7 @@ class PorposalApi{
     final Uri finalUri = uri.replace(queryParameters: queryParams);
     final response = await http.post(finalUri);
 
+
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
       print("response--$responseData");
@@ -254,6 +256,29 @@ class PorposalApi{
     log("msg$response");
 
   }
+
+// AdvanceSearchHistory Api
+
+  Future<AdvanceSearcHistoryModel?>fetchDataAdvanceSearchProposolHistory({required int application_id}) async {
+    final Uri uri = Uri.parse(AppUrls.advanceSearchProposolHistory); // Replace with your API endpoint
+    final Map<String, String> queryParams = {
+      'application_id': application_id.toString(),
+    };
+    final Uri finalUri = uri.replace(queryParameters: queryParams);
+    final response = await http.post(finalUri);
+
+
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print("response--$responseData");
+      if(responseData !=null){
+        return AdvanceSearcHistoryModel.fromJson(responseData);
+      }
+    }
+    log("msg$response");
+
+  }
+
 
 
 

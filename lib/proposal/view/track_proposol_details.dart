@@ -73,7 +73,7 @@ class _TrackProposolDetailsState extends State<TrackProposolDetails> {
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: Padding(
-                padding: const EdgeInsets.only(top: 10, left: 10),
+                padding: const EdgeInsets.only(top: 20, left: 10,bottom: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -232,11 +232,17 @@ class _TrackProposolDetailsState extends State<TrackProposolDetails> {
                 ),
               ),
             ),
-            SizedBox(height: 20,),
-            Text("Proposal History/Timeline",style: TextStyle(fontWeight: FontWeight.bold),),
-            SizedBox(height: 10,),
-
-            Expanded(child: ProposlHistory(isExpanded)),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "Proposal History/Timeline",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Expanded(child: ProposlHistory()),
           ],
         ),
       ),
@@ -244,118 +250,147 @@ class _TrackProposolDetailsState extends State<TrackProposolDetails> {
   }
 }
 
-
-Widget ProposlHistory( bool isExpanded) {
+Widget ProposlHistory() {
   return Consumer<ProposalViewModel>(builder: (context, model, child) {
-  // final name= model.proposolHistoryModel?.data?[0].historyWiseWithApplications?[0].userName;
-   return ListView.builder(
-        itemCount: model.proposolHistoryModel?.data?.length ,
-        itemBuilder: (BuildContext context, int index) {
-          final historylist=model.proposolHistoryModel?.data?[index];
-          print("count karo ${model.proposolHistoryModel?.data?.length}");
-          return
-
-            Card(
-            child: Column(
-              children: [
-                ExpansionTile(
-                 // textColor: AppColor.green,
-                  //collapsedTextColor: AppColor.green,
-                  backgroundColor: AppColor.whitecolor,
-                  collapsedBackgroundColor:isExpanded==true?AppColor.whitecolor :AppColor.greenshade,
-                  onExpansionChanged: (v){
-                    isExpanded=true;
-                  },
-                  title:
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(historylist?.status??"",style: TextStyle(fontWeight: FontWeight.bold),),
-                      SizedBox(height: 5,),
-
-                      Container(
-                        width: MediaQuery.of(context).size.width/2,
-                          padding: EdgeInsets.only(left: 5,top: 2,bottom: 2),
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
-                              color: AppColor.darkgreen),
-                          child: Row(
-                            children: [
-                              Text(historylist?.startDate?.substring(0,10)??"",style: TextStyle(color: AppColor.whitecolor),),
-                              historylist?.endDate!=null?
-
-                              Text(" - ${historylist?.endDate?.substring(0,10)??""}",style: TextStyle(color: AppColor.whitecolor),):Text(" - N/A",style: TextStyle(color: AppColor.whitecolor),),
-                            ],
-                          )
-                      )
-
-                    ],
-                  ),
-
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15,right: 30,bottom: 30,top: 5),
+    return model.proposolHistoryModel?.data?.length != null
+        ? ListView.builder(
+            itemCount: model.proposolHistoryModel?.data?.length,
+            itemBuilder: (BuildContext context, int index) {
+              final historylist = model.proposolHistoryModel?.data?[index];
+              print("count karo ${model.proposolHistoryModel?.data?.length}");
+              return model.proposolHistoryModel?.data?.length != null
+                  ? Card(
                       child: Column(
                         children: [
-                          Row(
-                            children: [
-                              Text("Start Date"),
-                              Spacer(),
-                              Text(historylist?.startDate?.substring(0,10)??"",style: TextStyle(fontWeight: FontWeight.bold),),
-                            ],
-                          ),
-                          SizedBox(height: 20,),
-
-                          Padding(
-                            padding: const EdgeInsets.only(right: 0),
-                            child: Row(
+                          ExpansionTile(
+                            backgroundColor: AppColor.whitecolor,
+                            collapsedBackgroundColor: AppColor.greenshade,
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("End Date"),
-                                Spacer(),
-                                historylist?.endDate!=null?Text(historylist?.endDate?.substring(0,10)??"",style: TextStyle(fontWeight: FontWeight.bold),):Text("N/A"),
+                                Text(
+                                  historylist?.status ?? "",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Container(
+                                    width: MediaQuery.of(context).size.width / 2,
+                                    padding: EdgeInsets.only(left: 5, top: 2, bottom: 2),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5), color: AppColor.darkgreen),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          historylist?.startDate?.substring(0, 10) ?? "",
+                                          style: TextStyle(color: AppColor.whitecolor),
+                                        ),
+                                        historylist?.endDate != null
+                                            ? Text(
+                                                " - ${historylist?.endDate?.substring(0, 10) ?? ""}",
+                                                style: TextStyle(color: AppColor.whitecolor),
+                                              )
+                                            : Padding(
+                                                padding: const EdgeInsets.only(left: 10),
+                                                child: Text(
+                                                  " - N/A",
+                                                  style: TextStyle(color: AppColor.whitecolor),
+                                                ),
+                                              ),
+                                      ],
+                                    ))
                               ],
                             ),
-                          ),
-
-                          SizedBox(height: 8,),
-
-
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width/2,
-                                child: RichText(
-
-                                  text: TextSpan(
-                                    style: TextStyle(
-                                      color: AppColor.black,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(left: 15, right: 30, bottom: 30, top: 5),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text("Start Date"),
+                                        Spacer(),
+                                        Text(
+                                          historylist?.startDate?.substring(0, 10) ?? "",
+                                          style: TextStyle(fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
                                     ),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                          text: 'Raised EDS by  ',
-                                     ),
-                                      TextSpan(text:"User name  ",style: TextStyle(color: AppColor.black, fontWeight: FontWeight.bold)),
-                                      TextSpan(text:"Role name",style: TextStyle(color: AppColor.black, fontWeight: FontWeight.bold)),
-                                    ],
-                                  ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 0),
+                                      child: Row(
+                                        children: [
+                                          Text("End Date"),
+                                          Spacer(),
+                                          historylist?.endDate != null
+                                              ? Text(
+                                                  historylist?.endDate?.substring(0, 10) ?? "",
+                                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                                )
+                                              : Text("N/A"),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          width: MediaQuery.of(context).size.width / 2,
+                                          child: RichText(
+                                            text: TextSpan(
+                                              style: TextStyle(
+                                                color: AppColor.black,
+                                              ),
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                  text: 'Raised EDS by  ',
+                                                ),
+                                                TextSpan(
+                                                    text: "User name  ",
+                                                    style:
+                                                        TextStyle(color: AppColor.black, fontWeight: FontWeight.bold)),
+                                                TextSpan(
+                                                    text: "Role name",
+                                                    style:
+                                                        TextStyle(color: AppColor.black, fontWeight: FontWeight.bold)),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Spacer(),
+                                        Text(
+                                          "View",
+                                          style: TextStyle(
+                                            color: AppColor.darkgreen,
+                                            fontWeight: FontWeight.bold,
+                                            decoration: TextDecoration.underline,
+                                            decorationThickness: 2,
+                                          ),
+                                        ),
+                                        Spacer(),
+                                        Text("(${historylist?.endDate?.substring(0, 10) ?? ""})"),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Spacer(),
-                              Text("View",style: TextStyle(color: AppColor.darkgreen,fontWeight: FontWeight.bold,decoration: TextDecoration.underline,decorationThickness: 2,) ,),
-                              Spacer(),
-                              Text("(${historylist?.endDate?.substring(0,10)??""})"),
                             ],
                           ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
-
-
-        });
+                    )
+                  : Center(child: Text(""));
+            })
+        : Center(
+            child: CircularProgressIndicator(
+            color: Colors.green,
+          ));
   });
 }

@@ -2,7 +2,6 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:parivesh/common/custom_widget.dart';
 import 'package:parivesh/proposal/model/advance_search_arguments.dart';
 import 'package:parivesh/proposal/view/advance_search_dashboard.dart';
 import 'package:parivesh/proposal/view/track_proposal.dart';
@@ -30,6 +29,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
   late TextEditingController _endDateController = TextEditingController();
   late TextEditingController areaController = TextEditingController();
   late TextEditingController _endAreaController = TextEditingController();
+  late TextEditingController _endAreaToController = TextEditingController();
   late TextEditingController _enterTextController = TextEditingController();
   late ProposalViewModel proposalViewModel;
   ClearanceTypeModel? clearanceTypeModel;
@@ -427,7 +427,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                         controller: _startDateController,
                                         decoration: InputDecoration(
                                           isDense: true,
-                                          contentPadding: const EdgeInsets.all(8),
+                                          //contentPadding: const EdgeInsets.all(8),
                                           border: OutlineInputBorder(borderSide: BorderSide(color: AppColor.black)),
                                           hintText: "mm/dd/yyyy",
                                         ),
@@ -451,7 +451,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                         controller: _endDateController,
                                         decoration: const InputDecoration(
                                           isDense: true,
-                                          contentPadding: const EdgeInsets.all(8),
+                                          //contentPadding: const EdgeInsets.all(8),
                                           border: OutlineInputBorder(),
                                           hintText: "mm/dd/yyyy",
                                         ),
@@ -464,7 +464,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                   child: Align(
                                       alignment: Alignment.center,
                                       child: Padding(
-                                        padding: const EdgeInsets.only(right: 85, top: 5),
+                                        padding: const EdgeInsets.only(right: 85, top: 15),
                                         child: Icon(
                                           Icons.calendar_month,
                                           size: 20,
@@ -475,7 +475,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                   child: Align(
                                       alignment: Alignment.centerRight,
                                       child: Padding(
-                                        padding: const EdgeInsets.only(right: 20, top: 5),
+                                        padding: const EdgeInsets.only(right: 20, top: 15),
                                         child: Icon(
                                           Icons.calendar_month,
                                           size: 20,
@@ -854,6 +854,18 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                   Navigator.pushNamed(context, AppRoutes.advancesearchdashboard,
                                       arguments:
                                           AdvanceSearchArguments(clearanceId: clearencevalue, stateCode: statevalue));
+                                  model.clearanceTypeModel?.data?.clear();
+                                  model.stateTypeModel?.data?.clear();
+                                  _startDateController.clear();
+                                  _endDateController.clear();
+                                  _endAreaController.clear();
+                                  areaController.clear();
+                                  model.proposolTypeModel?.data?.clear();
+                                  model.proposolStatusModel?.data?.clear();
+                                  model.sectorTypeModel?.data?.clear();
+                                  model.categoryModel?.data?.clear();
+                                  _enterTextController.clear();
+
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                     content: Text("Please Select State"),

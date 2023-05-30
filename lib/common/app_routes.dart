@@ -6,6 +6,7 @@ import 'package:parivesh/proposal/view/track_proposol_details.dart';
 import 'package:parivesh/proposal/viewmodel/trackporposal_viewmodel.dart';
 import 'package:provider/provider.dart';
 
+import '../proposal/view/advance_searchDetails.dart';
 import '../proposal/view/track_proposal_dashboard.dart';
 import '../proposal/view/track_proposal.dart';
 
@@ -47,6 +48,14 @@ data(RouteSettings settings) {
               child: TrackProposolDetails(proposolNo: args.proposolNo,ApplicationFor: args.ApplicationFor,
               ProjectCategory: args.ProjectCategory,Area: args.Area,Date: args.Date,ProjectName: args.ProjectName,SingleWindowNo: args.SingleWindowNo,
               state: args.state,id: args.id,)));
+      case AppRoutes.advancesearchdetails:
+      final args = settings.arguments as AdvanceSearchDetailsArguments;
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+              create: (_) => ProposalViewModel(),
+              child: AdvanceSearchDetail(proposolNo: args.proposolNo,ApplicationFor: args.ApplicationFor,
+              ProjectCategory: args.ProjectCategory,Area: args.Area,Date: args.Date,ProjectName: args.ProjectName,SingleWindowNo: args.SingleWindowNo,
+              state: args.state,id: args.id,)));
 
   }
 }
@@ -56,4 +65,5 @@ class AppRoutes {
   static const String trackporposaldash = "trackporposaldash";
   static const String advancesearchdashboard = "advancesearchdashboard";
   static const String trackproposoldetails = "trackproposoldetails";
+  static const String advancesearchdetails = "advancesearchdetails";
 }

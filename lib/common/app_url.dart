@@ -11,4 +11,5 @@ class AppUrls{
   static const getListOProposolCategory ="https://parivesh.nic.in/parivesh_api/trackYourProposal/getListOfCategoryForFC";
   static const advanceSearchDetails="https://parivesh.nic.in/parivesh_api/trackYourProposal/advanceSearchData?majorClearanceType=&state=";
   static const ProposolHistory="https://parivesh.nic.in/workgroupmaster/generic/getProcessHis?application_id=";
+  static const advanceSearchProposolHistory="https://parivesh.nic.in/workgroupmaster/generic/getProcessHis?application_id=";
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:parivesh/proposal/api/proposal_api.dart';
+import 'package:parivesh/proposal/model/advance_search_history_model.dart';
 import 'package:parivesh/proposal/model/authority_model.dart';
 import 'package:parivesh/proposal/model/proposol_history_model.dart';
 import 'package:parivesh/proposal/model/proposol_status_model.dart';
@@ -26,6 +27,7 @@ class ProposalViewModel extends ChangeNotifier {
   CategoryModel? categoryModel;
   TrackProposolDetailsModel? trackProposolDetailsModel;
   ProposolHistoryModel? proposolHistoryModel;
+  AdvanceSearcHistoryModel?advanceSearchHistoryModel;
 
   Future getPorposalDetails({required String porposalNo}) async {
     final data = await _porposalApi.fetchData(porposalNo: porposalNo);
@@ -140,6 +142,16 @@ class ProposalViewModel extends ChangeNotifier {
     notifyListeners();
     return proposolHistoryModel;
   }
+
+// AdvanceSearchHistory
+
+  Future<AdvanceSearcHistoryModel?> getAdvanceSearchProposolHistory({required int application_id}) async {
+    final data = await _porposalApi.fetchDataAdvanceSearchProposolHistory(application_id: application_id);
+    advanceSearchHistoryModel = data;
+    notifyListeners();
+    return advanceSearchHistoryModel;
+  }
+
 
 
 
