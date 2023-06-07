@@ -22,6 +22,7 @@ import '../model/track_proposal_model.dart';
 class PorposalApi{
 
   Future<TrackPorposalModel?> fetchData({required String porposalNo}) async {
+
     final Uri uri = Uri.parse(AppUrls.trackporpsal); // Replace with your API endpoint
     final Map<String, String> queryParams = {
       'proposalNo': porposalNo,
@@ -35,6 +36,7 @@ class PorposalApi{
       if(responseData !=null){
         return TrackPorposalModel.fromJson(responseData);
       }
+
     }
     log("msg$response");
 
@@ -87,11 +89,13 @@ class PorposalApi{
 
 //ClearanceTypApi
   Future<ClearanceTypeModel?> fetchDataClearanceType() async {
+
     final Uri uri = Uri.parse(AppUrls.getAllClearanceType); // Replace with your API endpoint
 
     final response = await http.get(uri);
 
     if (response.statusCode == 200) {
+
       final responseData = json.decode(response.body);
       print("response--clearence$responseData");
       if(responseData !=null){

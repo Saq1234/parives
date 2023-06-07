@@ -79,7 +79,6 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
   @override
   void initState() {
     super.initState();
-
     proposalViewModel = Provider.of<ProposalViewModel>(context, listen: false);
     proposalViewModel.getDataClearanceType();
     proposalViewModel.getDataStateType();
@@ -101,6 +100,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
   var clearanceId;
   var stateCode;
 
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -118,6 +118,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
           child: SingleChildScrollView(
               physics: AlwaysScrollableScrollPhysics(),
               child: Consumer<ProposalViewModel>(builder: (context, model, child) {
+
                 return Column(
                   children: [
                     SizedBox(
@@ -146,6 +147,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                       ))
                                 ]),
                           ),
+
                           Container(
                             decoration: BoxDecoration(
                               border: Border.all(color: AppColor.black),
@@ -158,6 +160,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                               children: [
                                 DropdownButtonHideUnderline(
                                   child: DropdownButton2(
+
                                     isExpanded: true,
                                     icon: Icon(
                                       Icons.keyboard_arrow_down_outlined,
@@ -179,18 +182,18 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                         child: Text(item.name.toString()),
                                       );
                                     }).toList(),
-                                    onChanged: (newVal) {
+                                    onChanged: (newValue) {
                                       setState(() {
-                                        clearencevalue = newVal;
-                                        print("check${clearencevalue}");
+                                        clearencevalue = newValue;
                                         clearancevisible = true;
-                                        proposalViewModel.proposolTypeModel?.data?.clear();
-                                        proposolTypeevalue;
+                                        // proposalViewModel.proposolTypeModel?.data?.clear();
+                                        print("clearance-->>${clearencevalue}");
+                                        //proposalViewModel.getPorposalType(id: clearencevalue);
                                       });
-                                       proposalViewModel.getPorposalType(id: clearencevalue);
 
                                     },
                                     value: clearencevalue,
+
                                   ),
                                 ),
                               ],
@@ -416,9 +419,11 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                 children: [
                                   Expanded(
                                     child: Container(
-                                      // decoration: BoxDecoration(
-                                      //   border: Border.all(color: AppColor.black)
-                                      // ),
+                                      height: 45,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: AppColor.black),
+                                        borderRadius: BorderRadius.circular(20)
+                                      ),
                                       child: TextField(
                                         readOnly: true,
                                         onTap: () {
@@ -426,9 +431,9 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                         },
                                         controller: _startDateController,
                                         decoration: InputDecoration(
+                                          border: InputBorder.none,
                                           isDense: true,
-                                          //contentPadding: const EdgeInsets.all(8),
-                                          border: OutlineInputBorder(borderSide: BorderSide(color: AppColor.black)),
+                                           contentPadding: const EdgeInsets.only(top: 10,left: 10),
                                           hintText: "mm/dd/yyyy",
                                         ),
                                       ),
@@ -443,6 +448,11 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                   ),
                                   Expanded(
                                     child: Container(
+                                      height: 45,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(color: AppColor.black),
+                                          borderRadius: BorderRadius.circular(20)
+                                      ),
                                       child: TextField(
                                         readOnly: true,
                                         onTap: () {
@@ -451,8 +461,8 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                         controller: _endDateController,
                                         decoration: const InputDecoration(
                                           isDense: true,
-                                          //contentPadding: const EdgeInsets.all(8),
-                                          border: OutlineInputBorder(),
+                                          border: InputBorder.none,
+                                          contentPadding: const EdgeInsets.only(top: 10,left: 10),
                                           hintText: "mm/dd/yyyy",
                                         ),
                                       ),
@@ -464,7 +474,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                   child: Align(
                                       alignment: Alignment.center,
                                       child: Padding(
-                                        padding: const EdgeInsets.only(right: 85, top: 15),
+                                        padding: const EdgeInsets.only(right: 90, top: 12),
                                         child: Icon(
                                           Icons.calendar_month,
                                           size: 20,
@@ -475,7 +485,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                   child: Align(
                                       alignment: Alignment.centerRight,
                                       child: Padding(
-                                        padding: const EdgeInsets.only(right: 20, top: 15),
+                                        padding: const EdgeInsets.only(right: 20, top: 12),
                                         child: Icon(
                                           Icons.calendar_month,
                                           size: 20,
@@ -494,7 +504,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                               children: [
                                 RichText(
                                   text: TextSpan(
-                                      text: 'Area (ha):',
+                                      text: 'Area (ha)',
                                       style: TextStyle(
                                         color: Colors.black,
                                       ),
@@ -507,11 +517,16 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                   children: [
                                     Expanded(
                                       child: Container(
-                                        height: 50,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(color: AppColor.black),
+                                            borderRadius: BorderRadius.circular(20)
+                                        ),
+                                        height: 45,
                                         child: TextField(
                                           controller: areaController,
                                           decoration: const InputDecoration(
-                                            border: OutlineInputBorder(),
+                                            contentPadding: EdgeInsets.only(left: 10),
+                                            border: InputBorder.none,
                                             hintText: 'Enter Area (ha)',
                                           ),
                                         ),
@@ -526,11 +541,16 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                     ),
                                     Expanded(
                                       child: Container(
-                                        height: 50,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(color: AppColor.black),
+                                            borderRadius: BorderRadius.circular(20)
+                                        ),
+                                        height: 45,
                                         child: TextField(
                                           controller: _endAreaController,
                                           decoration: const InputDecoration(
-                                            border: OutlineInputBorder(),
+                                            contentPadding: EdgeInsets.only(left: 10),
+                                            border: InputBorder.none,
                                             hintText: 'Enter Area (ha)',
                                           ),
                                         ),
@@ -579,6 +599,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                         color: AppColor.black,
                                       ),
                                       dropdownDecoration: BoxDecoration(
+                                        color: AppColor.black,
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       scrollbarAlwaysShow: true,
@@ -588,7 +609,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                       itemPadding: EdgeInsets.only(left: 10),
                                       isDense: true,
                                       hint: Text("Select"),
-                                      items: model.proposolTypeModel?.data?.map((item) {
+                                      items: model.proposolTypeModel?.data?.map(( item) {
                                         return
                                           DropdownMenuItem(
                                           value: item.id,
@@ -598,7 +619,9 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                       onChanged: (newVal) {
                                         setState(() {
                                           proposolTypeevalue = newVal;
-                                          print("check${proposolTypeevalue}");
+                                          print("proposoltyep>>${proposolTypeevalue}");
+                                          print("clearance>>${clearencevalue}");
+
                                         });
 
                                       },
@@ -681,11 +704,16 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                             height: 10,
                           ),
                           Container(
-                            height: 50,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: AppColor.black),
+                                borderRadius: BorderRadius.circular(20)
+                            ),
+                            height: 45,
                             child: TextField(
                               controller: _enterTextController,
                               decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
+                                contentPadding: EdgeInsets.only(left: 10),
+                                border: InputBorder.none,
                                 hintText: 'Enter Text to Search',
                               ),
                             ),
@@ -854,8 +882,8 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                                   Navigator.pushNamed(context, AppRoutes.advancesearchdashboard,
                                       arguments:
                                           AdvanceSearchArguments(clearanceId: clearencevalue, stateCode: statevalue));
-                                  model.clearanceTypeModel?.data?.clear();
-                                  model.stateTypeModel?.data?.clear();
+                                  // model.clearanceTypeModel?.data?.clear();
+                                  // model.stateTypeModel?.data?.clear();
                                   _startDateController.clear();
                                   _endDateController.clear();
                                   _endAreaController.clear();
@@ -884,7 +912,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                               child: Center(
                                   child: Text(
                                 "Search",
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                style: TextStyle(fontWeight: FontWeight.bold,color: AppColor.whitecolor),
                               )),
                             ),
                           ),
@@ -896,6 +924,7 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => const TrackPorposal()));
                             },
                             child: Container(
+                              margin: EdgeInsets.only(bottom: 30),
                               padding: EdgeInsets.all(15),
                               decoration: BoxDecoration(borderRadius: BorderRadius.circular(25), color: Colors.orange),
                               width: double.infinity,

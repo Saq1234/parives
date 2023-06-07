@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:parivesh/common/appColors.dart';
+import 'package:parivesh/common/custom_widget.dart';
 import 'package:parivesh/proposal/view/advance_search_porposal.dart';
 import 'package:parivesh/proposal/view/track_proposal_dashboard.dart';
 import 'package:provider/provider.dart';
@@ -94,11 +96,18 @@ class _TrackPorposalState extends State<TrackPorposal> {
                           SizedBox(
                             height: 20,
                           ),
-                          TextField(
-                            controller: porposalController,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: 'Enter Proposal Number/Single Window Number',
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(color: AppColor.black),
+                                borderRadius: BorderRadius.circular(20)
+                            ),
+                            child: TextField(
+                              controller: porposalController,
+                              decoration:  InputDecoration(
+                                contentPadding: EdgeInsets.only(left: 10),
+                                border: InputBorder.none,
+                                hintText: 'Enter Proposal Number/Single Window Number',
+                              ),
                             ),
                           ),
 
@@ -106,14 +115,16 @@ class _TrackPorposalState extends State<TrackPorposal> {
                           Container(
                             height: MediaQuery.of(context).size.height/10,),
                           GestureDetector(
-                            onTap: () async{
+                            onTap: () {
                               if (porposalController.text.isNotEmpty) {
+                                setState(() {
+                                  porposalViewModel.getPorposalDetails(porposalNo: porposalController.text);
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const TrackPorposalDash()));
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                  porposalController.clear();
+                                });
 
-                                await  porposalViewModel.getPorposalDetails(porposalNo: porposalController.text);
 
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => const TrackPorposalDash()));
-                                FocusManager.instance.primaryFocus?.unfocus();
-                                porposalController.clear();
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                   content: Text("Please fill Porposal Number"),
@@ -122,12 +133,12 @@ class _TrackPorposalState extends State<TrackPorposal> {
                             },
                             child: Container(
                               padding: EdgeInsets.all(15),
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.green),
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(25), color: Colors.green),
                               width: double.infinity,
                               child: Center(
                                   child: Text(
                                 "Search",
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                style: TextStyle(fontWeight: FontWeight.bold,color: AppColor.whitecolor),
                               )),
                             ),
                           ),
@@ -142,7 +153,7 @@ class _TrackPorposalState extends State<TrackPorposal> {
                             },
                             child: Container(
                               padding: EdgeInsets.all(15),
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.orange),
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(25), color: Colors.orange),
                               width: double.infinity,
                               child: Center(
                                   child: Text(

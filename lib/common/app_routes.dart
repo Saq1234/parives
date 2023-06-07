@@ -53,9 +53,12 @@ data(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
               create: (_) => ProposalViewModel(),
-              child: AdvanceSearchDetail(proposolNo: args.proposolNo,ApplicationFor: args.ApplicationFor,
-              ProjectCategory: args.ProjectCategory,Area: args.Area,Date: args.Date,ProjectName: args.ProjectName,SingleWindowNo: args.SingleWindowNo,
-              state: args.state,id: args.id,)));
+              child: AdvanceSearchDetail(
+                proposolNo: args.proposolNo,
+                clearanceId: args.clearanceId,
+                id: args.id,
+                sector: args.sector,
+              )));
 
   }
 }

@@ -18,14 +18,15 @@ class TrackProposolDetailsArguments{
 }
 class AdvanceSearchDetailsArguments{
     String? proposolNo;
-    String? SingleWindowNo;
-    String? ProjectName;
-    String? state;
-    String? ProjectCategory;
-    String? Area;
-    String? ApplicationFor;
-    String? Date;
+    int?clearanceId;
     int?id;
+    String? sector;
 
-    AdvanceSearchDetailsArguments({this.proposolNo,this.ApplicationFor,this.Area,this.Date,this.ProjectCategory,this.ProjectName,this.SingleWindowNo,this.state,this.id});
+    AdvanceSearchDetailsArguments({
+        this.proposolNo,
+        this.clearanceId,
+        this.id,
+        this.sector,
+
+    });
 }

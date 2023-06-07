@@ -21,62 +21,76 @@ class TrackPorposalDash extends StatefulWidget {
 class _TrackPorposalDashState extends State<TrackPorposalDash> {
   ProposalViewModel? proposalViewModel;
   TrackPorposalModel? trackPorposalModel;
-  bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
-
     proposalViewModel = Provider.of<ProposalViewModel>(context, listen: false);
-
 
     // TODO: implement initState
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: Text(''),
-          centerTitle: true,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(image: AssetImage('assets/images/logo.png'), fit: BoxFit.fitWidth)),
+    return
+      WillPopScope(
+        onWillPop: () async{
+          setState(() {
+            proposalViewModel?.trackPorposalModel?.data?.clear();
+          });
+          return true;
+
+
+        },
+        child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            title: Text(''),
+            centerTitle: true,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(image: AssetImage('assets/images/logo.png'), fit: BoxFit.fitWidth)),
+            ),
+          ),
+          body: Column(
+            children: [
+              Expanded(child: CardData()),
+            ],
           ),
         ),
-        body:
-        Column(
-          children: [
-            Expanded(child: CardData()),
-          ],
-        ),
-      ),
-    );
+    ),
+      );
   }
 }
 
 Widget CardData() {
   return Consumer<ProposalViewModel>(builder: (context, model, child) {
-     return model.trackPorposalModel != null
+    return
+      model.trackPorposalModel != null ?
+      model.trackPorposalModel?.data?.length !=0
         ?
-     ListView.builder(
+         ListView.builder(
             itemCount: model.trackPorposalModel?.data?.length,
             itemBuilder: (BuildContext context, int index) {
               final mylist = model.trackPorposalModel?.data?[index];
               print("nooo${mylist?.proposalNo?[index]}");
-              return mylist?.proposalNo != null
-                  ? Padding(
+              return mylist?.proposalNo !=null?
+                Padding(
                       padding: const EdgeInsets.all(10),
                       child: GestureDetector(
-                        onTap: (){
-
+                        onTap: () {
                           Navigator.pushNamed(context, AppRoutes.trackproposoldetails,
-                              arguments:
-                              TrackProposolDetailsArguments(proposolNo: mylist?.proposalNo,ApplicationFor: mylist?.clearanceType,
-                              Date: mylist?.dateOfSubmission,ProjectName: mylist?.projectName,SingleWindowNo: mylist?.singleWindowNumber,
-                              state: mylist?.state,ProjectCategory: mylist?.category,Area: mylist?.forestArea,id: mylist?.id));
+                              arguments: TrackProposolDetailsArguments(
+                                  proposolNo: mylist?.proposalNo,
+                                  ApplicationFor: mylist?.clearanceType,
+                                  Date: mylist?.dateOfSubmission,
+                                  ProjectName: mylist?.projectName,
+                                  SingleWindowNo: mylist?.singleWindowNumber,
+                                  state: mylist?.state,
+                                  ProjectCategory: mylist?.category,
+                                  Area: mylist?.forestArea,
+                                  id: mylist?.id));
                         },
                         child: Card(
                           elevation: 2,
@@ -87,7 +101,7 @@ Widget CardData() {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 20, left: 10,bottom: 20),
+                            padding: const EdgeInsets.only(top: 20, left: 10, bottom: 20),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -211,22 +225,16 @@ Widget CardData() {
                           ),
                         ),
                       ),
-                    )
-                  : Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.green,
-                      ),
-                    );
+                    ):Container();
+
             })
-        : Center(
-            child: model.trackPorposalModel != null && model.trackPorposalModel!.data!.isEmpty
-                ? Text(
-                    "No Data Available",
-                    style: TextStyle(color: Colors.black),
-                  )
-                : CircularProgressIndicator(
-                    color: Colors.green,
-                  ),
-          );
+        :Center(
+      child: Text(
+        "No Data Available",
+        style: TextStyle(color: Colors.black),
+      ),
+    ):
+    Center(child: CircularProgressIndicator(color: Colors.green,));
+
   });
 }

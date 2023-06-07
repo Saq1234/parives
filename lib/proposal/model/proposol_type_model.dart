@@ -33,8 +33,8 @@ class ProposolTypeModel {
 class Data {
   String? name;
   int? id;
-  Null? type;
-  Null? id1;
+  dynamic? type;
+  dynamic? id1;
 
   Data({this.name, this.id, this.type, this.id1});
 
