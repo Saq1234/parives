@@ -2,17 +2,22 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:parivesh/proposal/view/track_proposal.dart';
 import 'package:parivesh/proposal/viewmodel/trackporposal_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import 'common/app_routes.dart';
+import 'dashboard/view/dashboard.dart';
 
 void main() async{
   HttpOverrides.global = MyHttpOverrides();
-  runApp(const MyApp());
-}
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_){
+    runApp(MyApp());
+  });}
 
 class MyHttpOverrides extends HttpOverrides{
   @override
@@ -68,7 +73,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         const Duration(seconds: 3),
             () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const TrackPorposal())));
+            MaterialPageRoute(builder: (context) => const Dashboard())));
 
   }
 

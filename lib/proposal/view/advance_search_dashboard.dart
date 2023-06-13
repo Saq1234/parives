@@ -110,6 +110,7 @@ class _AdvanceSearchDashboardState extends State<AdvanceSearchDashboard> {
                                                   sector: mylist?.sector,
                                                   clearanceId: widget.clearanceId
                                                   ));
+
                                           FocusManager.instance.primaryFocus?.unfocus();
                                           searchController.clear();
                                         },

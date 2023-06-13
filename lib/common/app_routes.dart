@@ -60,6 +60,7 @@ data(RouteSettings settings) {
                 sector: args.sector,
               )));
 
+
   }
 }
 
@@ -69,4 +70,5 @@ class AppRoutes {
   static const String advancesearchdashboard = "advancesearchdashboard";
   static const String trackproposoldetails = "trackproposoldetails";
   static const String advancesearchdetails = "advancesearchdetails";
+  static const String dashboard = "dashboard";
 }

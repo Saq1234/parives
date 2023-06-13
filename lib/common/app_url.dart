@@ -12,4 +12,6 @@ class AppUrls{
   static const advanceSearchDetails="https://parivesh.nic.in/parivesh_api/trackYourProposal/advanceSearchData?majorClearanceType=&state=";
   static const ProposolHistory="https://parivesh.nic.in/workgroupmaster/generic/getProcessHis?application_id=";
   static const advanceSearchProposolHistory="https://parivesh.nic.in/workgroupmaster/generic/getProcessHis?application_id=";
+  static const proposalDetailsAgenda="https://parivesh.nic.in/ua/parivesh/agenda/getAgendaDetails?proposalNo=";
+  static const proposalMomDetails="https://parivesh.nic.in/ua/parivesh/MoM/getMomDetails?proposalNo=";
 }

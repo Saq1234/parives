@@ -5,6 +5,8 @@ import 'package:parivesh/common/app_url.dart';
 import 'package:http/http.dart' as http;
 import 'package:parivesh/proposal/model/advance_search_history_model.dart';
 import 'package:parivesh/proposal/model/authority_model.dart';
+import 'package:parivesh/proposal/model/proposal_mom_details.dart';
+import 'package:parivesh/proposal/model/proposal_view_agenda_model.dart';
 import 'package:parivesh/proposal/model/proposol_history_model.dart';
 import 'package:parivesh/proposal/model/proposol_status_model.dart';
 import 'package:parivesh/proposal/model/proposol_type_model.dart';
@@ -282,6 +284,56 @@ class PorposalApi{
     log("msg$response");
 
   }
+
+
+// ProposalViewAgendaDetails Api
+
+  Future <List<ProposalAgendaDetails>?>fetchProposalViewAgenda({required String proposalNo}) async {
+    final Uri uri = Uri.parse(AppUrls.proposalDetailsAgenda); // Replace with your API endpoint
+    final Map<String, String> queryParams = {
+      'proposalNo': proposalNo,
+    };
+    final Uri finalUri = uri.replace(queryParameters: queryParams);
+    final response = await http.post(finalUri);
+
+
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print("response--$responseData");
+      if(responseData !=null){
+        Iterable  iterable = responseData;
+        return iterable.map((e) => ProposalAgendaDetails.fromJson(e)).toList();
+      }
+    }
+    log("msg$response");
+
+  }
+
+// ProposalMomDetaols Api
+
+  Future <List<ProposalMomDetails>?>fetchProposalMom({required String proposalNo}) async {
+    final Uri uri = Uri.parse(AppUrls.proposalMomDetails); // Replace with your API endpoint
+    final Map<String, String> queryParams = {
+      'proposalNo': proposalNo,
+    };
+    final Uri finalUri = uri.replace(queryParameters: queryParams);
+    final response = await http.post(finalUri);
+
+
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      print("response--$responseData");
+      if(responseData !=null){
+        Iterable  iterable = responseData;
+        return iterable.map((e) => ProposalMomDetails.fromJson(e)).toList();
+      }
+    }
+    log("msg$response");
+
+  }
+
+
+
 
 
 

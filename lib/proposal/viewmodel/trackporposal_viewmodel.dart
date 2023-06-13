@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:parivesh/proposal/api/proposal_api.dart';
 import 'package:parivesh/proposal/model/advance_search_history_model.dart';
 import 'package:parivesh/proposal/model/authority_model.dart';
+import 'package:parivesh/proposal/model/proposal_mom_details.dart';
+import 'package:parivesh/proposal/model/proposal_view_agenda_model.dart';
 import 'package:parivesh/proposal/model/proposol_history_model.dart';
 import 'package:parivesh/proposal/model/proposol_status_model.dart';
 import 'package:parivesh/proposal/model/sector_type_model.dart';
@@ -28,6 +30,8 @@ class ProposalViewModel extends ChangeNotifier {
   TrackProposolDetailsModel? trackProposolDetailsModel;
   ProposolHistoryModel? proposolHistoryModel;
   AdvanceSearcHistoryModel?advanceSearchHistoryModel;
+ List <ProposalAgendaDetails>? proposalAgendaDetails;
+  List <ProposalMomDetails>? proposalMomDetails;
 
   Future getPorposalDetails({required String porposalNo}) async {
     final data = await _porposalApi.fetchData(porposalNo: porposalNo);
@@ -134,7 +138,7 @@ class ProposalViewModel extends ChangeNotifier {
     return trackProposolDetailsModel;
   }
 
-// ProposolHistory
+// ProposolHistoryViewModel
 
   Future<ProposolHistoryModel?> getProposolHistory({required int application_id}) async {
     final data = await _porposalApi.fetchDataProposolHistory(application_id: application_id);
@@ -143,7 +147,7 @@ class ProposalViewModel extends ChangeNotifier {
     return proposolHistoryModel;
   }
 
-// AdvanceSearchHistory
+// AdvanceSearchHistoryViewModel
 
   Future<AdvanceSearcHistoryModel?> getAdvanceSearchProposolHistory({required int application_id}) async {
     final data = await _porposalApi.fetchDataAdvanceSearchProposolHistory(application_id: application_id);
@@ -151,6 +155,27 @@ class ProposalViewModel extends ChangeNotifier {
     notifyListeners();
     return advanceSearchHistoryModel;
   }
+
+// ProposalViewAgendaViewModel
+
+  Future<List<ProposalAgendaDetails>?> getProposalViewAgenda({required String proposalNo}) async {
+    final data = await _porposalApi.fetchProposalViewAgenda(proposalNo: proposalNo);
+    proposalAgendaDetails = data;
+    notifyListeners();
+    return proposalAgendaDetails;
+  }
+
+// ProposalMomViewModel
+
+  void getProposalMomDetails({required String proposalNo}) async {
+    final data = await _porposalApi.fetchProposalMom(proposalNo: proposalNo);
+    proposalMomDetails = data;
+    notifyListeners();
+
+
+  }
+
+
 
 
 
