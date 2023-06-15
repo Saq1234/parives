@@ -40,8 +40,8 @@ dependencies:
   intl: ^0.18.0
   http: ^0.13.6
   provider: ^6.0.5
-  syncfusion_flutter_pdfviewer: ^21.2.9
-
+  syncfusion_flutter_pdfviewer: 20.4.50
+  url_launcher: ^6.1.11
 
 dev_dependencies:
   flutter_test:
