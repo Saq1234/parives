@@ -63,12 +63,7 @@ List<Snac2022Model> Snac2022List = [
               "https://forestsclearance.nic.in/writereaddata/meeting_notice_campa/16_Jun_2022_1138557301_SANC_Assamsanction-06152022154915.pdf"),
     ],
   ),
-  Snac2022Model(
-    name: "",
-    data: [
-      Data(FileNo: "", sanctionDate: ""),
-    ],
-  ),
+
   Snac2022Model(
     name: "Bihar",
     data: [
