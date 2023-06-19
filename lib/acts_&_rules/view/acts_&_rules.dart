@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:parivesh/acts_&_rules/view/pdf_page.dart';
+import 'package:parivesh/acts_&_rules/view/wild_clearance.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../model/enviorment_clearance/coastalRegulationZone.dart';
@@ -19,6 +21,7 @@ import '../model/enviorment_clearance/t_oil_model.dart';
 import '../model/enviorment_clearance/wWater_pollution_model.dart';
 import 'actsrulesDetails.dart';
 import 'forest_clearance.dart';
+import 'national_campa.dart';
 
 class ActsAndRules extends StatefulWidget {
   const ActsAndRules({Key? key}) : super(key: key);
@@ -121,63 +124,84 @@ class _ActsAndRulesState extends State<ActsAndRules> {
               SizedBox(
                 height: 20,
               ),
-              Card(
-                elevation: 5,
-                color: Colors.grey.shade100,
-                child: Container(
-                  padding: EdgeInsets.all(15),
-                  width: double.infinity,
-                  child: Row(
-                    children: [
-                      Text(
-                        "Wildlife Clearance",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Spacer(),
-                      Icon(Icons.keyboard_arrow_right)
-                    ],
+              GestureDetector(
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => WildClearance())),
+                child: Card(
+                  elevation: 5,
+                  color: Colors.grey.shade100,
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        Text(
+                          "Wildlife Clearance",
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        Spacer(),
+                        Icon(Icons.keyboard_arrow_right)
+                      ],
+                    ),
                   ),
                 ),
               ),
               SizedBox(
                 height: 20,
               ),
-              Card(
-                elevation: 5,
-                color: Colors.grey.shade100,
-                child: Container(
-                  padding: EdgeInsets.all(15),
-                  width: double.infinity,
-                  child: Row(
-                    children: [
-                      Text(
-                        "Advisory on Exotic Live Species",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Spacer(),
-                      Icon(Icons.keyboard_arrow_right)
-                    ],
+              GestureDetector(
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PfdPage(
+                          filepath: "https://environmentclearance.nic.in/writereaddata/om/30052020WildlifeAdvisorySpecies.pdf",
+                        ))),
+                child: Card(
+                  elevation: 5,
+                  color: Colors.grey.shade100,
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        Text(
+                          "Advisory on Exotic Live Species",
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        Spacer(),
+                        Icon(Icons.keyboard_arrow_right)
+                      ],
+                    ),
                   ),
                 ),
               ),
               SizedBox(
                 height: 20,
               ),
-              Card(
-                elevation: 5,
-                color: Colors.grey.shade100,
-                child: Container(
-                  padding: EdgeInsets.all(15),
-                  width: double.infinity,
-                  child: Row(
-                    children: [
-                      Text(
-                        "National CAMPA",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Spacer(),
-                      Icon(Icons.keyboard_arrow_right)
-                    ],
+
+              GestureDetector(
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NationalCampa())),
+                child: Card(
+                  elevation: 5,
+                  color: Colors.grey.shade100,
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        Text(
+                          "National CAMPA",
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        Spacer(),
+                        Icon(Icons.keyboard_arrow_right)
+                      ],
+                    ),
                   ),
                 ),
               ),

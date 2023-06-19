@@ -366,7 +366,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                         ),
                                         children: <Widget>[
                                           Container(
-                                            height: echomarkList.length > 2 ? MediaQuery.of(context).size.height / 3 : 100,
+                                            height: echosensitiveList.length > 2 ? MediaQuery.of(context).size.height / 3 : 100,
                                             child: Scrollbar(
                                               isAlwaysShown: true,
                                               thickness: 10,
@@ -986,9 +986,8 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                         elevation: 2,
                         color: Colors.grey.shade100,
                         child: Container(
+                          margin: EdgeInsets.only(left: 10,right: 10),
                           height: 50,
-
-
                           child: Row(
                             children: [
                               Text(
