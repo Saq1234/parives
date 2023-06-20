@@ -4,11 +4,13 @@ import 'package:parivesh/proposal/model/advance_search_arguments.dart';
 import 'package:parivesh/proposal/view/advance_search_dashboard.dart';
 import 'package:parivesh/proposal/view/track_proposol_details.dart';
 import 'package:parivesh/proposal/viewmodel/trackporposal_viewmodel.dart';
+import 'package:parivesh/user_manuals/view_model/user_manual_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import '../proposal/view/advance_searchDetails.dart';
 import '../proposal/view/track_proposal_dashboard.dart';
 import '../proposal/view/track_proposal.dart';
+import '../user_manuals/view/user_manual.dart';
 
 class AppRouteGenerator {
   late final int clearanceId;
@@ -59,6 +61,12 @@ data(RouteSettings settings) {
                 id: args.id,
                 sector: args.sector,
               )));
+    case AppRoutes.usermanuals:
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+            create: (_) => UserManualViewModel(),
+            child: UserManuals(),
+          ));
 
 
   }
@@ -71,4 +79,5 @@ class AppRoutes {
   static const String trackproposoldetails = "trackproposoldetails";
   static const String advancesearchdetails = "advancesearchdetails";
   static const String dashboard = "dashboard";
+  static const String usermanuals = "usermanuals";
 }

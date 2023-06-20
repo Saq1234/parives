@@ -40,7 +40,7 @@ class _NationalCampaState extends State<NationalCampa> {
           title: Container(
               width: MediaQuery.of(context).size.width / 1.1,
               child: Text(
-                "Forest CLEARANCE (Acts, Rules & Guidelines)",
+                "NATIONAL CAMPA (Acts, Rules & Guidelines)",
                 maxLines: 2,
               )),
           titleSpacing: 2.0,

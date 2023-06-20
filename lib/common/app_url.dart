@@ -14,4 +14,5 @@ class AppUrls{
   static const advanceSearchProposolHistory="https://parivesh.nic.in/workgroupmaster/generic/getProcessHis?application_id=";
   static const proposalDetailsAgenda="https://parivesh.nic.in/ua/parivesh/agenda/getAgendaDetails?proposalNo=";
   static const proposalMomDetails="https://parivesh.nic.in/ua/parivesh/MoM/getMomDetails?proposalNo=";
+  static const userManuals="https://stgdev.parivesh.nic.in/cms/userManual/getList?category=";
 }

@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:parivesh/acts_&_rules/view/acts_&_rules.dart';
-import 'package:parivesh/common/appColors.dart';
-import 'package:parivesh/common/app_routes.dart';
+
 import 'package:parivesh/login/view/login.dart';
 import 'package:parivesh/proposal/view/track_proposal.dart';
-import 'package:parivesh/user_manual/view/user_manuals.dart';
+
+import '../../common/app_routes.dart';
+import '../../user_manuals/view/user_manual.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -91,8 +92,9 @@ class _DashboardState extends State<Dashboard> {
                 height: 30,
               ),
               GestureDetector(
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const UserManulas())),
-                child: Card(
+                onTap: () => Navigator.pushNamed(context, AppRoutes.usermanuals),
+
+                  child: Card(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                   color: Colors.grey.shade50,
                   elevation: 10,
