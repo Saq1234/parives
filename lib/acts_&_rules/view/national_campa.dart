@@ -74,24 +74,30 @@ class _NationalCampaState extends State<NationalCampa> {
                               itemCount: ActsLiist.length,
                               itemBuilder: (BuildContext context, int index) {
                                 ActsModel Actslist = ActsLiist[index];
-                                return GestureDetector(
-                                  onTap: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => PfdPage(
-                                                filepath: Actslist.url,
-                                              ))),
-                                  child: ListTile(
-                                    leading: Icon(
-                                      Icons.picture_as_pdf,
-                                      color: Colors.red,
+                                return Column(
+                                  children: [
+                                    Divider(color: Colors.black,),
+
+                                    GestureDetector(
+                                      onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => PfdPage(
+                                                    filepath: Actslist.url,
+                                                  ))),
+                                      child: ListTile(
+                                        leading: Icon(
+                                          Icons.picture_as_pdf,
+                                          color: Colors.red,
+                                        ),
+                                        title: Text(
+                                          Actslist.name.toString(),
+                                          style: TextStyle(),
+                                        ),
+                                        minLeadingWidth: 2,
+                                      ),
                                     ),
-                                    title: Text(
-                                      Actslist.name.toString(),
-                                      style: TextStyle(),
-                                    ),
-                                    minLeadingWidth: 2,
-                                  ),
+                                  ],
                                 );
                               }),
                         ),
@@ -125,24 +131,30 @@ class _NationalCampaState extends State<NationalCampa> {
                               itemCount: RulesList.length,
                               itemBuilder: (BuildContext context, int index) {
                                 RulesModel Ruleslist = RulesList[index];
-                                return GestureDetector(
-                                  onTap: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => PfdPage(
-                                                filepath: Ruleslist.url,
-                                              ))),
-                                  child: ListTile(
-                                    leading: Icon(
-                                      Icons.picture_as_pdf,
-                                      color: Colors.red,
+                                return Column(
+                                  children: [
+                                    Divider(color: Colors.black,),
+
+                                    GestureDetector(
+                                      onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => PfdPage(
+                                                    filepath: Ruleslist.url,
+                                                  ))),
+                                      child: ListTile(
+                                        leading: Icon(
+                                          Icons.picture_as_pdf,
+                                          color: Colors.red,
+                                        ),
+                                        title: Text(
+                                          Ruleslist.name.toString(),
+                                          style: TextStyle(),
+                                        ),
+                                        minLeadingWidth: 2,
+                                      ),
                                     ),
-                                    title: Text(
-                                      Ruleslist.name.toString(),
-                                      style: TextStyle(),
-                                    ),
-                                    minLeadingWidth: 2,
-                                  ),
+                                  ],
                                 );
                               }),
                         ),
@@ -173,24 +185,30 @@ class _NationalCampaState extends State<NationalCampa> {
                               itemCount: GuidelineList.length,
                               itemBuilder: (BuildContext context, int index) {
                                 GuidelineModel GuidelinelList = GuidelineList[index];
-                                return GestureDetector(
-                                  onTap: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => PfdPage(
-                                                filepath: GuidelinelList.url,
-                                              ))),
-                                  child: ListTile(
-                                    leading: Icon(
-                                      Icons.picture_as_pdf,
-                                      color: Colors.red,
+                                return Column(
+                                  children: [
+                                    Divider(color: Colors.black,),
+
+                                    GestureDetector(
+                                      onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => PfdPage(
+                                                    filepath: GuidelinelList.url,
+                                                  ))),
+                                      child: ListTile(
+                                        leading: Icon(
+                                          Icons.picture_as_pdf,
+                                          color: Colors.red,
+                                        ),
+                                        title: Text(
+                                          GuidelinelList.name.toString(),
+                                          style: TextStyle(),
+                                        ),
+                                        minLeadingWidth: 2,
+                                      ),
                                     ),
-                                    title: Text(
-                                      GuidelinelList.name.toString(),
-                                      style: TextStyle(),
-                                    ),
-                                    minLeadingWidth: 2,
-                                  ),
+                                  ],
                                 );
                               }),
                         ),
@@ -199,7 +217,7 @@ class _NationalCampaState extends State<NationalCampa> {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 15,
                 ),
                 GestureDetector(
                   onTap: () {
@@ -212,114 +230,114 @@ class _NationalCampaState extends State<NationalCampa> {
                     elevation: 2,
                     color: Colors.grey.shade100,
                     child: ExpansionTile(
-                      tilePadding: EdgeInsets.only(left: 10, right: 10),
+                     // tilePadding: EdgeInsets.only(left: 10, right: 10),
                       title: Text(
                         "SANCTIONS",
                         style: TextStyle(fontSize: 16),
                       ),
                       children: <Widget>[
                         ListTile(
-                          title: Container(
-                            child: Column(
-                              children: [
-                                Card(
-                                  elevation: 2,
-                                  color: Colors.grey.shade100,
-                                  child: ExpansionTile(
-                                    tilePadding: EdgeInsets.only(left: 10, right: 10),
-                                    title: Text(
-                                      "2023",
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                    children: <Widget>[
-                                      Container(
-                                        height: MediaQuery.of(context).size.height / 3,
-                                        child: Scrollbar(
-                                          isAlwaysShown: true,
-                                          thickness: 10,
-                                          showTrackOnHover: true,
-                                          child: ListView.builder(
-                                              physics: BouncingScrollPhysics(),
-                                              itemCount: Snac2023List.length,
-                                              itemBuilder: (BuildContext context, int index) {
-                                                Snac2023Model Snac2023list = Snac2023List[index];
-                                                return Card(
-                                                  elevation: 2,
-                                                  child: ExpansionTile(
-                                                    title: Text(Snac2023list.name.toString()),
-                                                    children: [
-                                                      Container(
-                                                        margin: EdgeInsets.only(right: 15, left: 5, bottom: 5),
-                                                        child: Table(
-                                                          border: TableBorder.all(width: 1, color: Colors.black45),
-                                                          //table border
-
-                                                          children: [
-                                                            TableRow(children: [
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets.only(left: 15, top: 10, right: 5),
-                                                                child: TableCell(child: Text("	File No")),
-                                                              ),
-                                                              Padding(
-                                                                padding: const EdgeInsets.only(top: 10),
-                                                                child: TableCell(child: Text("	Sanction Date")),
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets.only(top: 10, left: 15, bottom: 5),
-                                                                child: TableCell(child: Text("	View Sanction Letter")),
-                                                              ),
-                                                            ]),
-                                                            TableRow(
-                                                              children: [
-                                                                Padding(
-                                                                  padding: const EdgeInsets.only(
-                                                                      left: 5, top: 15, bottom: 10),
-                                                                  child: TableCell(
-                                                                      child: Text(Snac2023list.fileNo.toString())),
-                                                                ),
-                                                                Padding(
-                                                                  padding: const EdgeInsets.only(
-                                                                      left: 5, top: 15, bottom: 10),
-                                                                  child: TableCell(
-                                                                      child:
-                                                                          Text(Snac2023list.sanctionDate.toString())),
-                                                                ),
-                                                                Padding(
-                                                                  padding: const EdgeInsets.only(top: 15, bottom: 10),
-                                                                  child: GestureDetector(
-                                                                      onTap: () => Navigator.push(
-                                                                          context,
-                                                                          MaterialPageRoute(
-                                                                              builder: (context) => PfdPage(
-                                                                                    filepath: Snac2023list.url,
-                                                                                  ))),
-                                                                      child: TableCell(
-                                                                          child: Icon(
-                                                                        Icons.picture_as_pdf,
-                                                                        color: Colors.red,
-                                                                      ))),
-                                                                )
-                                                              ],
-                                                            )
-                                                          ],
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                );
-                                              }),
-                                        ),
-                                      )
-                                    ],
+                          title: Column(
+                            crossAxisAlignment:CrossAxisAlignment.start,
+                            children: [
+                              Card(
+                                elevation: 2,
+                                //   color: Colors.grey.shade100,
+                                child: ExpansionTile(
+                                 // tilePadding: EdgeInsets.only(left: 10, right: 20),
+                                  title: Text(
+                                    "2023",
+                                    style: TextStyle(fontSize: 16),
                                   ),
+                                  children: <Widget>[
+                                    Container(
+                                      height: MediaQuery.of(context).size.height / 3,
+                                      child: Scrollbar(
+                                        isAlwaysShown: true,
+                                        thickness: 10,
+                                        showTrackOnHover: true,
+                                        child: ListView.builder(
+                                            physics: BouncingScrollPhysics(),
+                                            itemCount: Snac2023List.length,
+                                            itemBuilder: (BuildContext context, int index) {
+                                              Snac2023Model Snac2023list = Snac2023List[index];
+                                              return Card(
+                                                color: Colors.white,
+                                                elevation: 2,
+                                                child: ExpansionTile(
+                                                  title: Text(Snac2023list.name.toString()),
+                                                  children: [
+                                                    Container(
+                                                      margin: EdgeInsets.only(right: 15, left: 5, bottom: 5),
+                                                      child: Table(
+                                                        border: TableBorder.all(width: 1, color: Colors.black45),
+                                                        //table border
+
+                                                        children: [
+                                                          TableRow(children: [
+                                                            Padding(
+                                                              padding:
+                                                              const EdgeInsets.only(left: 15, top: 10, right: 5),
+                                                              child: TableCell(child: Text("	File No")),
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(top: 10),
+                                                              child: TableCell(child: Text("	Sanction Date")),
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                              const EdgeInsets.only(top: 10, left: 15, bottom: 5),
+                                                              child: TableCell(child: Text("	View Sanction Letter")),
+                                                            ),
+                                                          ]),
+                                                          TableRow(
+                                                            children: [
+                                                              Padding(
+                                                                padding: const EdgeInsets.only(
+                                                                    left: 5, top: 15, bottom: 10),
+                                                                child: TableCell(
+                                                                    child: Text(Snac2023list.fileNo.toString())),
+                                                              ),
+                                                              Padding(
+                                                                padding: const EdgeInsets.only(
+                                                                    left: 5, top: 15, bottom: 10),
+                                                                child: TableCell(
+                                                                    child:
+                                                                    Text(Snac2023list.sanctionDate.toString())),
+                                                              ),
+                                                              Padding(
+                                                                padding: const EdgeInsets.only(top: 15, bottom: 10),
+                                                                child: GestureDetector(
+                                                                    onTap: () => Navigator.push(
+                                                                        context,
+                                                                        MaterialPageRoute(
+                                                                            builder: (context) => PfdPage(
+                                                                              filepath: Snac2023list.url,
+                                                                            ))),
+                                                                    child: TableCell(
+                                                                        child: Icon(
+                                                                          Icons.picture_as_pdf,
+                                                                          color: Colors.red,
+                                                                        ))),
+                                                              )
+                                                            ],
+                                                          )
+                                                        ],
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              );
+                                            }),
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                              ],
-                            ),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                            ],
                           ),
                         ),
                         ListTile(
@@ -328,7 +346,7 @@ class _NationalCampaState extends State<NationalCampa> {
                               children: [
                                 Card(
                                   elevation: 2,
-                                  color: Colors.grey.shade100,
+                                //  color: Colors.grey.shade100,
                                   child: ExpansionTile(
                                     tilePadding: EdgeInsets.only(left: 10, right: 10),
                                     title: Text(
@@ -457,7 +475,7 @@ class _NationalCampaState extends State<NationalCampa> {
                               children: [
                                 Card(
                                   elevation: 2,
-                                  color: Colors.grey.shade100,
+                                //  color: Colors.grey.shade100,
                                   child: ExpansionTile(
                                     tilePadding: EdgeInsets.only(left: 10, right: 10),
                                     title: Text(
@@ -588,7 +606,7 @@ class _NationalCampaState extends State<NationalCampa> {
                               children: [
                                 Card(
                                   elevation: 2,
-                                  color: Colors.grey.shade100,
+                                 // color: Colors.grey.shade100,
                                   child: ExpansionTile(
                                     tilePadding: EdgeInsets.only(left: 10, right: 10),
                                     title: Text(
@@ -719,7 +737,7 @@ class _NationalCampaState extends State<NationalCampa> {
                               children: [
                                 Card(
                                   elevation: 2,
-                                  color: Colors.grey.shade100,
+                                //  color: Colors.grey.shade100,
                                   child: ExpansionTile(
                                     tilePadding: EdgeInsets.only(left: 10, right: 10),
                                     title: Text(
@@ -849,7 +867,7 @@ class _NationalCampaState extends State<NationalCampa> {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 15,
                 ),
                 Card(
                   elevation: 2,
@@ -867,7 +885,7 @@ class _NationalCampaState extends State<NationalCampa> {
                             children: [
                               Card(
                                 elevation: 2,
-                                color: Colors.grey.shade100,
+                              //  color: Colors.grey.shade100,
                                 child: ExpansionTile(
                                   tilePadding: EdgeInsets.only(left: 10, right: 10),
                                   title: Text(
@@ -996,7 +1014,7 @@ class _NationalCampaState extends State<NationalCampa> {
                             children: [
                               Card(
                                 elevation: 2,
-                                color: Colors.grey.shade100,
+                              //  color: Colors.grey.shade100,
                                 child: ExpansionTile(
                                   tilePadding: EdgeInsets.only(left: 10, right: 10),
                                   title: Text(
@@ -1125,7 +1143,7 @@ class _NationalCampaState extends State<NationalCampa> {
                             children: [
                               Card(
                                 elevation: 2,
-                                color: Colors.grey.shade100,
+                              //  color: Colors.grey.shade100,
                                 child: ExpansionTile(
                                   tilePadding: EdgeInsets.only(left: 10, right: 10),
                                   title: Text(
@@ -1254,7 +1272,7 @@ class _NationalCampaState extends State<NationalCampa> {
                             children: [
                               Card(
                                 elevation: 2,
-                                color: Colors.grey.shade100,
+                              //  color: Colors.grey.shade100,
                                 child: ExpansionTile(
                                   tilePadding: EdgeInsets.only(left: 10, right: 10),
                                   title: Text(

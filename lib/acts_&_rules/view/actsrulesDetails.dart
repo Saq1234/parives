@@ -63,6 +63,8 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                           ),
                         ),
                         children: <Widget>[
+                          Divider(color: Colors.black,),
+
                           GestureDetector(
                             onTap: () => Navigator.push(
                                 context,
@@ -101,6 +103,8 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                           ),
                         ),
                         children: <Widget>[
+                          Divider(color: Colors.black,),
+
                           GestureDetector(
                             onTap: () => Navigator.push(
                                 context,
@@ -148,7 +152,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                   children: [
                                     Card(
                                       elevation:2,
-                                      color: Colors.grey.shade100,
+                                      //color: Colors.grey.shade100,
                                       child:
                                       ExpansionTile(
                                         tilePadding: EdgeInsets.only(left: 10,right: 10),
@@ -158,43 +162,52 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                           style: TextStyle(fontSize: 16),
                                         ),
                                         children: <Widget>[
-                                          GestureDetector(
-                                            onTap: () => Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) => PfdPage(
-                                                      filepath: "writereaddata/ENV/gsr-02e.pdf",
-                                                    ))),
-                                            child: ListTile(
-                                              leading: Icon(
-                                                Icons.picture_as_pdf,
-                                                color: Colors.red,
+
+                                          Column(
+                                            children: [
+                                              Divider(color: Colors.black,),
+                                              GestureDetector(
+                                                onTap: () => Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) => PfdPage(
+                                                          filepath: "writereaddata/ENV/gsr-02e.pdf",
+                                                        ))),
+                                                child: ListTile(
+                                                  leading: Icon(
+                                                    Icons.picture_as_pdf,
+                                                    color: Colors.red,
+                                                  ),
+                                                  title: Text(
+                                                    "G.S.R.02(E), [02/01/2014] - Use of Washed, Blended or Beneficiated Coal in Thermal Power Plant",
+                                                    style: TextStyle(),
+                                                  ),
+                                                  minLeadingWidth: 2,
+                                                ),
                                               ),
-                                              title: Text(
-                                                "G.S.R.02(E), [02/01/2014] - Use of Washed, Blended or Beneficiated Coal in Thermal Power Plant",
-                                                style: TextStyle(),
+                                              Divider(color: Colors.black,),
+
+                                              GestureDetector(
+                                                onTap: () => Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) => PfdPage(
+                                                          filepath: "https://parivesh.nic.in/writereaddata/ENV/gsr513e.pdf",
+                                                        ))),
+                                                child: ListTile(
+                                                  leading: Icon(
+                                                    Icons.picture_as_pdf,
+                                                    color: Colors.red,
+                                                  ),
+                                                  title: Text(
+                                                    "G.S.R. 513(E), dated 28.06.2012",
+                                                    style: TextStyle(),
+                                                  ),
+                                                  minLeadingWidth: 2,
+                                                ),
                                               ),
-                                              minLeadingWidth: 2,
-                                            ),
-                                          ),
-                                          GestureDetector(
-                                            onTap: () => Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) => PfdPage(
-                                                      filepath: "https://parivesh.nic.in/writereaddata/ENV/gsr513e.pdf",
-                                                    ))),
-                                            child: ListTile(
-                                              leading: Icon(
-                                                Icons.picture_as_pdf,
-                                                color: Colors.red,
-                                              ),
-                                              title: Text(
-                                                "G.S.R. 513(E), dated 28.06.2012",
-                                                style: TextStyle(),
-                                              ),
-                                              minLeadingWidth: 2,
-                                            ),
+
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -204,7 +217,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                     ),
                                     Card(
                                       elevation: 2,
-                                      color: Colors.grey.shade100,
+                                     // color: Colors.grey.shade100,
                                       child: ExpansionTile(
                                         tilePadding: EdgeInsets.only(left: 10,right: 10),
 
@@ -224,24 +237,30 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                                   itemCount: coastalmodellist.length,
                                                   itemBuilder: (BuildContext context, int index) {
                                                     CoastalRegulationZoneModel costallist = coastalmodellist[index];
-                                                    return GestureDetector(
-                                                      onTap: () => Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) => PfdPage(
-                                                                filepath: costallist.url,
-                                                              ))),
-                                                      child: ListTile(
-                                                        leading: Icon(
-                                                          Icons.picture_as_pdf,
-                                                          color: Colors.red,
+                                                    return Column(
+                                                      children: [
+                                                        Divider(color: Colors.black,),
+
+                                                        GestureDetector(
+                                                          onTap: () => Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) => PfdPage(
+                                                                    filepath: costallist.url,
+                                                                  ))),
+                                                          child: ListTile(
+                                                            leading: Icon(
+                                                              Icons.picture_as_pdf,
+                                                              color: Colors.red,
+                                                            ),
+                                                            title: Text(
+                                                              costallist.name.toString(),
+                                                              style: TextStyle(),
+                                                            ),
+                                                            minLeadingWidth: 2,
+                                                          ),
                                                         ),
-                                                        title: Text(
-                                                          costallist.name.toString(),
-                                                          style: TextStyle(),
-                                                        ),
-                                                        minLeadingWidth: 2,
-                                                      ),
+                                                      ],
                                                     );
                                                   }),
                                             ),
@@ -254,7 +273,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                     ),
                                     Card(
                                       elevation: 2,
-                                      color: Colors.grey.shade100,
+                                    //  color: Colors.grey.shade100,
                                       child: ExpansionTile(
                                         tilePadding: EdgeInsets.only(left: 10,right: 10),
 
@@ -275,24 +294,30 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                                   itemCount: delegationlist.length,
                                                   itemBuilder: (BuildContext context, int index) {
                                                     DelegationPowerModel delegationdata = delegationlist[index];
-                                                    return GestureDetector(
-                                                      onTap: () => Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) => PfdPage(
-                                                                filepath: delegationdata.url,
-                                                              ))),
-                                                      child: ListTile(
-                                                        leading: Icon(
-                                                          Icons.picture_as_pdf,
-                                                          color: Colors.red,
+                                                    return Column(
+                                                      children: [
+                                                        Divider(color: Colors.black,),
+
+                                                        GestureDetector(
+                                                          onTap: () => Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) => PfdPage(
+                                                                    filepath: delegationdata.url,
+                                                                  ))),
+                                                          child: ListTile(
+                                                            leading: Icon(
+                                                              Icons.picture_as_pdf,
+                                                              color: Colors.red,
+                                                            ),
+                                                            title: Text(
+                                                              delegationdata.name.toString(),
+                                                              style: TextStyle(),
+                                                            ),
+                                                            minLeadingWidth: 2,
+                                                          ),
                                                         ),
-                                                        title: Text(
-                                                          delegationdata.name.toString(),
-                                                          style: TextStyle(),
-                                                        ),
-                                                        minLeadingWidth: 2,
-                                                      ),
+                                                      ],
                                                     );
                                                   }),
                                             ),
@@ -305,7 +330,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                     ),
                                     Card(
                                       elevation: 2,
-                                      color: Colors.grey.shade100,
+                                     // color: Colors.grey.shade100,
                                       child: ExpansionTile(
                                         tilePadding: EdgeInsets.only(left: 10,right: 10),
 
@@ -326,24 +351,30 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                                   itemCount: echomarkList.length,
                                                   itemBuilder: (BuildContext context, int index) {
                                                     EchoMarkModel echomarklist = echomarkList[index];
-                                                    return GestureDetector(
-                                                      onTap: () => Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) => PfdPage(
-                                                                filepath: echomarklist.url,
-                                                              ))),
-                                                      child: ListTile(
-                                                        leading: Icon(
-                                                          Icons.picture_as_pdf,
-                                                          color: Colors.red,
+                                                    return Column(
+                                                      children: [
+                                                        Divider(color: Colors.black,),
+
+                                                        GestureDetector(
+                                                          onTap: () => Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) => PfdPage(
+                                                                    filepath: echomarklist.url,
+                                                                  ))),
+                                                          child: ListTile(
+                                                            leading: Icon(
+                                                              Icons.picture_as_pdf,
+                                                              color: Colors.red,
+                                                            ),
+                                                            title: Text(
+                                                              echomarklist.name.toString(),
+                                                              style: TextStyle(),
+                                                            ),
+                                                            minLeadingWidth: 2,
+                                                          ),
                                                         ),
-                                                        title: Text(
-                                                          echomarklist.name.toString(),
-                                                          style: TextStyle(),
-                                                        ),
-                                                        minLeadingWidth: 2,
-                                                      ),
+                                                      ],
                                                     );
                                                   }),
                                             ),
@@ -356,7 +387,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                     ),
                                     Card(
                                       elevation: 2,
-                                      color: Colors.grey.shade100,
+                                     // color: Colors.grey.shade100,
                                       child: ExpansionTile(
                                         tilePadding: EdgeInsets.only(left: 10,right: 10),
 
@@ -377,24 +408,30 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                                   itemCount: echosensitiveList.length,
                                                   itemBuilder: (BuildContext context, int index) {
                                                     EcosensitiveModel echosensitivelist = echosensitiveList[index];
-                                                    return GestureDetector(
-                                                      onTap: () => Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) => PfdPage(
-                                                                filepath: echosensitivelist.url,
-                                                              ))),
-                                                      child: ListTile(
-                                                        leading: Icon(
-                                                          Icons.picture_as_pdf,
-                                                          color: Colors.red,
+                                                    return Column(
+                                                      children: [
+                                                        Divider(color: Colors.black,),
+
+                                                        GestureDetector(
+                                                          onTap: () => Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) => PfdPage(
+                                                                    filepath: echosensitivelist.url,
+                                                                  ))),
+                                                          child: ListTile(
+                                                            leading: Icon(
+                                                              Icons.picture_as_pdf,
+                                                              color: Colors.red,
+                                                            ),
+                                                            title: Text(
+                                                              echosensitivelist.name.toString(),
+                                                              style: TextStyle(),
+                                                            ),
+                                                            minLeadingWidth: 2,
+                                                          ),
                                                         ),
-                                                        title: Text(
-                                                          echosensitivelist.name.toString(),
-                                                          style: TextStyle(),
-                                                        ),
-                                                        minLeadingWidth: 2,
-                                                      ),
+                                                      ],
                                                     );
                                                   }),
                                             ),
@@ -407,7 +444,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                     ),
                                     Card(
                                       elevation: 2,
-                                      color: Colors.grey.shade100,
+                                    //  color: Colors.grey.shade100,
                                       child: ExpansionTile(
                                         tilePadding: EdgeInsets.only(left: 10,right: 10),
 
@@ -428,24 +465,30 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                                   itemCount: enviormentclearanceList.length,
                                                   itemBuilder: (BuildContext context, int index) {
                                                     EnviormentClearanceModel enviormentlist = enviormentclearanceList[index];
-                                                    return GestureDetector(
-                                                      onTap: () => Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) => PfdPage(
-                                                                filepath: enviormentlist.url,
-                                                              ))),
-                                                      child: ListTile(
-                                                        leading: Icon(
-                                                          Icons.picture_as_pdf,
-                                                          color: Colors.red,
+                                                    return Column(
+                                                      children: [
+                                                        Divider(color: Colors.black,),
+
+                                                        GestureDetector(
+                                                          onTap: () => Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) => PfdPage(
+                                                                    filepath: enviormentlist.url,
+                                                                  ))),
+                                                          child: ListTile(
+                                                            leading: Icon(
+                                                              Icons.picture_as_pdf,
+                                                              color: Colors.red,
+                                                            ),
+                                                            title: Text(
+                                                              enviormentlist.name.toString(),
+                                                              style: TextStyle(),
+                                                            ),
+                                                            minLeadingWidth: 2,
+                                                          ),
                                                         ),
-                                                        title: Text(
-                                                          enviormentlist.name.toString(),
-                                                          style: TextStyle(),
-                                                        ),
-                                                        minLeadingWidth: 2,
-                                                      ),
+                                                      ],
                                                     );
                                                   }),
                                             ),
@@ -458,7 +501,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                     ),
                                     Card(
                                       elevation: 2,
-                                      color: Colors.grey.shade100,
+                                     // color: Colors.grey.shade100,
                                       child: ExpansionTile(
                                         tilePadding: EdgeInsets.only(left: 10,right: 10),
 
@@ -479,24 +522,30 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                                   itemCount: enviormentalList.length,
                                                   itemBuilder: (BuildContext context, int index) {
                                                     EnviormentalImpactModel enviormentallist = enviormentalList[index];
-                                                    return GestureDetector(
-                                                      onTap: () => Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) => PfdPage(
-                                                                filepath: enviormentallist.url,
-                                                              ))),
-                                                      child: ListTile(
-                                                        leading: Icon(
-                                                          Icons.picture_as_pdf,
-                                                          color: Colors.red,
+                                                    return Column(
+                                                      children: [
+                                                        Divider(color: Colors.black,),
+
+                                                        GestureDetector(
+                                                          onTap: () => Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) => PfdPage(
+                                                                    filepath: enviormentallist.url,
+                                                                  ))),
+                                                          child: ListTile(
+                                                            leading: Icon(
+                                                              Icons.picture_as_pdf,
+                                                              color: Colors.red,
+                                                            ),
+                                                            title: Text(
+                                                              enviormentallist.name.toString(),
+                                                              style: TextStyle(),
+                                                            ),
+                                                            minLeadingWidth: 2,
+                                                          ),
                                                         ),
-                                                        title: Text(
-                                                          enviormentallist.name.toString(),
-                                                          style: TextStyle(),
-                                                        ),
-                                                        minLeadingWidth: 2,
-                                                      ),
+                                                      ],
                                                     );
                                                   }),
                                             ),
@@ -509,7 +558,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                     ),
                                     Card(
                                       elevation: 2,
-                                      color: Colors.grey.shade100,
+                                     // color: Colors.grey.shade100,
                                       child: ExpansionTile(
                                         tilePadding: EdgeInsets.only(left: 10,right: 10),
 
@@ -530,24 +579,30 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                                   itemCount: environmentallabsList.length,
                                                   itemBuilder: (BuildContext context, int index) {
                                                     EnvironmentalLabsModel environmentallabslist = environmentallabsList[index];
-                                                    return GestureDetector(
-                                                      onTap: () => Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) => PfdPage(
-                                                                filepath: environmentallabslist.url,
-                                                              ))),
-                                                      child: ListTile(
-                                                        leading: Icon(
-                                                          Icons.picture_as_pdf,
-                                                          color: Colors.red,
+                                                    return Column(
+                                                      children: [
+                                                        Divider(color: Colors.black,),
+
+                                                        GestureDetector(
+                                                          onTap: () => Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) => PfdPage(
+                                                                    filepath: environmentallabslist.url,
+                                                                  ))),
+                                                          child: ListTile(
+                                                            leading: Icon(
+                                                              Icons.picture_as_pdf,
+                                                              color: Colors.red,
+                                                            ),
+                                                            title: Text(
+                                                              environmentallabslist.name.toString(),
+                                                              style: TextStyle(),
+                                                            ),
+                                                            minLeadingWidth: 2,
+                                                          ),
                                                         ),
-                                                        title: Text(
-                                                          environmentallabslist.name.toString(),
-                                                          style: TextStyle(),
-                                                        ),
-                                                        minLeadingWidth: 2,
-                                                      ),
+                                                      ],
                                                     );
                                                   }),
                                             ),
@@ -560,7 +615,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                     ),
                                     Card(
                                       elevation: 2,
-                                      color: Colors.grey.shade100,
+                                     // color: Colors.grey.shade100,
                                       child: ExpansionTile(
                                         tilePadding: EdgeInsets.only(left: 10,right: 10),
 
@@ -582,24 +637,30 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                                   itemBuilder: (BuildContext context, int index) {
                                                     EnvironmentalStandardsModel environmentalstandardlist =
                                                     environmentalstandardList[index];
-                                                    return GestureDetector(
-                                                      onTap: () => Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) => PfdPage(
-                                                                filepath: environmentalstandardlist.url,
-                                                              ))),
-                                                      child: ListTile(
-                                                        leading: Icon(
-                                                          Icons.picture_as_pdf,
-                                                          color: Colors.red,
+                                                    return Column(
+                                                      children: [
+                                                        Divider(color: Colors.black,),
+
+                                                        GestureDetector(
+                                                          onTap: () => Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) => PfdPage(
+                                                                    filepath: environmentalstandardlist.url,
+                                                                  ))),
+                                                          child: ListTile(
+                                                            leading: Icon(
+                                                              Icons.picture_as_pdf,
+                                                              color: Colors.red,
+                                                            ),
+                                                            title: Text(
+                                                              environmentalstandardlist.name.toString(),
+                                                              style: TextStyle(),
+                                                            ),
+                                                            minLeadingWidth: 2,
+                                                          ),
                                                         ),
-                                                        title: Text(
-                                                          environmentalstandardlist.name.toString(),
-                                                          style: TextStyle(),
-                                                        ),
-                                                        minLeadingWidth: 2,
-                                                      ),
+                                                      ],
                                                     );
                                                   }),
                                             ),
@@ -612,7 +673,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                     ),
                                     Card(
                                       elevation: 2,
-                                      color: Colors.grey.shade100,
+                                    //  color: Colors.grey.shade100,
                                       child: ExpansionTile(
                                         tilePadding: EdgeInsets.only(left: 10,right: 10),
 
@@ -634,24 +695,30 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                                   itemBuilder: (BuildContext context, int index) {
                                                     HazardousSubstancesModel HazardousSubstanceslist =
                                                     HazardousSubstancesList[index];
-                                                    return GestureDetector(
-                                                      onTap: () => Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) => PfdPage(
-                                                                filepath: HazardousSubstanceslist.url,
-                                                              ))),
-                                                      child: ListTile(
-                                                        leading: Icon(
-                                                          Icons.picture_as_pdf,
-                                                          color: Colors.red,
+                                                    return Column(
+                                                      children: [
+                                                        Divider(color: Colors.black,),
+
+                                                        GestureDetector(
+                                                          onTap: () => Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) => PfdPage(
+                                                                    filepath: HazardousSubstanceslist.url,
+                                                                  ))),
+                                                          child: ListTile(
+                                                            leading: Icon(
+                                                              Icons.picture_as_pdf,
+                                                              color: Colors.red,
+                                                            ),
+                                                            title: Text(
+                                                              HazardousSubstanceslist.name.toString(),
+                                                              style: TextStyle(),
+                                                            ),
+                                                            minLeadingWidth: 2,
+                                                          ),
                                                         ),
-                                                        title: Text(
-                                                          HazardousSubstanceslist.name.toString(),
-                                                          style: TextStyle(),
-                                                        ),
-                                                        minLeadingWidth: 2,
-                                                      ),
+                                                      ],
                                                     );
                                                   }),
                                             ),
@@ -664,7 +731,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                     ),
                                     Card(
                                       elevation: 2,
-                                      color: Colors.grey.shade100,
+                                     // color: Colors.grey.shade100,
                                       child: ExpansionTile(
                                         tilePadding: EdgeInsets.only(left: 10,right: 10),
 
@@ -685,24 +752,30 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                                   itemCount: LossOfEcologyList.length,
                                                   itemBuilder: (BuildContext context, int index) {
                                                     LossOfEcologyModel LossOfEcologylist = LossOfEcologyList[index];
-                                                    return GestureDetector(
-                                                      onTap: () => Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) => PfdPage(
-                                                                filepath: LossOfEcologylist.url,
-                                                              ))),
-                                                      child: ListTile(
-                                                        leading: Icon(
-                                                          Icons.picture_as_pdf,
-                                                          color: Colors.red,
+                                                    return Column(
+                                                      children: [
+                                                        Divider(color: Colors.black,),
+
+                                                        GestureDetector(
+                                                          onTap: () => Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) => PfdPage(
+                                                                    filepath: LossOfEcologylist.url,
+                                                                  ))),
+                                                          child: ListTile(
+                                                            leading: Icon(
+                                                              Icons.picture_as_pdf,
+                                                              color: Colors.red,
+                                                            ),
+                                                            title: Text(
+                                                              LossOfEcologylist.name.toString(),
+                                                              style: TextStyle(),
+                                                            ),
+                                                            minLeadingWidth: 2,
+                                                          ),
                                                         ),
-                                                        title: Text(
-                                                          LossOfEcologylist.name.toString(),
-                                                          style: TextStyle(),
-                                                        ),
-                                                        minLeadingWidth: 2,
-                                                      ),
+                                                      ],
                                                     );
                                                   }),
                                             ),
@@ -715,7 +788,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                     ),
                                     Card(
                                       elevation: 2,
-                                      color: Colors.grey.shade100,
+                                    //  color: Colors.grey.shade100,
                                       child: ExpansionTile(
                                         tilePadding: EdgeInsets.only(left: 10,right: 10),
 
@@ -736,24 +809,30 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                                   itemCount: NoisePollutionList.length,
                                                   itemBuilder: (BuildContext context, int index) {
                                                     NoisePollutionModel NoisePollutionlist = NoisePollutionList[index];
-                                                    return GestureDetector(
-                                                      onTap: () => Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) => PfdPage(
-                                                                filepath: NoisePollutionlist.url,
-                                                              ))),
-                                                      child: ListTile(
-                                                        leading: Icon(
-                                                          Icons.picture_as_pdf,
-                                                          color: Colors.red,
+                                                    return Column(
+                                                      children: [
+                                                        Divider(color: Colors.black,),
+
+                                                        GestureDetector(
+                                                          onTap: () => Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) => PfdPage(
+                                                                    filepath: NoisePollutionlist.url,
+                                                                  ))),
+                                                          child: ListTile(
+                                                            leading: Icon(
+                                                              Icons.picture_as_pdf,
+                                                              color: Colors.red,
+                                                            ),
+                                                            title: Text(
+                                                              NoisePollutionlist.name.toString(),
+                                                              style: TextStyle(),
+                                                            ),
+                                                            minLeadingWidth: 2,
+                                                          ),
                                                         ),
-                                                        title: Text(
-                                                          NoisePollutionlist.name.toString(),
-                                                          style: TextStyle(),
-                                                        ),
-                                                        minLeadingWidth: 2,
-                                                      ),
+                                                      ],
                                                     );
                                                   }),
                                             ),
@@ -766,7 +845,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                     ),
                                     Card(
                                       elevation: 2,
-                                      color: Colors.grey.shade100,
+                                    //  color: Colors.grey.shade100,
                                       child: ExpansionTile(
                                         tilePadding: EdgeInsets.only(left: 10,right: 10),
 
@@ -787,24 +866,30 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                                   itemCount: OzoneLayerList.length,
                                                   itemBuilder: (BuildContext context, int index) {
                                                     OzoneLayerModel OzoneLayerlist = OzoneLayerList[index];
-                                                    return GestureDetector(
-                                                      onTap: () => Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) => PfdPage(
-                                                                filepath: OzoneLayerlist.url,
-                                                              ))),
-                                                      child: ListTile(
-                                                        leading: Icon(
-                                                          Icons.picture_as_pdf,
-                                                          color: Colors.red,
+                                                    return Column(
+                                                      children: [
+                                                        Divider(color: Colors.black,),
+
+                                                        GestureDetector(
+                                                          onTap: () => Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) => PfdPage(
+                                                                    filepath: OzoneLayerlist.url,
+                                                                  ))),
+                                                          child: ListTile(
+                                                            leading: Icon(
+                                                              Icons.picture_as_pdf,
+                                                              color: Colors.red,
+                                                            ),
+                                                            title: Text(
+                                                              OzoneLayerlist.name.toString(),
+                                                              style: TextStyle(),
+                                                            ),
+                                                            minLeadingWidth: 2,
+                                                          ),
                                                         ),
-                                                        title: Text(
-                                                          OzoneLayerlist.name.toString(),
-                                                          style: TextStyle(),
-                                                        ),
-                                                        minLeadingWidth: 2,
-                                                      ),
+                                                      ],
                                                     );
                                                   }),
                                             ),
@@ -817,7 +902,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                     ),
                                     Card(
                                       elevation: 2,
-                                      color: Colors.grey.shade100,
+                                     // color: Colors.grey.shade100,
                                       child: ExpansionTile(
                                         tilePadding: EdgeInsets.only(left: 10,right: 10),
 
@@ -838,24 +923,30 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                                   itemCount: WaterPollutionList.length,
                                                   itemBuilder: (BuildContext context, int index) {
                                                     WaterPollutionModel WaterPollutionlist = WaterPollutionList[index];
-                                                    return GestureDetector(
-                                                      onTap: () => Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) => PfdPage(
-                                                                filepath: WaterPollutionlist.url,
-                                                              ))),
-                                                      child: ListTile(
-                                                        leading: Icon(
-                                                          Icons.picture_as_pdf,
-                                                          color: Colors.red,
+                                                    return Column(
+                                                      children: [
+                                                        Divider(color: Colors.black,),
+
+                                                        GestureDetector(
+                                                          onTap: () => Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) => PfdPage(
+                                                                    filepath: WaterPollutionlist.url,
+                                                                  ))),
+                                                          child: ListTile(
+                                                            leading: Icon(
+                                                              Icons.picture_as_pdf,
+                                                              color: Colors.red,
+                                                            ),
+                                                            title: Text(
+                                                              WaterPollutionlist.name.toString(),
+                                                              style: TextStyle(),
+                                                            ),
+                                                            minLeadingWidth: 2,
+                                                          ),
                                                         ),
-                                                        title: Text(
-                                                          WaterPollutionlist.name.toString(),
-                                                          style: TextStyle(),
-                                                        ),
-                                                        minLeadingWidth: 2,
-                                                      ),
+                                                      ],
                                                     );
                                                   }),
                                             ),
@@ -868,7 +959,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                     ),
                                     Card(
                                       elevation: 2,
-                                      color: Colors.grey.shade100,
+                                     // color: Colors.grey.shade100,
                                       child: ExpansionTile(
                                         tilePadding: EdgeInsets.only(left: 10,right: 10),
 
@@ -889,24 +980,30 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                                   itemCount: TOilList.length,
                                                   itemBuilder: (BuildContext context, int index) {
                                                     TOilModel TOillist = TOilList[index];
-                                                    return GestureDetector(
-                                                      onTap: () => Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) => PfdPage(
-                                                                filepath: TOillist.url,
-                                                              ))),
-                                                      child: ListTile(
-                                                        leading: Icon(
-                                                          Icons.picture_as_pdf,
-                                                          color: Colors.red,
+                                                    return Column(
+                                                      children: [
+                                                        Divider(color: Colors.black,),
+
+                                                        GestureDetector(
+                                                          onTap: () => Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) => PfdPage(
+                                                                    filepath: TOillist.url,
+                                                                  ))),
+                                                          child: ListTile(
+                                                            leading: Icon(
+                                                              Icons.picture_as_pdf,
+                                                              color: Colors.red,
+                                                            ),
+                                                            title: Text(
+                                                              TOillist.name.toString(),
+                                                              style: TextStyle(),
+                                                            ),
+                                                            minLeadingWidth: 2,
+                                                          ),
                                                         ),
-                                                        title: Text(
-                                                          TOillist.name.toString(),
-                                                          style: TextStyle(),
-                                                        ),
-                                                        minLeadingWidth: 2,
-                                                      ),
+                                                      ],
                                                     );
                                                   }),
                                             ),
@@ -948,24 +1045,30 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                   itemCount: RegionalEmpowerrdList.length,
                                   itemBuilder: (BuildContext context, int index) {
                                     RegionalEmpoweredModel RegionalEmpowerrdlist = RegionalEmpowerrdList[index];
-                                    return GestureDetector(
-                                      onTap: () => Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => PfdPage(
-                                                filepath: RegionalEmpowerrdlist.url,
-                                              ))),
-                                      child: ListTile(
-                                        leading: Icon(
-                                          Icons.picture_as_pdf,
-                                          color: Colors.red,
+                                    return Column(
+                                      children: [
+                                        Divider(color: Colors.black,),
+
+                                        GestureDetector(
+                                          onTap: () => Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => PfdPage(
+                                                    filepath: RegionalEmpowerrdlist.url,
+                                                  ))),
+                                          child: ListTile(
+                                            leading: Icon(
+                                              Icons.picture_as_pdf,
+                                              color: Colors.red,
+                                            ),
+                                            title: Text(
+                                              RegionalEmpowerrdlist.name.toString(),
+                                              style: TextStyle(),
+                                            ),
+                                            minLeadingWidth: 2,
+                                          ),
                                         ),
-                                        title: Text(
-                                          RegionalEmpowerrdlist.name.toString(),
-                                          style: TextStyle(),
-                                        ),
-                                        minLeadingWidth: 2,
-                                      ),
+                                      ],
                                     );
                                   }),
                             ),

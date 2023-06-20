@@ -56,24 +56,30 @@ class _WildClearanceState extends State<WildClearance> {
                               itemCount: ActsList.length,
                               itemBuilder: (BuildContext context, int index) {
                                 ActsModel Actslist = ActsList[index];
-                                return GestureDetector(
-                                  onTap: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => PfdPage(
-                                            filepath: Actslist.url,
-                                          ))),
-                                  child: ListTile(
-                                    leading: Icon(
-                                      Icons.picture_as_pdf,
-                                      color: Colors.red,
+                                return Column(
+                                  children: [
+                                    Divider(color: Colors.black,),
+
+                                    GestureDetector(
+                                      onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => PfdPage(
+                                                filepath: Actslist.url,
+                                              ))),
+                                      child: ListTile(
+                                        leading: Icon(
+                                          Icons.picture_as_pdf,
+                                          color: Colors.red,
+                                        ),
+                                        title: Text(
+                                          Actslist.name.toString(),
+                                          style: TextStyle(),
+                                        ),
+                                        minLeadingWidth: 2,
+                                      ),
                                     ),
-                                    title: Text(
-                                      Actslist.name.toString(),
-                                      style: TextStyle(),
-                                    ),
-                                    minLeadingWidth: 2,
-                                  ),
+                                  ],
                                 );
                               }),
                         ),
@@ -107,24 +113,30 @@ class _WildClearanceState extends State<WildClearance> {
                               itemCount: RulesList.length,
                               itemBuilder: (BuildContext context, int index) {
                                 RulesModel Ruleslist = RulesList[index];
-                                return GestureDetector(
-                                  onTap: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => PfdPage(
-                                            filepath: Ruleslist.url,
-                                          ))),
-                                  child: ListTile(
-                                    leading: Icon(
-                                      Icons.picture_as_pdf,
-                                      color: Colors.red,
+                                return Column(
+                                  children: [
+                                    Divider(color: Colors.black,),
+
+                                    GestureDetector(
+                                      onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => PfdPage(
+                                                filepath: Ruleslist.url,
+                                              ))),
+                                      child: ListTile(
+                                        leading: Icon(
+                                          Icons.picture_as_pdf,
+                                          color: Colors.red,
+                                        ),
+                                        title: Text(
+                                          Ruleslist.name.toString(),
+                                          style: TextStyle(),
+                                        ),
+                                        minLeadingWidth: 2,
+                                      ),
                                     ),
-                                    title: Text(
-                                      Ruleslist.name.toString(),
-                                      style: TextStyle(),
-                                    ),
-                                    minLeadingWidth: 2,
-                                  ),
+                                  ],
                                 );
                               }),
                         ),
@@ -155,24 +167,30 @@ class _WildClearanceState extends State<WildClearance> {
                               itemCount: GuidelineList.length,
                               itemBuilder: (BuildContext context, int index) {
                                 GuidelineModel Guidelinelist = GuidelineList[index];
-                                return GestureDetector(
-                                  onTap: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => PfdPage(
-                                            filepath: Guidelinelist.url,
-                                          ))),
-                                  child: ListTile(
-                                    leading: Icon(
-                                      Icons.picture_as_pdf,
-                                      color: Colors.red,
+                                return Column(
+                                  children: [
+                                    Divider(color: Colors.black,),
+
+                                    GestureDetector(
+                                      onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => PfdPage(
+                                                filepath: Guidelinelist.url,
+                                              ))),
+                                      child: ListTile(
+                                        leading: Icon(
+                                          Icons.picture_as_pdf,
+                                          color: Colors.red,
+                                        ),
+                                        title: Text(
+                                          Guidelinelist.name.toString(),
+                                          style: TextStyle(),
+                                        ),
+                                        minLeadingWidth: 2,
+                                      ),
                                     ),
-                                    title: Text(
-                                      Guidelinelist.name.toString(),
-                                      style: TextStyle(),
-                                    ),
-                                    minLeadingWidth: 2,
-                                  ),
+                                  ],
                                 );
                               }),
                         ),
