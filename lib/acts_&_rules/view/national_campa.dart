@@ -40,7 +40,7 @@ class _NationalCampaState extends State<NationalCampa> {
           title: Container(
               width: MediaQuery.of(context).size.width / 1.1,
               child: Text(
-                "NATIONAL CAMPA (Acts, Rules & Guidelines)",
+                "National Campa",
                 maxLines: 2,
               )),
           titleSpacing: 2.0,
@@ -57,7 +57,7 @@ class _NationalCampaState extends State<NationalCampa> {
                   child: ExpansionTile(
                     tilePadding: EdgeInsets.only(left: 10, right: 10),
                     title: Text(
-                      "ACTS",
+                      "Acts",
                       style: TextStyle(
                         fontSize: 16.0,
                       ),
@@ -114,7 +114,7 @@ class _NationalCampaState extends State<NationalCampa> {
                   child: ExpansionTile(
                     tilePadding: EdgeInsets.only(left: 10, right: 10),
                     title: Text(
-                      "RULES",
+                      "Rules",
                       style: TextStyle(
                         fontSize: 16.0,
                       ),
@@ -170,7 +170,7 @@ class _NationalCampaState extends State<NationalCampa> {
                   color: Colors.grey.shade100,
                   child: ExpansionTile(
                     title: Text(
-                      "GUIDELINE",
+                      "Guideline",
                       style: TextStyle(fontSize: 16),
                     ),
                     children: <Widget>[
@@ -232,7 +232,7 @@ class _NationalCampaState extends State<NationalCampa> {
                     child: ExpansionTile(
                      // tilePadding: EdgeInsets.only(left: 10, right: 10),
                       title: Text(
-                        "SANCTIONS",
+                        "Sanctions",
                         style: TextStyle(fontSize: 16),
                       ),
                       children: <Widget>[
@@ -875,7 +875,7 @@ class _NationalCampaState extends State<NationalCampa> {
                   child: ExpansionTile(
                     tilePadding: EdgeInsets.only(left: 10, right: 10),
                     title: Text(
-                      "APO",
+                      "Apo",
                       style: TextStyle(fontSize: 16),
                     ),
                     children: <Widget>[

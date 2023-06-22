@@ -35,7 +35,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
         appBar:
       AppBar(title: Container(
         width: MediaQuery.of(context).size.width/1.1,
-          child: Text("ENVIRONMENT CLEARANCE (Acts, Rules & Guidelines)",maxLines: 2,)),
+          child: Text("Enviorment Clearance",maxLines: 2,)),
         titleSpacing: 2.0,
 
       ),
@@ -57,7 +57,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                       child: ExpansionTile(
                         tilePadding: EdgeInsets.only(left: 10,right: 10),
                         title: Text(
-                          "ACTS",
+                          "Acts",
                           style: TextStyle(
                             fontSize: 16.0,
                           ),
@@ -97,7 +97,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                       ExpansionTile(
                         tilePadding: EdgeInsets.only(left: 10,right: 10),
                         title: Text(
-                          "RULES",
+                          "Rules",
                           style: TextStyle(
                             fontSize: 16.0,
                           ),
@@ -142,7 +142,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                         child: ExpansionTile(
                           tilePadding: EdgeInsets.only(left: 10,right: 10),
                           title: Text(
-                            "POWER CONFERRED BY THE ENVIRONMENT PROTECTION ACT",
+                            "Power Conferred By The Environment Protection Act",
                             style: TextStyle(fontSize: 16),
                           ),
                           children: <Widget>[
@@ -1029,7 +1029,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                         tilePadding: EdgeInsets.only(left: 10,right: 10),
 
                         title: Text(
-                          "REGIONAL EMPOWERED COMMITTEE",
+                          "Regional Empowered Committee",
                           style: TextStyle(fontSize: 16),
                         ),
                         children: <Widget>[
@@ -1094,7 +1094,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                           child: Row(
                             children: [
                               Text(
-                                "COMPENDIUM of EIA NOTIFICATION",
+                                "Compendium Of Eia Notification",
                                 style: TextStyle(fontSize: 16),
                               ),
                               Spacer(),

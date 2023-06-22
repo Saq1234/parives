@@ -22,7 +22,7 @@ class _WildClearanceState extends State<WildClearance> {
           title: Container(
               width: MediaQuery.of(context).size.width / 1.1,
               child: Text(
-                "Wild CLEARANCE (Acts, Rules & Guidelines)",
+                "Wild Clearance",
                 maxLines: 2,
               )),
           titleSpacing: 2.0,
@@ -39,7 +39,7 @@ class _WildClearanceState extends State<WildClearance> {
                   child: ExpansionTile(
                     tilePadding: EdgeInsets.only(left: 10, right: 10),
                     title: Text(
-                      "ACTS",
+                      "Acts",
                       style: TextStyle(
                         fontSize: 16.0,
                       ),
@@ -96,7 +96,7 @@ class _WildClearanceState extends State<WildClearance> {
                   child: ExpansionTile(
                     tilePadding: EdgeInsets.only(left: 10, right: 10),
                     title: Text(
-                      "RULES",
+                      "Rules",
                       style: TextStyle(
                         fontSize: 16.0,
                       ),
@@ -152,7 +152,7 @@ class _WildClearanceState extends State<WildClearance> {
                   color: Colors.grey.shade100,
                   child: ExpansionTile(
                     title: Text(
-                      "GUIDELINE",
+                      "Guideline",
                       style: TextStyle(fontSize: 16),
                     ),
                     children: <Widget>[
