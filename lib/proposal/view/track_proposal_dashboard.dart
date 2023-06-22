@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:parivesh/common/appColors.dart';
+import 'package:parivesh/common/no_network.dart';
 import 'package:parivesh/proposal/model/advance_search_arguments.dart';
 import 'package:parivesh/proposal/model/track_proposal_model.dart';
 import 'package:provider/provider.dart';
@@ -21,18 +24,63 @@ class TrackPorposalDash extends StatefulWidget {
 class _TrackPorposalDashState extends State<TrackPorposalDash> {
   ProposalViewModel? proposalViewModel;
   TrackPorposalModel? trackPorposalModel;
+  bool _connectionStatus = true;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
+    initConnectivity();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     proposalViewModel = Provider.of<ProposalViewModel>(context, listen: false);
 
-    // TODO: implement initState
   }
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
+
+  Future<void> initConnectivity() async {
+    ConnectivityResult result = ConnectivityResult.none;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    switch (result) {
+      case ConnectivityResult.wifi:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.mobile:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.none:
+        setState(() => _connectionStatus = false);
+        break;
+      default:
+        setState(() => _connectionStatus = true);
+        break;
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
-    return
+    return _connectionStatus == true?
       WillPopScope(
         onWillPop: () async{
           setState(() {
@@ -60,7 +108,7 @@ class _TrackPorposalDashState extends State<TrackPorposalDash> {
           ),
         ),
     ),
-      );
+      ):NoNetworkWidget();
   }
 }
 

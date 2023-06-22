@@ -1,6 +1,11 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:parivesh/acts_&_rules/view/pdf_page.dart';
+import 'package:parivesh/common/no_network.dart';
 
 import '../model/forest_clearance/acts_model.dart';
 import '../model/forest_clearance/rules_model.dart';
@@ -14,9 +19,59 @@ class WildClearance extends StatefulWidget {
 }
 
 class _WildClearanceState extends State<WildClearance> {
+  bool _connectionStatus = true;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initConnectivity();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+  }
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
+
+  Future<void> initConnectivity() async {
+    ConnectivityResult result = ConnectivityResult.none;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    switch (result) {
+      case ConnectivityResult.wifi:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.mobile:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.none:
+        setState(() => _connectionStatus = false);
+        break;
+      default:
+        setState(() => _connectionStatus = true);
+        break;
+    }
+  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  _connectionStatus == true?
+      Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: Container(
@@ -206,6 +261,6 @@ class _WildClearanceState extends State<WildClearance> {
               ],
             ),
           ),
-        ));
+        )):NoNetworkWidget();
   }
 }

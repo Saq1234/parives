@@ -1,7 +1,12 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:parivesh/common/no_network.dart';
 import 'package:parivesh/proposal/model/advance_search_arguments.dart';
 import 'package:parivesh/proposal/view/advance_search_dashboard.dart';
 import 'package:parivesh/proposal/view/track_proposal.dart';
@@ -35,6 +40,48 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
   ClearanceTypeModel? clearanceTypeModel;
   bool clearancevisible = false;
   bool statevisible = false;
+  bool _connectionStatus = true;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
+  @override
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
+
+  Future<void> initConnectivity() async {
+    ConnectivityResult result = ConnectivityResult.none;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    switch (result) {
+      case ConnectivityResult.wifi:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.mobile:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.none:
+        setState(() => _connectionStatus = false);
+        break;
+      default:
+        setState(() => _connectionStatus = true);
+        break;
+    }
+  }
 
   Future<Null> selectStartDateForAndroid(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -79,6 +126,9 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
   @override
   void initState() {
     super.initState();
+    initConnectivity();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     proposalViewModel = Provider.of<ProposalViewModel>(context, listen: false);
     proposalViewModel.getDataClearanceType();
     proposalViewModel.getDataStateType();
@@ -103,7 +153,8 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return _connectionStatus == true?
+      SafeArea(
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -943,6 +994,6 @@ class _AdvanceSearchPorposalState extends State<AdvanceSearchPorposal> {
               })),
         ),
       ),
-    );
+    ):NoNetworkWidget();
   }
 }

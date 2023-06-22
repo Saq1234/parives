@@ -1,5 +1,9 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:parivesh/user_manuals/model/user_manual_crz_model.dart';
 import 'package:parivesh/user_manuals/model/user_manual_enviorment_model.dart';
 import 'package:parivesh/user_manuals/model/user_manual_wild_model.dart';
@@ -10,6 +14,7 @@ import 'package:parivesh/user_manuals/view_model/user_manual_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 import '../../common/appColors.dart';
+import '../../common/no_network.dart';
 
 class UserManuals extends StatefulWidget {
   const UserManuals({Key? key}) : super(key: key);
@@ -27,11 +32,56 @@ class _UserManualsState extends State<UserManuals> {
   UserManualsEnviormentModel? userManualsEnviormentModel;
   TextEditingController searchControllerManual = TextEditingController();
   String search = "";
+  bool _connectionStatus = true;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
+  @override
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
+
+  Future<void> initConnectivity() async {
+    ConnectivityResult result = ConnectivityResult.none;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    switch (result) {
+      case ConnectivityResult.wifi:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.mobile:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.none:
+        setState(() => _connectionStatus = false);
+        break;
+      default:
+        setState(() => _connectionStatus = true);
+        break;
+    }
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    initConnectivity();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     userManualViewModel = Provider.of<UserManualViewModel>(context, listen: false);
     userManualViewModel?.getUserManualOtherDetails(category: "others");
     userManualViewModel?.getUserManualForestDetails(category: "forest-clearance");
@@ -48,7 +98,8 @@ class _UserManualsState extends State<UserManuals> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  _connectionStatus == true?
+      Scaffold(
         appBar: AppBar(
           title: Text("User Manuals"),
           titleSpacing: 2.0,
@@ -220,7 +271,7 @@ class _UserManualsState extends State<UserManuals> {
               ],
             ),
           ),
-        ));
+        )):NoNetworkWidget();
   }
 }
 
