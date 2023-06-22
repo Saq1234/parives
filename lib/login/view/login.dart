@@ -19,36 +19,57 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
+        child: Stack(
           children: [
-            Container(
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(bottomRight: Radius.circular(200)), color: Color(0xffCAE7DE)),
-              height: MediaQuery.of(context).size.height / 3,
-              width: MediaQuery.of(context).size.width,
-              child: Align(
-                  alignment: Alignment.center,
-                  child:forgothide==true?
-                  Text("Forgot Password",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),):
-                  Text("Login",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)
+            Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: Opacity(
+                opacity: 1,
+                child: Image.asset('assets/images/moefcc_ministry_logo.png',fit: BoxFit.fill,height: double.infinity,width: double.infinity,
+                  color: Colors.white.withOpacity(0.9), colorBlendMode: BlendMode.screen, ),
               ),
             ),
-            Container(
-              height: MediaQuery.of(context).size.height / 6,
-            ),
+            Scaffold(
+              backgroundColor: Colors.transparent,
 
-            Column(
-              children: [
-                forgothide==true?
-                fogot():login(),
-              ],
-            ),
+              appBar: AppBar(
+                backgroundColor: Colors.white,
+                title: Text(''),
+                centerTitle: true,
+                flexibleSpace: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(image: AssetImage('assets/images/logo.png'), fit: BoxFit.fitWidth)),
+                ),
+              ),
+
+              body:
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+
+                    Container(
+                      height: MediaQuery.of(context).size.height / 6,
+                    ),
+                    forgothide==true?
+                    Text("Forgot Password",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),):
+                    Text("Login",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24,color: Colors.black),),
+                    Container(
+                      height: MediaQuery.of(context).size.height / 6,
+                    ),
+                    Column(
+                      children: [
+                        forgothide==true?
+                        fogot():login(),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            )
+
           ],
-        ),
-      ),
-    ));
+        )
+    );
   }
   Widget login(){
    return Padding(
@@ -59,7 +80,7 @@ class _LoginState extends State<Login> {
         children: [
           Container(
             decoration:
-            BoxDecoration(border: Border.all(color: AppColor.black), borderRadius: BorderRadius.circular(20)),
+            BoxDecoration(border: Border.all(color: AppColor.black), borderRadius: BorderRadius.circular(20),),
             child: TextField(
               cursorColor: Colors.grey,
               controller: idController,
