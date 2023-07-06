@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../acts_&_rules_dashboard/view/acts_rules_dashboard.dart';
 import '../../common/appColors.dart';
 import '../../common/no_network.dart';
 
@@ -16,6 +18,16 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
+  static const colorizeColors = [
+    Colors.purple,
+    Colors.white,
+    Colors.blue,
+
+    Colors.yellow,
+    Colors.red,
+    Colors.white,
+  ];
   TextEditingController idController = TextEditingController();
   TextEditingController passController = TextEditingController();
   bool _isObscure = true;
@@ -73,58 +85,116 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+
     return _connectionStatus == true?
 
      SafeArea(
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 30),
-              child: Opacity(
-                opacity: 1,
-                child: Image.asset('assets/images/moefcc_ministry_logo.png',fit: BoxFit.fill,height: double.infinity,width: double.infinity,
-                  color: Colors.white.withOpacity(0.9), colorBlendMode: BlendMode.screen, ),
-              ),
+        child: Scaffold(
+          backgroundColor: Colors.white,
+
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            title: Text(''),
+            centerTitle: true,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(image: AssetImage('assets/images/logo.png'), fit: BoxFit.fitWidth)),
             ),
-            Scaffold(
-              backgroundColor: Colors.transparent,
+          ),
 
-              appBar: AppBar(
-                backgroundColor: Colors.white,
-                title: Text(''),
-                centerTitle: true,
-                flexibleSpace: Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(image: AssetImage('assets/images/logo.png'), fit: BoxFit.fitWidth)),
-                ),
-              ),
+          body:
+          SingleChildScrollView(
+            child:Column(
 
-              body:
-              SingleChildScrollView(
-                child: Column(
+              children: [
+                Stack(
                   children: [
-
                     Container(
-                      height: MediaQuery.of(context).size.height / 6,
-                    ),
-                    forgothide==true?
-                    Text("Forgot Password",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),):
-                    Text("Login",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24,color: Colors.black),),
-                    Container(
-                      height: MediaQuery.of(context).size.height / 6,
-                    ),
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height/3.5,
+                    child: Image.asset("assets/images/login_top_image.jpg",fit: BoxFit.cover,),
+                    
+                  ),
                     Column(
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: Center(
+                            child: AnimatedTextKit(
+                              repeatForever: true,
+                              animatedTexts: [
+                              ColorizeAnimatedText(
+                              'PARIVESH',
+                              textStyle: TextStyle(fontSize: 24),
+                              colors: colorizeColors,
+                            ),
+                            ],),
+                          ),
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: 
+                          Text("Pro Active and Responsive facilitation by ",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
+                        ),
+                        Text("Interactive and Virtuous Environmental",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
+                        Text("Single window Hub",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
+                        SizedBox(height: 15,),
+                        Text("A single window integrated system for Environment, Forest,",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 12),),
+                        SizedBox(height: 10,),
+
+                        Text("Wild Life & CRZ Clearance Process",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 12),),
+                      ],
+                    ),
+                    ]
+                ),
+                Stack(
+                  children: [
+                    Opacity(
+                      opacity: 0.3,
+                      child: Container(
+                        margin: EdgeInsets.only(top: 50),
+                        child: Image.asset("assets/images/parivesh.jpg",fit: BoxFit.cover,width: double.infinity,
+                          color: Colors.white.withOpacity(0.2),
+                          colorBlendMode: BlendMode.hue,
+                        ),
+                      ),
+
+                    ),
+
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: Column(
+                          children: [
+                            forgothide==true?
+
+                            Text("Forgot Password",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),):
+                            Text("Log In",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24,color: Colors.black),),
+
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    Positioned.fill(
+                      top: 100,
+                      child: Column(
+                        children: [
                         forgothide==true?
                         fogot():login(),
                       ],
-                    ),
+                      ),
+                    )
                   ],
                 ),
-              ),
+
+
+
+              ],
             )
 
-          ],
+          ),
         )
     ):NoNetworkWidget();
   }
@@ -193,17 +263,21 @@ class _LoginState extends State<Login> {
           SizedBox(
             height: 50,
           ),
-          Container(
-            height: 45,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Color(0xffCAE7DE),
-                border: Border.all(color: Colors.black)),
-            child: Center(
-                child: Text(
-                  "Login",
-                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),
-                )),
+          GestureDetector(
+            onTap: ()=>Navigator.pushReplacement(context,
+    MaterialPageRoute(builder: (context) => const ActsRulesDashBoard())),
+            child: Container(
+              height: 45,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Color(0xffCAE7DE),
+                  border: Border.all(color: Colors.black)),
+              child: Center(
+                  child: Text(
+                    "Login",
+                    style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),
+                  )),
+            ),
           ),
         ],
       ),

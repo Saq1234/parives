@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -12,8 +15,8 @@ class ActsRulesDashBoard extends StatefulWidget {
 }
 
 class _ActsRulesDashBoardState extends State<ActsRulesDashBoard> {
-  bool ec = false;
-  bool fc = false;
+  String? ec ;
+  String? fc ;
   bool wild = false;
   bool crz = false;
   bool campa = false;
@@ -53,298 +56,229 @@ class _ActsRulesDashBoardState extends State<ActsRulesDashBoard> {
     } else {
       throw 'Could not launch $url';
     }
+  }_launchUrl_compliance() async {
+    const url = 'http://164.100.213.215/ECDashboard/Compliance';
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+  int? selectedRadioTile;
+
+  setSelectedRadioTile(int val) {
+    setState(() {
+      selectedRadioTile = val;
+    });
   }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            leading: BackButton(),
-          ),
-          body: Column(children: [
-            actsrules()
-          ],),
-
-    ));
-  }
-  Widget actsrules() {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.only(top: 15),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black),
+        child:
+        WillPopScope(
+          onWillPop: ()async{
+            SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+            return true;
+          },
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+              // leading: BackButton(
+              //   onPressed: ()=> SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+              //   ,
+              // ),
+              title: Text("Proposals status Dashboard"),
+              titleSpacing: 2.0,
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        ec = true;
-                        fc = false;
-                        wild = false;
-                        crz = false;
-                        campa = false;
-                      });
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Color(0xffC4C8DB),
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width/1.3,
-                            child: Text(
-                              "EC Dashboard for Proposals submitted after 1st March, 2023",
-                              style: TextStyle(fontSize: 16),
+            body: Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: SingleChildScrollView(
+                child: Column(children: [
+                 Container(
+                   margin: EdgeInsets.all(10),
+                   decoration: BoxDecoration(border: Border.all(color: Colors.green)),
+                   child: Column(
+                     children: [
+                       SizedBox(height: 10,),
+                       Theme(
+                         data: Theme.of(context).copyWith(
+                           listTileTheme: ListTileThemeData(
+                             horizontalTitleGap: 4,//here adjust based on your need
+                           ),),
+                         child: RadioListTile(
+                           activeColor: Colors.blue,
 
-                            ),
-                          ),
-                          Spacer(),
-                          ec == true
-                              ? Icon(
-                            Icons.check_circle,
-                            color: Colors.green,
-                          )
-                              : SizedBox.shrink()
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        ec = false;
-                        fc = true;
-                        wild = false;
-                        crz = false;
-                        campa = false;
-                      });
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Color(0xffC4C8DB),
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width/1.3,
-                            child: Text(
-                              "FC Dashboard for Proposals submitted after 5th September, 2022",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          Spacer(),
-                          fc == true
-                              ? Icon(
-                            Icons.check_circle,
-                            color: Colors.green,
-                          )
-                              : SizedBox.shrink()
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        ec = false;
-                        fc = false;
-                        wild = true;
-                        crz = false;
-                        campa = false;
-                      });
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Color(0xffC4C8DB),
-                      ),
-                      child: Row(
-                        children: [
-                          Container(width: MediaQuery.of(context).size.width/1.3,
-                            child: Text(
-                              "Wildlife Dashboard for Proposals submitted after 28th March, 2023",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          Spacer(),
-                          wild == true
-                              ? Icon(
-                            Icons.check_circle,
-                            color: Colors.green,
-                          )
-                              : SizedBox.shrink()
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        ec = false;
-                        fc = false;
-                        wild = false;
-                        crz = true;
-                        campa = false;
-                      });
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Color(0xffC4C8DB),
-                      ),
-                      child: Row(
-                        children: [
-                          Container(width: MediaQuery.of(context).size.width/1.3,
-                            child: Text(
-                              "CRZ Dashboard for Proposals submitted after 31st March, 2023",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          Spacer(),
-                          crz == true
-                              ? Icon(
-                            Icons.check_circle,
-                            color: Colors.green,
-                          )
-                              : SizedBox.shrink()
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        ec = false;
-                        fc = false;
-                        wild = false;
-                        crz = false;
-                        campa = true;
-                      });
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Color(0xffC4C8DB),
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width/1.3,
-                            child: Text(
-                              "Campa Payment Verification Pending status after 23rd March, 2023",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          Spacer(),
-                          campa == true
-                              ? Icon(
-                            Icons.check_circle,
-                            color: Colors.green,
-                          )
-                              : SizedBox.shrink()
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                ],
+                           contentPadding: EdgeInsets.zero,
+                           dense: true,
+                           title:  Text('EC Dashboard for Proposals submitted after 1st March, 2023',style: TextStyle(
+                             fontWeight: FontWeight.bold,fontSize: 16
+                           ),),
+
+                           value: 1,
+                           groupValue: selectedRadioTile,
+                           onChanged: (val) {
+                             setState(() {
+                               setSelectedRadioTile(val!);
+                               _launchUrl_ec();
+                               SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
+
+                             });
+                           },
+                         ),
+                       ),SizedBox(height: 10,),
+                       Theme(
+                         data: Theme.of(context).copyWith(
+                           listTileTheme: ListTileThemeData(
+                             horizontalTitleGap: 4,//here adjust based on your need
+                           ),),
+                         child: RadioListTile(
+                           activeColor: Colors.blue,
+                           contentPadding: EdgeInsets.zero,
+                           dense: true,
+                           title:  Text('FC Dashboard for Proposals submitted after 5th September, 2022',style: TextStyle(
+                               fontWeight: FontWeight.bold,fontSize: 16
+                           ),),
+                           value: 2,
+                           groupValue: selectedRadioTile,
+                           onChanged: (val) {
+                             setState(() {
+                               setSelectedRadioTile(val!);
+                               _launchUrl_fc();
+                               SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
+
+                             });
+                           },
+                         ),
+                       ),SizedBox(height: 10,),
+                       Theme(
+                         data: Theme.of(context).copyWith(
+                           listTileTheme: ListTileThemeData(
+                             horizontalTitleGap: 4,//here adjust based on your need
+                           ),),
+                         child: RadioListTile(
+                           activeColor: Colors.blue,
+                           contentPadding: EdgeInsets.zero,
+                           dense: true,
+                           title:  Text('Wildlife Dashboard for Proposals submitted after 28th March, 2023',style: TextStyle(
+                               fontWeight: FontWeight.bold,fontSize: 16
+                           ),),
+                           value: 3,
+                           groupValue: selectedRadioTile,
+                           onChanged: (val) {
+                             setState(() {
+                               setSelectedRadioTile(val!);
+                               _launchUrl_wild();
+                               SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
+
+                             });
+                           },
+                         ),
+                       ),SizedBox(height: 10,),
+                       Theme(
+                         data: Theme.of(context).copyWith(
+                           listTileTheme: ListTileThemeData(
+                             horizontalTitleGap: 4,//here adjust based on your need
+                           ),),
+                         child: RadioListTile(
+                           activeColor: Colors.blue,
+                           contentPadding: EdgeInsets.zero,
+                           dense: true,
+                           title:  Text('CRZ Dashboard for Proposals submitted after 31st March, 2023',style: TextStyle(
+                               fontWeight: FontWeight.bold,fontSize: 16
+                           ),),
+                           value: 4,
+                           groupValue: selectedRadioTile,
+                           onChanged: (val) {
+                             setState(() {
+                               setSelectedRadioTile(val!);
+                               _launchUrl_crz();
+                               SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
+
+                             });
+                           },
+                         ),
+                       ),SizedBox(height: 10,),
+                       Theme(
+                         data: Theme.of(context).copyWith(
+                           listTileTheme: ListTileThemeData(
+                             horizontalTitleGap: 4,//here adjust based on your need
+                           ),),
+                         child: RadioListTile(
+                           activeColor: Colors.blue,
+                           contentPadding: EdgeInsets.zero,
+                           dense: true,
+                           title:  Text('Campa Payment Verification Pending status after 23rd March, 2023',style: TextStyle(
+                               fontWeight: FontWeight.bold,fontSize: 16
+                           ),),
+                           value: 5,
+                           groupValue: selectedRadioTile,
+                           onChanged: (val) {
+                             setState(() {
+                               setSelectedRadioTile(val!);
+                               _launchUrl_campa();
+                               SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
+
+                             });
+                           },
+                         ),
+                       ),SizedBox(height: 10,),
+                       Theme(
+                         data: Theme.of(context).copyWith(
+                           listTileTheme: ListTileThemeData(
+                             horizontalTitleGap: 4,//here adjust based on your need
+                           ),),
+                         child: RadioListTile(
+                           activeColor: Colors.blue,
+                           contentPadding: EdgeInsets.zero,
+                           dense: true,
+                           title:  Text('Compliance Dashboard for Compliance submitted after 1st July, 2023',style: TextStyle(
+                               fontWeight: FontWeight.bold,fontSize: 16
+                           ),),
+                           value:6 ,
+                           groupValue: selectedRadioTile,
+                           onChanged: (val) {
+                             setState(() {
+                               setSelectedRadioTile(val!);
+                               _launchUrl_compliance();
+                               SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
+
+                             });
+                           },
+                         ),
+                       ),SizedBox(height: 10,),
+                       Theme(
+                         data: Theme.of(context).copyWith(
+                           listTileTheme: ListTileThemeData(
+                             horizontalTitleGap: 4,//here adjust based on your need
+                           ),),
+                         child: RadioListTile(
+                           activeColor: Colors.blue,
+                           contentPadding: EdgeInsets.zero,
+                           dense: true,
+                           title:  Text('CAMPA Management Dashboard',style: TextStyle(
+                               fontWeight: FontWeight.bold,fontSize: 16
+                           ),),
+                           value:7 ,
+                           groupValue: selectedRadioTile,
+                           onChanged: (val) {
+                             setState(() {
+                               setSelectedRadioTile(val!);
+                               SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
+
+                             });
+                           },
+                         ),
+                       ),
+
+                     ],
+                   ),
+                 ),
+                ],),
               ),
             ),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          GestureDetector(
-            onTap: () async {
-              if (ec == true) {
-                _launchUrl_ec();
 
-              }
-              else if (fc == true) {
-                setState(() {
-                  ec=false;
-                  _launchUrl_fc();
-                });
-
-              } else if (wild == true) {
-                setState(() {
-                  ec=false;
-                  fc=false;
-                  _launchUrl_wild();
-                });
-              } else if (crz == true) {
-                setState(() {
-                  ec=false;
-                  fc=false;
-                  wild=false;
-                  _launchUrl_crz();
-                });
-              } else if (campa == true) {
-                setState(() {
-                  ec=false;
-                  fc=false;
-                  wild=false;
-                  campa=false;
-                  _launchUrl_campa();
-                });
-              } else {
-                const snackBar = SnackBar(
-                  content: Text('Please select Acts & Rules !'),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              }
-            },
-            child: Container(
-              padding: EdgeInsets.all(10),
-              height: 45,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Color(0xff96D2CF),
-              ),
-              child: Center(
-                  child: Text(
-                    "Select",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  )),
-            ),
-          )
-        ],
-      ),
-    );
+    ),
+        ));
   }
 
 }

@@ -1004,7 +1004,8 @@ class _TrackProposolDetailsState extends State<AdvanceSearchDetail> {
                     )
                         : Center(child: Text(""));
                   }),
-              Positioned(child:
+              Positioned
+                (child:
               GestureDetector(
                   onTap: (){
                     setState(() {

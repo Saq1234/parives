@@ -99,179 +99,182 @@ class _UserManualsState extends State<UserManuals> {
   @override
   Widget build(BuildContext context) {
     return  _connectionStatus == true?
-      Scaffold(
-        appBar: AppBar(
-          title: Text("User Manuals"),
-          titleSpacing: 2.0,
-          actions: [
-            PopupMenuButton(
-                // add icon, by default "3 dot" icon
-                // icon: Icon(Icons.book)
-                itemBuilder: (context) {
-              return [
-                PopupMenuItem<int>(
-                  value: 0,
-                  child: Text("General"),
-                ),
-                PopupMenuItem<int>(
-                  value: 1,
-                  child: Text("Forest Clearance"),
-                ),
-                PopupMenuItem<int>(
-                  value: 2,
-                  child: Text("Wild Clearance"),
-                ),
-                PopupMenuItem<int>(
-                  value: 3,
-                  child: Text("Crz Clearance"),
-                ),
-                PopupMenuItem<int>(
-                  value: 4,
-                  child: Text("Enviorment Clearance"),
-                ),
-              ];
-            }, onSelected: (value) {
-              if (value == 0) {
-                setState(() {
-                  other = true;
-                  forest = false;
-                  wild = false;
-                  crz = false;
-                  env = false;
-                });
-              } else if (value == 1) {
-                setState(() {
-                  other = false;
-                  forest = true;
-                  wild = false;
-                  crz = false;
-                  env = false;
-                });
-              } else if (value == 2) {
-                setState(() {
-                  other = false;
-                  forest = false;
-                  wild = true;
-                  crz = false;
-                  env = false;
-                });
-              } else if (value == 3) {
-                setState(() {
-                  other = false;
-                  forest = false;
-                  wild = false;
-                  crz = true;
-                  env = false;
-                });
-              } else if (value == 4) {
-                setState(() {
-                  other = false;
-                  forest = false;
-                  wild = false;
-                  crz = false;
-                  env = true;
-                });
-              }
-            }),
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                // Container(
-                //   decoration: BoxDecoration(
-                //     border: Border.all(color: AppColor.black,width: 1),
-                //     borderRadius: BorderRadius.circular(20),
-                //
-                //   ),
-                //   child: TextField(
-                //
-                //     controller: searchControllerManual,
-                //     decoration:  InputDecoration(
-                //         suffixIcon: Icon(Icons.search),
-                //         contentPadding: EdgeInsets.only(left: 10,top: 10),
-                //         border: InputBorder.none,
-                //         hintText: 'Search Category....',
-                //         hintStyle: TextStyle(fontWeight: FontWeight.bold)
-                //     ),
-                //     onChanged: (String? value){
-                //       setState(() {
-                //         search=value.toString();
-                //       });
-                //     },
-                //   ),
-                // ),
-                // SizedBox(height: 10,),
-
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white, // Replace with your desired background color
+      SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("User Manuals"),
+            titleSpacing: 2.0,
+            actions: [
+              PopupMenuButton(
+                icon: Image.asset("assets/images/filter_icon.png",width: 25,),
+                  // add icon, by default "3 dot" icon
+                  // icon: Icon(Icons.book)
+                  itemBuilder: (context) {
+                return [
+                  PopupMenuItem<int>(
+                    value: 0,
+                    child: Text("General"),
                   ),
-                  child: Table(
-                    columnWidths: const <int, TableColumnWidth>{
-                      0: FlexColumnWidth(1.3),
-                      1: FlexColumnWidth(3),
-                      2: FlexColumnWidth(1.2),
-                    },
-                    border: TableBorder.all(width: 2, color: Colors.black45),
-                    children: [
-                      TableRow(children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 10,
-                          ),
-                          child: TableCell(
-                              child: Center(
-                            child: Text(
-                              "Category",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          )),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 10,
-                          ),
-                          child: TableCell(
-                              child: Center(child: Text("Manual", style: TextStyle(fontWeight: FontWeight.bold)))),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 5),
-                          child: TableCell(
-                              child: Center(child: Text("View", style: TextStyle(fontWeight: FontWeight.bold)))),
-                        ),
-                      ]),
-                    ],
+                  PopupMenuItem<int>(
+                    value: 1,
+                    child: Text("Forest Clearance"),
                   ),
-                ),
-                SizedBox(
-                  height: 1,
-                ),
-                other == true || forest == true || wild == true || crz == true || env == true
-                    ? Column(
-                        children: [
-                          other == true ? othersDetails() : SizedBox.shrink(),
-                          forest == true ? forestDetails() :SizedBox.shrink(),
-                          wild == true ? wildDetails() : SizedBox.shrink(),
-                          crz == true ? crzDetails() : SizedBox.shrink(),
-                          env == true ? enviormentDetails() :SizedBox.shrink(),
-                        ],
-                      )
-                    : Column(
-                        children: [
-                          othersDetails(),
-                          forestDetails(),
-                          wildDetails(),
-                          crzDetails(),
-                          enviormentDetails(),
-                        ],
-                      ),
-              ],
-            ),
+                  PopupMenuItem<int>(
+                    value: 2,
+                    child: Text("Wild Clearance"),
+                  ),
+                  PopupMenuItem<int>(
+                    value: 3,
+                    child: Text("Crz Clearance"),
+                  ),
+                  PopupMenuItem<int>(
+                    value: 4,
+                    child: Text("Environment Clearance"),
+                  ),
+                ];
+              }, onSelected: (value) {
+                if (value == 0) {
+                  setState(() {
+                    other = true;
+                    forest = false;
+                    wild = false;
+                    crz = false;
+                    env = false;
+                  });
+                } else if (value == 1) {
+                  setState(() {
+                    other = false;
+                    forest = true;
+                    wild = false;
+                    crz = false;
+                    env = false;
+                  });
+                } else if (value == 2) {
+                  setState(() {
+                    other = false;
+                    forest = false;
+                    wild = true;
+                    crz = false;
+                    env = false;
+                  });
+                } else if (value == 3) {
+                  setState(() {
+                    other = false;
+                    forest = false;
+                    wild = false;
+                    crz = true;
+                    env = false;
+                  });
+                } else if (value == 4) {
+                  setState(() {
+                    other = false;
+                    forest = false;
+                    wild = false;
+                    crz = false;
+                    env = true;
+                  });
+                }
+              }),
+            ],
           ),
-        )):NoNetworkWidget();
+          body: Padding(
+            padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //     border: Border.all(color: AppColor.black,width: 1),
+                  //     borderRadius: BorderRadius.circular(20),
+                  //
+                  //   ),
+                  //   child: TextField(
+                  //
+                  //     controller: searchControllerManual,
+                  //     decoration:  InputDecoration(
+                  //         suffixIcon: Icon(Icons.search),
+                  //         contentPadding: EdgeInsets.only(left: 10,top: 10),
+                  //         border: InputBorder.none,
+                  //         hintText: 'Search Category....',
+                  //         hintStyle: TextStyle(fontWeight: FontWeight.bold)
+                  //     ),
+                  //     onChanged: (String? value){
+                  //       setState(() {
+                  //         search=value.toString();
+                  //       });
+                  //     },
+                  //   ),
+                  // ),
+                  // SizedBox(height: 10,),
+
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white, // Replace with your desired background color
+                    ),
+                    child: Table(
+                      columnWidths: const <int, TableColumnWidth>{
+                        0: FlexColumnWidth(1.3),
+                        1: FlexColumnWidth(3),
+                        2: FlexColumnWidth(1.2),
+                      },
+                      border: TableBorder.all(width: 2, color: Colors.black45),
+                      children: [
+                        TableRow(children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 10,
+                            ),
+                            child: TableCell(
+                                child: Center(
+                              child: Text(
+                                "Category",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            )),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 10,
+                            ),
+                            child: TableCell(
+                                child: Center(child: Text("Manual", style: TextStyle(fontWeight: FontWeight.bold)))),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10, bottom: 5),
+                            child: TableCell(
+                                child: Center(child: Text("View", style: TextStyle(fontWeight: FontWeight.bold)))),
+                          ),
+                        ]),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 1,
+                  ),
+                  other == true || forest == true || wild == true || crz == true || env == true
+                      ? Column(
+                          children: [
+                            other == true ? othersDetails() : SizedBox.shrink(),
+                            forest == true ? forestDetails() :SizedBox.shrink(),
+                            wild == true ? wildDetails() : SizedBox.shrink(),
+                            crz == true ? crzDetails() : SizedBox.shrink(),
+                            env == true ? enviormentDetails() :SizedBox.shrink(),
+                          ],
+                        )
+                      : Column(
+                          children: [
+                            othersDetails(),
+                            forestDetails(),
+                            wildDetails(),
+                            crzDetails(),
+                            enviormentDetails(),
+                          ],
+                        ),
+                ],
+              ),
+            ),
+          )),
+      ):NoNetworkWidget();
   }
 }
 
