@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:math';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -31,19 +33,43 @@ class _LoginState extends State<Login> {
   TextEditingController idController = TextEditingController();
   TextEditingController passController = TextEditingController();
   bool _isObscure = true;
-  bool forgothide=false;
+  bool forgothide = false;
   bool _connectionStatus = true;
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  String? randomString;
+  String? showCaptcha;
 
-@override
+
+  String generateRandomString() {
+    const int keyLength = 32; // 32 bytes = 256 bits
+    final random = Random.secure();
+    final List<int> bytes = List.generate(keyLength, (index) => random.nextInt(256));
+
+    final key = base64UrlEncode(bytes);
+
+    return key;
+  }
+
+  showRandomNumber() {
+    randomString = generateRandomString();
+    showCaptcha=randomString!.substring(0,5);
+    print(randomString);
+
+
+  }
+
+
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     initConnectivity();
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+    showRandomNumber();
   }
+
   void dispose() {
     _connectivitySubscription.cancel();
     super.dispose();
@@ -85,10 +111,9 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    return _connectionStatus == true ?
 
-    return _connectionStatus == true?
-
-     SafeArea(
+    SafeArea(
         child: Scaffold(
           backgroundColor: Colors.white,
 
@@ -104,102 +129,112 @@ class _LoginState extends State<Login> {
 
           body:
           SingleChildScrollView(
-            child:Column(
+              child: Column(
 
-              children: [
-                Stack(
-                  children: [
-                    Container(
-                    width: double.infinity,
-                    height: MediaQuery.of(context).size.height/3.5,
-                    child: Image.asset("assets/images/login_top_image.jpg",fit: BoxFit.cover,),
-                    
-                  ),
-                    Column(
+                children: [
+                  Stack(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Center(
-                            child: AnimatedTextKit(
-                              repeatForever: true,
-                              animatedTexts: [
-                              ColorizeAnimatedText(
-                              'PARIVESH',
-                              textStyle: TextStyle(fontSize: 24),
-                              colors: colorizeColors,
+                        Container(
+                          width: double.infinity,
+                          height: MediaQuery
+                              .of(context)
+                              .size
+                              .height / 3.5,
+                          child: Image.asset("assets/images/login_top_image.jpg", fit: BoxFit.cover,),
+
+                        ),
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 15),
+                              child: Center(
+                                child: AnimatedTextKit(
+                                  repeatForever: true,
+                                  animatedTexts: [
+                                    ColorizeAnimatedText(
+                                      'PARIVESH',
+                                      textStyle: TextStyle(fontSize: 24),
+                                      colors: colorizeColors,
+                                    ),
+                                  ],),
+                              ),
                             ),
-                            ],),
+
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child:
+                              Text("Pro Active and Responsive facilitation by ", style: TextStyle(color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20),),
+                            ),
+                            Text("Interactive and Virtuous Environmental",
+                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),),
+                            Text("Single window Hub",
+                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),),
+                            SizedBox(height: 15,),
+                            Text("A single window integrated system for Environment, Forest,",
+                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),),
+                            SizedBox(height: 10,),
+
+                            Text("Wild Life & CRZ Clearance Process",
+                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),),
+                          ],
+                        ),
+                      ]
+                  ),
+                  Stack(
+                    children: [
+                      Opacity(
+                        opacity: 0.3,
+                        child: Container(
+                          margin: EdgeInsets.only(top: 50),
+                          child: Image.asset("assets/images/parivesh.jpg", fit: BoxFit.cover, width: double.infinity,
+                            color: Colors.white.withOpacity(0.2),
+                            colorBlendMode: BlendMode.hue,
                           ),
                         ),
 
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: 
-                          Text("Pro Active and Responsive facilitation by ",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
-                        ),
-                        Text("Interactive and Virtuous Environmental",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
-                        Text("Single window Hub",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
-                        SizedBox(height: 15,),
-                        Text("A single window integrated system for Environment, Forest,",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 12),),
-                        SizedBox(height: 10,),
+                      ),
 
-                        Text("Wild Life & CRZ Clearance Process",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 12),),
-                      ],
-                    ),
-                    ]
-                ),
-                Stack(
-                  children: [
-                    Opacity(
-                      opacity: 0.3,
-                      child: Container(
-                        margin: EdgeInsets.only(top: 50),
-                        child: Image.asset("assets/images/parivesh.jpg",fit: BoxFit.cover,width: double.infinity,
-                          color: Colors.white.withOpacity(0.2),
-                          colorBlendMode: BlendMode.hue,
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Column(
+                            children: [
+                              forgothide == true ?
+
+                              Text("Forgot Password", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),) :
+                              Text("Log In",
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black),),
+
+                            ],
+                          ),
                         ),
                       ),
 
-                    ),
-
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 20),
+                      Positioned.fill(
+                        top: 100,
                         child: Column(
                           children: [
-                            forgothide==true?
-
-                            Text("Forgot Password",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),):
-                            Text("Log In",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24,color: Colors.black),),
-
+                            forgothide == true ?
+                            fogot() : login(),
                           ],
                         ),
-                      ),
-                    ),
-
-                    Positioned.fill(
-                      top: 100,
-                      child: Column(
-                        children: [
-                        forgothide==true?
-                        fogot():login(),
-                      ],
-                      ),
-                    )
-                  ],
-                ),
+                      )
+                    ],
+                  ),
 
 
-
-              ],
-            )
+                ],
+              )
 
           ),
         )
-    ):NoNetworkWidget();
+    ) : NoNetworkWidget();
   }
-  Widget login(){
-   return Padding(
+
+  Widget login() {
+    return Padding(
       padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -229,11 +264,12 @@ class _LoginState extends State<Login> {
                   obscureText: _isObscure,
                   controller: passController,
                   decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 10,top: 12),
+                      contentPadding: EdgeInsets.only(left: 10, top: 12),
                       border: InputBorder.none,
                       hintText: 'Password *',
                       suffixIcon: IconButton(
-                          icon: Icon(_isObscure ? Icons.visibility : Icons.visibility_off,color: _isObscure?Colors.grey:Colors.black,),
+                          icon: Icon(_isObscure ? Icons.visibility : Icons.visibility_off,
+                            color: _isObscure ? Colors.grey : Colors.black,),
                           onPressed: () {
                             setState(() {
                               _isObscure = !_isObscure;
@@ -245,9 +281,9 @@ class _LoginState extends State<Login> {
           Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
-                onTap: (){
+                onTap: () {
                   setState(() {
-                    forgothide=true;
+                    forgothide = true;
                   });
                 },
                 child: Padding(
@@ -261,11 +297,58 @@ class _LoginState extends State<Login> {
                 ),
               )),
           SizedBox(
+            height: 15,
+          ),
+          Row(
+            children: [
+              Container(
+                color: Colors.black,
+                padding: EdgeInsets.all(8),
+                child: Text(showCaptcha!.toString(),
+                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),),
+              ),
+              SizedBox(width: 20,),
+              GestureDetector(
+                onTap: (){
+                  setState(() {
+                    randomString=generateRandomString();
+                    showCaptcha=randomString!.substring(0,5);
+
+                    print(randomString);
+
+                  });
+                },
+                child: Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: AppColor.black),
+                        ),
+                    child: Icon(Icons.refresh,color: Colors.green,size: 30,)),
+              ),
+              Spacer(),
+              Container(
+                height: 45,
+                margin: EdgeInsets.only(right: 10),
+                width: MediaQuery.of(context).size.width/2.2,
+                decoration: BoxDecoration(
+                    border: Border.all(color: AppColor.black),
+                    borderRadius: BorderRadius.circular(20)),
+                child: TextField(
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 20,),
+                      border: InputBorder.none,
+                      hintText: 'Enter Captcha',
+                      hintStyle: TextStyle(fontWeight: FontWeight.bold,color: Colors.black)
+
+
+                  ),),),
+            ],),
+          SizedBox(
             height: 50,
           ),
           GestureDetector(
-            onTap: ()=>Navigator.pushReplacement(context,
-    MaterialPageRoute(builder: (context) => const ActsRulesDashBoard())),
+            onTap: () =>
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => const ActsRulesDashBoard())),
             child: Container(
               height: 45,
               decoration: BoxDecoration(
@@ -275,7 +358,7 @@ class _LoginState extends State<Login> {
               child: Center(
                   child: Text(
                     "Login",
-                    style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   )),
             ),
           ),
@@ -283,8 +366,9 @@ class _LoginState extends State<Login> {
       ),
     );
   }
-  Widget fogot(){
-   return Padding(
+
+  Widget fogot() {
+    return Padding(
       padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -309,9 +393,9 @@ class _LoginState extends State<Login> {
           Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
-                onTap: (){
+                onTap: () {
                   setState(() {
-                    forgothide=false;
+                    forgothide = false;
                   });
                 },
                 child: Padding(
@@ -338,7 +422,7 @@ class _LoginState extends State<Login> {
             child: Center(
                 child: Text(
                   "Submit",
-                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 )),
           ),
         ],
