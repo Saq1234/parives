@@ -121,7 +121,7 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const Login())),
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) =>  Login())),
                             child: Align(
                               alignment: Alignment.topRight,
                               child: Container(

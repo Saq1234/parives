@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class ActsRulesDashBoard extends StatefulWidget {
@@ -83,6 +82,13 @@ class _ActsRulesDashBoardState extends State<ActsRulesDashBoard> {
     setState(() {
       selectedRadioTile = val;
     });
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+    super.dispose();
   }
 
   @override

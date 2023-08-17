@@ -4,16 +4,29 @@ import 'dart:math';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:crypto/crypto.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
+import 'package:encrypt/encrypt.dart';
+
+
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:http/http.dart' as http;
+import 'package:parivesh/login/view/flow.dart';
 import '../../acts_&_rules_dashboard/view/acts_rules_dashboard.dart';
 import '../../common/appColors.dart';
+import '../../common/app_url.dart';
 import '../../common/no_network.dart';
 
+
+
+
+
+
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
 
   @override
   State<Login> createState() => _LoginState();
@@ -32,6 +45,8 @@ class _LoginState extends State<Login> {
   ];
   TextEditingController idController = TextEditingController();
   TextEditingController passController = TextEditingController();
+  TextEditingController forgetIdController = TextEditingController();
+  TextEditingController captchaController = TextEditingController();
   bool _isObscure = true;
   bool forgothide = false;
   bool _connectionStatus = true;
@@ -39,6 +54,16 @@ class _LoginState extends State<Login> {
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
   String? randomString;
   String? showCaptcha;
+  bool id=false;
+  bool pass=false;
+  bool captcha=false;
+  bool forgotId=false;
+  var keyBase64;
+  var encrypted;
+  var decrypted;
+  var keyBase64Encoded;
+  var encryptedBase64;
+
 
 
   String generateRandomString() {
@@ -53,11 +78,139 @@ class _LoginState extends State<Login> {
 
   showRandomNumber() {
     randomString = generateRandomString();
-    showCaptcha=randomString!.substring(0,5);
+    showCaptcha = randomString!.substring(0, 5);
     print(randomString);
+  }
+
+
+  String _responseText = '';
+
+  Future<void> makePostRequest({required String username, required String password,required String propParivesh}) async {
+    final url = Uri.parse(AppUrls.loginpi); // Replace with your API endpoint
+
+    final response = await http.post(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        username:username,
+        password:password,
+        propParivesh:propParivesh
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      setState(() {
+        _responseText = 'Response: ${response.body}';
+        print("Output >> $_responseText");
+      });
+    } else {
+      setState(() {
+        _responseText = 'Error: ${response.statusCode}';
+        print("FailOutput >> $_responseText");
+
+      });
+    }
+  }
+
+
+  // Future dob({required String Encodepassword})async {
+  //   var strinArray = ['s', 'e', 'c', 'r', 'e', 't', 'k', 'e', 'y'];
+  //   var screteKeyText = '';
+  //   for (var j = 1; j < strinArray.length; j++) {
+  //     screteKeyText += strinArray[DateTime.now().millisecondsSinceEpoch % strinArray.length];
+  //   }
+  //   print("secret>>$screteKeyText");
+  //
+  //   keyBase64 = base64.encode(utf8.encode(screteKeyText + DateTime.now().millisecondsSinceEpoch.toRadixString(36)));
+  //   print("Base64key>>$keyBase64");
+  //   keyBase64Encoded = base64.encode(utf8.encode(keyBase64));
+  //   print("Base64Encodedkey >>$keyBase64Encoded");
+  //
+  //
+  //   // var key = crypto.base64.parse(keyBase64);
+  //   //  var srcs = utf8.encode(Encodepassword.trim());
+  //   // var encrypted = crypto.AES.encrypt(srcs, key,
+  //   //     mode: crypto.AESMode.ecb, padding: crypto.Padding.pkcs7);
+  //   // print(encrypted.base64);
+  //
+  //
+  //   // encrypted = Encryptor.encrypt(keyBase64Encoded, Encodepassword);
+  //   //  decrypted = Encryptor.decrypt(keyBase64Encoded, encrypted);
+  //   //
+  //   //
+  //   // print("Base64+Password>>$encrypted");
+  //   // print("Decrypt>>$decrypted");
+  //
+  //
+  //
+  //
+  //
+  //   // var srcs = utf8.encode(Encodepassword);
+  //   // encrypted= encryptAESCryptoJS(Encodepassword, keyBase64Encoded);
+  //   // final des = decryptAESCryptoJS(encrypted!, keyBase64Encoded);
+  //   // print("Decrypt>>$encrypted");
+  //   // print("Decrypt>>$des");
+  //
+  //
+  //   // final des = decryptAESCryptoJS(encrypted, Encodepassword );
+  //   // print(des);
+  //
+  // }
+
+
+
+  Future<void> work({required String pd}) async {
+
+    var strinArray = ['s', 'e', 'c', 'r', 'e', 't', 'k', 'e', 'y'];
+    var screteKeyText = '';
+    var keyBase64;
+
+    for (var j = 1; j < strinArray.length; j++) {
+      screteKeyText += strinArray[DateTime.now().millisecondsSinceEpoch % strinArray.length];
+    }
+    print("secret>>$screteKeyText");
+
+    keyBase64 = base64.encode(utf8.encode(screteKeyText + DateTime.now().millisecondsSinceEpoch.toRadixString(36)));
+    print("Base64key>>$keyBase64");
+     keyBase64Encoded = base64.encode(utf8.encode(keyBase64));
+    print("Base64Encodedkey >>$keyBase64Encoded");
+
+
+
+
+    final plainText = pd;
+    final key = keyBase64Encoded;
+
+    print('Plain text for encryption: $plainText');
+
+    //Encrypt
+    Encrypted encrypted = encryptWithAES(key, plainText);
+     encryptedBase64 = encrypted.base64;
+    print('Encrypted data in base64 encoding: $encryptedBase64');
+
+    //Decrypt
+    String decryptedText = decryptWithAES(key, encrypted);
+    print('Decrypted data: $decryptedText');
+
+
+
 
 
   }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   @override
@@ -68,6 +221,7 @@ class _LoginState extends State<Login> {
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     showRandomNumber();
+   // dob(password:passController.text );
   }
 
   void dispose() {
@@ -217,7 +371,7 @@ class _LoginState extends State<Login> {
                         child: Column(
                           children: [
                             forgothide == true ?
-                            fogot() : login(),
+                            forgot() : login(),
                           ],
                         ),
                       )
@@ -242,7 +396,7 @@ class _LoginState extends State<Login> {
         children: [
           Container(
             decoration:
-            BoxDecoration(border: Border.all(color: AppColor.black), borderRadius: BorderRadius.circular(20),),
+            BoxDecoration(border: Border.all(color: id==true?Colors.red:AppColor.black), borderRadius: BorderRadius.circular(20),),
             child: TextField(
               cursorColor: Colors.grey,
               controller: idController,
@@ -251,19 +405,26 @@ class _LoginState extends State<Login> {
                 border: InputBorder.none,
                 hintText: 'Login id *',
               ),
+              onChanged: (v){
+                setState(() {
+                  id=false;
+                });
+              },
             ),
+
           ),
           SizedBox(
             height: 40,
           ),
           Container(
               decoration: BoxDecoration(
-                  border: Border.all(color: AppColor.black), borderRadius: BorderRadius.circular(20)),
+                  border: Border.all(color:pass==true?Colors.red: AppColor.black), borderRadius: BorderRadius.circular(20)),
               child: TextField(
                   cursorColor: Colors.grey,
                   obscureText: _isObscure,
                   controller: passController,
                   decoration: InputDecoration(
+
                       contentPadding: EdgeInsets.only(left: 10, top: 12),
                       border: InputBorder.none,
                       hintText: 'Password *',
@@ -274,7 +435,14 @@ class _LoginState extends State<Login> {
                             setState(() {
                               _isObscure = !_isObscure;
                             });
-                          })))),
+                          })),
+                onChanged: (v){
+                    setState(() {
+                      pass=false;
+                    });
+
+                },
+              )),
           SizedBox(
             height: 15,
           ),
@@ -304,51 +472,119 @@ class _LoginState extends State<Login> {
               Container(
                 color: Colors.black,
                 padding: EdgeInsets.all(8),
-                child: Text(showCaptcha!.toString(),
+                child: Text(showCaptcha.toString(),
                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),),
               ),
               SizedBox(width: 20,),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   setState(() {
-                    randomString=generateRandomString();
-                    showCaptcha=randomString!.substring(0,5);
+                  //  randomString = generateRandomString();
+                    showCaptcha = randomString!.substring(0, 5);
 
                     print(randomString);
-
                   });
                 },
                 child: Container(
                     decoration: BoxDecoration(
-                        border: Border.all(color: AppColor.black),
-                        ),
-                    child: Icon(Icons.refresh,color: Colors.green,size: 30,)),
+                      border: Border.all(color: AppColor.black),
+                    ),
+                    child: Icon(Icons.refresh, color: Colors.green, size: 30,)),
               ),
               Spacer(),
               Container(
                 height: 45,
                 margin: EdgeInsets.only(right: 10),
-                width: MediaQuery.of(context).size.width/2.2,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width / 2.2,
                 decoration: BoxDecoration(
-                    border: Border.all(color: AppColor.black),
+                    border: Border.all(color:captcha==true?Colors.red: AppColor.black),
                     borderRadius: BorderRadius.circular(20)),
                 child: TextField(
+                  controller: captchaController,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(left: 20,),
                       border: InputBorder.none,
                       hintText: 'Enter Captcha',
-                      hintStyle: TextStyle(fontWeight: FontWeight.bold,color: Colors.black)
+                      hintStyle: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)
+                  ),
+                  onChanged: (v){
+                    setState(() {
+                      captcha=false;
+                      if(captchaController.text.length>5){
+                        FocusManager.instance.primaryFocus?.unfocus();
 
+                      }
 
-                  ),),),
+                    });
+                  },
+                ),),
             ],),
           SizedBox(
             height: 50,
           ),
           GestureDetector(
-            onTap: () =>
+            onTap: () {
+              setState(() {
+               // dob(Encodepassword: passController.text);
+                work(pd: passController.text);
+              makePostRequest(username: idController.text,password:encryptedBase64 ,propParivesh: keyBase64Encoded);
+              });
+              if(idController.text.isEmpty && passController.text.isEmpty && captchaController.text.isEmpty){
+                setState(() {
+                  id=true;
+                  pass=true;
+                  captcha=true;
+                });
+
+              }
+              else if(idController.text.isEmpty){
+                setState(() {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Please Enter Login Id"),
+                  ));
+                   id=true;
+                });
+
+              }else if(passController.text.isEmpty){
+                setState(() {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Please Enter Password"),
+                  ));
+                   pass=true;
+
+                });
+
+              }
+              else if(captchaController.text.isEmpty){
+                setState(() {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Please Enter Captcha"),
+                  ));
+                   captcha=true;
+                });
+
+              }
+              else if(showCaptcha !=captchaController.text){
+                setState(() {
+                  //randomString = generateRandomString();
+                  showCaptcha = randomString!.substring(0, 5);
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Please Enter Valid Captcha"),
+                  ));
+                  captchaController.clear();
+                });
+
+              }else if(idController.text.isNotEmpty || passController.text.isNotEmpty || showCaptcha==captchaController.text){
                 Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => const ActsRulesDashBoard())),
+                    MaterialPageRoute(builder: (context) => const ActsRulesDashBoard()));
+              }
+
+            },
+
+
             child: Container(
               height: 45,
               decoration: BoxDecoration(
@@ -367,7 +603,7 @@ class _LoginState extends State<Login> {
     );
   }
 
-  Widget fogot() {
+  Widget forgot() {
     return Padding(
       padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
       child: Column(
@@ -376,15 +612,20 @@ class _LoginState extends State<Login> {
         children: [
           Container(
             decoration:
-            BoxDecoration(border: Border.all(color: AppColor.black), borderRadius: BorderRadius.circular(20)),
+            BoxDecoration(border: Border.all(color:forgotId==true?Colors.red: AppColor.black), borderRadius: BorderRadius.circular(20)),
             child: TextField(
               cursorColor: Colors.grey,
-              controller: idController,
+              controller: forgetIdController,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.only(left: 10),
                 border: InputBorder.none,
                 hintText: 'Login id *',
               ),
+              onChanged: (v){
+                setState(() {
+                  forgotId=false;
+                });
+              },
             ),
           ),
           SizedBox(
@@ -413,17 +654,29 @@ class _LoginState extends State<Login> {
           SizedBox(
             height: 40,
           ),
-          Container(
-            height: 45,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Color(0xffCAE7DE),
-                border: Border.all(color: Colors.black)),
-            child: Center(
-                child: Text(
-                  "Submit",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                )),
+          GestureDetector(
+            onTap: (){
+              if(forgetIdController.text.isEmpty){
+                setState(() {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Please Enter Login Id"),
+                  ));
+                  forgotId=true;
+                });
+              }
+            },
+            child: Container(
+              height: 45,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Color(0xffCAE7DE),
+                  border: Border.all(color: Colors.black)),
+              child: Center(
+                  child: Text(
+                    "Submit",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  )),
+            ),
           ),
         ],
       ),

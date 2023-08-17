@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-class TrackPorposalModel {
+class  TrackPorposalModel {
   List<Data>? data;
   String? message;
   String? error;

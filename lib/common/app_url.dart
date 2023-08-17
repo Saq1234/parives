@@ -15,4 +15,5 @@ class AppUrls{
   static const proposalDetailsAgenda="https://parivesh.nic.in/ua/parivesh/agenda/getAgendaDetails?proposalNo=";
   static const proposalMomDetails="https://parivesh.nic.in/ua/parivesh/MoM/getMomDetails?proposalNo=";
   static const userManuals="https://stgdev.parivesh.nic.in/cms/userManual/getList?category=";
+  static const loginpi="https://parivesh.nic.in/ua/authenticate";
 }

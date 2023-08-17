@@ -23,6 +23,7 @@ class TrackPorposal extends StatefulWidget {
 class _TrackPorposalState extends State<TrackPorposal> {
   TextEditingController porposalController = TextEditingController();
   late ProposalViewModel porposalViewModel;
+  bool perposal=false;
   bool _connectionStatus = true;
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
@@ -148,7 +149,7 @@ class _TrackPorposalState extends State<TrackPorposal> {
                           ),
                           Container(
                             decoration: BoxDecoration(
-                                border: Border.all(color: AppColor.black),
+                                border: Border.all(color:perposal==true?Colors.red: AppColor.black),
                                 borderRadius: BorderRadius.circular(20)
                             ),
                             child: TextField(
@@ -158,6 +159,11 @@ class _TrackPorposalState extends State<TrackPorposal> {
                                 border: InputBorder.none,
                                 hintText: 'Enter Proposal Number/Single Window Number',
                               ),
+                              onChanged: (v){
+                                setState(() {
+                                  perposal=false;
+                                });
+                              },
                             ),
                           ),
 
@@ -176,9 +182,13 @@ class _TrackPorposalState extends State<TrackPorposal> {
 
 
                               } else {
-                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                  content: Text("Please fill Porposal Number"),
-                                ));
+                                setState(() {
+                                  perposal=true;
+                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                    content: Text("Please fill Porposal Number"),
+                                  ));
+                                });
+
                               }
                             },
                             child: Container(
