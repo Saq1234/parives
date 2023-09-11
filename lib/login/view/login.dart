@@ -53,8 +53,6 @@ class _LoginState extends State<Login> {
   var encryptedBase64;
   var decodedString;
 
-
-
   String generateRandomString() {
     const int keyLength = 32; // 32 bytes = 256 bits
     final random = Random.secure();
