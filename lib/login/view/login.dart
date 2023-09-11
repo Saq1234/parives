@@ -1,16 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:crypto/crypto.dart';
-import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:encrypt/encrypt.dart';
-
-
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,11 +13,6 @@ import '../../acts_&_rules_dashboard/view/acts_rules_dashboard.dart';
 import '../../common/appColors.dart';
 import '../../common/app_url.dart';
 import '../../common/no_network.dart';
-
-
-
-
-
 
 class Login extends StatefulWidget {
 
@@ -63,6 +51,7 @@ class _LoginState extends State<Login> {
   var decrypted;
   var keyBase64Encoded;
   var encryptedBase64;
+  var decodedString;
 
 
 
@@ -177,9 +166,6 @@ class _LoginState extends State<Login> {
      keyBase64Encoded = base64.encode(utf8.encode(keyBase64));
     print("Base64Encodedkey >>$keyBase64Encoded");
 
-
-
-
     final plainText = pd;
     final key = keyBase64Encoded;
 
@@ -194,25 +180,8 @@ class _LoginState extends State<Login> {
     String decryptedText = decryptWithAES(key, encrypted);
     print('Decrypted data: $decryptedText');
 
-
-
-
-
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
   @override
   void initState() {
     // TODO: implement initState
@@ -284,7 +253,6 @@ class _LoginState extends State<Login> {
           body:
           SingleChildScrollView(
               child: Column(
-
                 children: [
                   Stack(
                       children: [
@@ -527,11 +495,10 @@ class _LoginState extends State<Login> {
           ),
           GestureDetector(
             onTap: () {
-              setState(() {
-               // dob(Encodepassword: passController.text);
-                work(pd: passController.text);
-              makePostRequest(username: idController.text,password:encryptedBase64 ,propParivesh: keyBase64Encoded);
-              });
+              // setState(() {
+              //   work(pd: passController.text);
+              //    makePostRequest(username: idController.text,password:encryptedBase64 ,propParivesh: keyBase64Encoded);
+              // });
               if(idController.text.isEmpty && passController.text.isEmpty && captchaController.text.isEmpty){
                 setState(() {
                   id=true;
