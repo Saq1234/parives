@@ -148,8 +148,6 @@ class _LoginState extends State<Login> {
   //
   // }
 
-
-
   Future<void> work({required String pd}) async {
 
     var strinArray = ['s', 'e', 'c', 'r', 'e', 't', 'k', 'e', 'y'];
