@@ -196,7 +196,6 @@ class _LoginState extends State<Login> {
     super.dispose();
   }
 
-
   Future<void> initConnectivity() async {
     ConnectivityResult result = ConnectivityResult.none;
     // Platform messages may fail, so we use a try/catch PlatformException.
