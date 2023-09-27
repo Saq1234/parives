@@ -115,7 +115,7 @@ class _NationalCampaState extends State<NationalCampa> {
                         Container(
                           height: ActsLiist.length >= 2 ? MediaQuery.of(context).size.height / 3 : 80,
                           child: Scrollbar(
-                            isAlwaysShown: true,
+                            thumbVisibility: true,
                             thickness: 10,
                             showTrackOnHover: true,
                             child: ListView.builder(
@@ -172,7 +172,7 @@ class _NationalCampaState extends State<NationalCampa> {
                         Container(
                           height: MediaQuery.of(context).size.height / 8,
                           child: Scrollbar(
-                            isAlwaysShown: true,
+                            thumbVisibility: true,
                             thickness: 10,
                             showTrackOnHover: true,
                             child: ListView.builder(
@@ -226,7 +226,7 @@ class _NationalCampaState extends State<NationalCampa> {
                         Container(
                           height: MediaQuery.of(context).size.height / 8,
                           child: Scrollbar(
-                            isAlwaysShown: true,
+                            thumbVisibility: true,
                             thickness: 10,
                             showTrackOnHover: true,
                             child: ListView.builder(
@@ -302,7 +302,7 @@ class _NationalCampaState extends State<NationalCampa> {
                                       Container(
                                         height: MediaQuery.of(context).size.height / 3,
                                         child: Scrollbar(
-                                          isAlwaysShown: true,
+                                          thumbVisibility: true,
                                           thickness: 10,
                                           showTrackOnHover: true,
                                           child: ListView.builder(
@@ -406,7 +406,7 @@ class _NationalCampaState extends State<NationalCampa> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -535,7 +535,7 @@ class _NationalCampaState extends State<NationalCampa> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 2,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -666,7 +666,7 @@ class _NationalCampaState extends State<NationalCampa> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 2,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -797,7 +797,7 @@ class _NationalCampaState extends State<NationalCampa> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 2,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -945,7 +945,7 @@ class _NationalCampaState extends State<NationalCampa> {
                                       Container(
                                         height: MediaQuery.of(context).size.height / 3,
                                         child: Scrollbar(
-                                          isAlwaysShown: true,
+                                          thumbVisibility: true,
                                           thickness: 10,
                                           showTrackOnHover: true,
                                           child: ListView.builder(
@@ -1074,7 +1074,7 @@ class _NationalCampaState extends State<NationalCampa> {
                                       Container(
                                         height: MediaQuery.of(context).size.height / 3,
                                         child: Scrollbar(
-                                          isAlwaysShown: true,
+                                          thumbVisibility: true,
                                           thickness: 10,
                                           showTrackOnHover: true,
                                           child: ListView.builder(
@@ -1203,7 +1203,7 @@ class _NationalCampaState extends State<NationalCampa> {
                                       Container(
                                         height: MediaQuery.of(context).size.height / 3,
                                         child: Scrollbar(
-                                          isAlwaysShown: true,
+                                          thumbVisibility: true,
                                           thickness: 10,
                                           showTrackOnHover: true,
                                           child: ListView.builder(
@@ -1332,7 +1332,7 @@ class _NationalCampaState extends State<NationalCampa> {
                                       Container(
                                         height: MediaQuery.of(context).size.height / 3,
                                         child: Scrollbar(
-                                          isAlwaysShown: true,
+                                          thumbVisibility: true,
                                           thickness: 10,
                                           showTrackOnHover: true,
                                           child: ListView.builder(

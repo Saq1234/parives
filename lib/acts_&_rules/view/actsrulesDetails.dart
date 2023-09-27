@@ -285,7 +285,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                             Container(
                                               height: MediaQuery.of(context).size.height / 3,
                                               child: Scrollbar(
-                                                isAlwaysShown: true,
+                                                thumbVisibility: true,
                                                 thickness: 10,
                                                 showTrackOnHover: true,
                                                 child: ListView.builder(
@@ -341,7 +341,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                             Container(
                                               height: MediaQuery.of(context).size.height / 3,
                                               child: Scrollbar(
-                                                isAlwaysShown: true,
+                                                thumbVisibility: true,
                                                 thickness: 10,
                                                 showTrackOnHover: true,
                                                 child: ListView.builder(
@@ -398,7 +398,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                             Container(
                                               height: echomarkList.length > 2 ? MediaQuery.of(context).size.height / 3 : 100,
                                               child: Scrollbar(
-                                                isAlwaysShown: true,
+                                                thumbVisibility: true,
                                                 thickness: 10,
                                                 showTrackOnHover: true,
                                                 child: ListView.builder(
@@ -455,7 +455,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                             Container(
                                               height: echosensitiveList.length > 2 ? MediaQuery.of(context).size.height / 3 : 100,
                                               child: Scrollbar(
-                                                isAlwaysShown: true,
+                                                thumbVisibility: true,
                                                 thickness: 10,
                                                 showTrackOnHover: true,
                                                 child: ListView.builder(
@@ -512,7 +512,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                             Container(
                                               height:  MediaQuery.of(context).size.height / 3 ,
                                               child: Scrollbar(
-                                                isAlwaysShown: true,
+                                                thumbVisibility: true,
                                                 thickness: 10,
                                                 showTrackOnHover: true,
                                                 child: ListView.builder(
@@ -569,7 +569,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                             Container(
                                               height: MediaQuery.of(context).size.height / 3 ,
                                               child: Scrollbar(
-                                                isAlwaysShown: true,
+                                                thumbVisibility: true,
                                                 thickness: 10,
                                                 showTrackOnHover: true,
                                                 child: ListView.builder(
@@ -626,7 +626,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                             Container(
                                               height:  MediaQuery.of(context).size.height / 3 ,
                                               child: Scrollbar(
-                                                isAlwaysShown: true,
+                                                thumbVisibility: true,
                                                 thickness: 10,
                                                 showTrackOnHover: true,
                                                 child: ListView.builder(
@@ -683,7 +683,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                             Container(
                                               height:  MediaQuery.of(context).size.height / 3 ,
                                               child: Scrollbar(
-                                                isAlwaysShown: true,
+                                                thumbVisibility: true,
                                                 thickness: 10,
                                                 showTrackOnHover: true,
                                                 child: ListView.builder(
@@ -741,7 +741,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                             Container(
                                               height:  MediaQuery.of(context).size.height / 3 ,
                                               child: Scrollbar(
-                                                isAlwaysShown: true,
+                                                thumbVisibility: true,
                                                 thickness: 10,
                                                 showTrackOnHover: true,
                                                 child: ListView.builder(
@@ -799,7 +799,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                             Container(
                                               height: MediaQuery.of(context).size.height / 3,
                                               child: Scrollbar(
-                                                isAlwaysShown: true,
+                                                thumbVisibility: true,
                                                 thickness: 10,
                                                 showTrackOnHover: true,
                                                 child: ListView.builder(
@@ -856,7 +856,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                             Container(
                                               height:  MediaQuery.of(context).size.height / 3 ,
                                               child: Scrollbar(
-                                                isAlwaysShown: true,
+                                                thumbVisibility: true,
                                                 thickness: 10,
                                                 showTrackOnHover: true,
                                                 child: ListView.builder(
@@ -913,7 +913,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                             Container(
                                               height: MediaQuery.of(context).size.height / 3 ,
                                               child: Scrollbar(
-                                                isAlwaysShown: true,
+                                                thumbVisibility: true,
                                                 thickness: 10,
                                                 showTrackOnHover: true,
                                                 child: ListView.builder(
@@ -970,7 +970,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                             Container(
                                               height: MediaQuery.of(context).size.height / 3 ,
                                               child: Scrollbar(
-                                                isAlwaysShown: true,
+                                                thumbVisibility: true,
                                                 thickness: 10,
                                                 showTrackOnHover: true,
                                                 child: ListView.builder(
@@ -1027,7 +1027,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                                             Container(
                                               height: MediaQuery.of(context).size.height / 3 ,
                                               child: Scrollbar(
-                                                isAlwaysShown: true,
+                                                thumbVisibility: true,
                                                 thickness: 10,
                                                 showTrackOnHover: true,
                                                 child: ListView.builder(
@@ -1092,7 +1092,7 @@ class _ActsrulesDetailsState extends State<ActsrulesDetails> {
                             Container(
                               height: MediaQuery.of(context).size.height / 3,
                               child: Scrollbar(
-                                isAlwaysShown: true,
+                                thumbVisibility: true,
                                 thickness: 10,
                                 showTrackOnHover: true,
                                 child: ListView.builder(

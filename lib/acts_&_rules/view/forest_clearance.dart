@@ -126,7 +126,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                         Container(
                           height: MediaQuery.of(context).size.height / 3,
                           child: Scrollbar(
-                            isAlwaysShown: true,
+                            thumbVisibility: true,
                             thickness: 10,
                             showTrackOnHover: true,
                             child: ListView.builder(
@@ -183,7 +183,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                         Container(
                           height: MediaQuery.of(context).size.height / 3,
                           child: Scrollbar(
-                            isAlwaysShown: true,
+                            thumbVisibility: true,
                             thickness: 10,
                             showTrackOnHover: true,
                             child: ListView.builder(
@@ -258,7 +258,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -321,7 +321,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -384,7 +384,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -447,7 +447,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -509,7 +509,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -572,7 +572,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -635,7 +635,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -698,7 +698,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -761,7 +761,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -824,7 +824,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -887,7 +887,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -950,7 +950,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -1013,7 +1013,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -1076,7 +1076,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -1139,7 +1139,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -1202,7 +1202,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -1265,7 +1265,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -1328,7 +1328,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -1391,7 +1391,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -1454,7 +1454,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                         Container(
                                           height: MediaQuery.of(context).size.height / 3,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -1518,7 +1518,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                                           height:
                                               Model2000List.length >= 2 ? MediaQuery.of(context).size.height / 3 : 100,
                                           child: Scrollbar(
-                                            isAlwaysShown: true,
+                                            thumbVisibility: true,
                                             thickness: 10,
                                             showTrackOnHover: true,
                                             child: ListView.builder(
@@ -1583,7 +1583,7 @@ class _ForestClearanceState extends State<ForestClearance> {
                         Container(
                           height: MediaQuery.of(context).size.height / 3,
                           child: Scrollbar(
-                            isAlwaysShown: true,
+                            thumbVisibility: true,
                             thickness: 10,
                             showTrackOnHover: true,
                             child: ListView.builder(

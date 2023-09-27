@@ -104,7 +104,7 @@ class _WildClearanceState extends State<WildClearance> {
                         Container(
                           height: MediaQuery.of(context).size.height / 3,
                           child: Scrollbar(
-                            isAlwaysShown: true,
+                            thumbVisibility: true,
                             thickness: 10,
                             showTrackOnHover: true,
                             child: ListView.builder(
@@ -161,7 +161,7 @@ class _WildClearanceState extends State<WildClearance> {
                         Container(
                           height: MediaQuery.of(context).size.height / 3,
                           child: Scrollbar(
-                            isAlwaysShown: true,
+                            thumbVisibility: true,
                             thickness: 10,
                             showTrackOnHover: true,
                             child: ListView.builder(
@@ -215,7 +215,7 @@ class _WildClearanceState extends State<WildClearance> {
                         Container(
                           height:GuidelineList.length>=2? MediaQuery.of(context).size.height / 3:100,
                           child: Scrollbar(
-                            isAlwaysShown: true,
+                            thumbVisibility: true,
                             thickness: 10,
                             showTrackOnHover: true,
                             child: ListView.builder(
